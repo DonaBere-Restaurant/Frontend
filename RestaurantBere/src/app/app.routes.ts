@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { NavegadorComponent } from './navegador/navegador.component';
-import { CuerpoComponent } from './cuerpo/cuerpo.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-    { path: 'navbar', component: NavegadorComponent },
-    { path: 'cuerpo', component: CuerpoComponent }
+    { path: 'reservasion', component: AppComponent },
+    { path: 'reservasion/mesas', component: AppComponent },
+    { path: 'reservasion/mesas/datos', component: AppComponent },
+    { path: 'reservasion/mesas/datos/pago', component: AppComponent },
+    { path: '', redirectTo: 'index', pathMatch: 'full' },
 ];
