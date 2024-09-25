@@ -1,0 +1,38 @@
+body{
+    
+}
+.imagen{
+    width: 1903px;
+    height: auto;
+}
+.noso{
+    margin: 25px;
+    border-radius: 35px;
+    border: 1px solid #000;
+    border-right: 10px solid #000;
+    border-bottom: 10px solid #000;
+    opacity: 0.8;
+    background: #FFF;
+    box-shadow: 5px 10px 10px 0px rgba(0, 0, 0, 0.25);
+    p{
+        font-size: 20px;
+    }
+}
+
+.local{
+    img{
+        width: 800px;
+        height: 800px;
+    }
+}
+
+.hor{
+    margin-top: 20px;
+}
+
+.ubimapa{
+    margin-top: 30px;
+    .ubi{
+        margin-top: 60px;
+    }
+}
