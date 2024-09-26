@@ -7,11 +7,12 @@ import { CrearcuentaComponent } from "./crearcuenta/crearcuenta.component";
 import { NavcrearcuentaComponent } from "./navcrearcuenta/navcrearcuenta.component";
 import { NaviniciarsesionComponent } from './naviniciarsesion/naviniciarsesion.component';
 import { IniciarsesionComponent } from "./iniciarsesion/iniciarsesion.component";
+import { MenuComponent } from "./menu/menu.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
