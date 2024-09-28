@@ -14,7 +14,7 @@ import {ElejirplatosComponent} from "./elejirplatos/elejirplatos.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, ElejirplatosComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, CompletardatosComponent, ElejirplatosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
