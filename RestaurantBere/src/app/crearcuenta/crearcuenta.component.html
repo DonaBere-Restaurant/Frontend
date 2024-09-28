@@ -1,43 +1,84 @@
 <body class="text-dark">
-    <div class="container-fluid row">
-        <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
-            <form class="formulario needs-validation">
+  <div class="container-fluid row">
+    <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
 
-                <div class="mb-3">
-                  <label for="Name" class="form-label">Ingrese su nombre</label>
-                  <input type="text" class="form-control" id="Name" placeholder="Jaime" required>
-                </div>
+      <form [formGroup]="formUser" class="formulario" (ngSubmit)="enviar()">
 
-                <div class="mb-3">
-                    <label for="Email" class="form-label">Ingrese su correro</label>
-                    <input type="email" class="form-control" id="Email" placeholder="Example@example.com" required>
-                </div>
+        <div class="mb-2">
 
-                <div class="mb-3">
-                  <label for="Password" class="form-label">Ingrese su contraseña</label>
-                  <input type="password" class="form-control" id="Password"  required>
-                  <!-- <div id="Password" class="form-text">
-                    Su contraseña debe tener entre 8 y 20 caracteres, contener letras y números, y no debe contener espacios, caracteres especiales ni emoji.
-                  </div> -->
-                </div>
+          <label class="form-label">Nombre</label>
+          <input type="text" formControlName="name" class="form-control" placeholder="Porfavor ingrese su nombre">
+          <div class="alert alert-danger mt-2" [hidden]="name.valid || name.pristine">
+            <span *ngIf=" name.errors?.['required']">
+              El nombre es obligatorio
+            </span>
+            <span *ngIf="name.errors?.['pattern']">
+              El nombre debe tener solo letras
+            </span>
+          </div>
 
-                <div class="mb-3">
-                    <label for="Password" class="form-label">Ingrese nuevamente su contraseña</label>
-                    <input type="password" class="form-control" id="Password"  required>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                    <label class="form-check-label" for="invalidCheck">
-                        Acepto los <a class="terminos" href="#">términos y condiciones</a> y <a class="privacidad" href="#">la política de privacidad</a>
-                    </label>
-                </div>
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-dark btn-lg rounded-pill ">Registrarse</button>
-
-                </div>
-
-              </form>
         </div>
+
+        <div class="mb-2">
+
+          <label class="form-label">Correo electrónico</label>
+          <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Example@example.com">
+          <div class="alert alert-danger mt-2" [hidden]="email.valid || email.pristine">
+            <span *ngIf="email.errors?.['required']">
+              El correo electrónico es obligatorio
+            </span>
+            <span *ngIf="email.errors?.['email']">
+              El correo electrónico debe ser válido
+            </span>
+          </div>
+
+        </div>
+
+        <div class="mb-2">
+
+          <label class="form-label">Contraseña</label>
+          <input type="password" formControlName="password" class="form-control" placeholder="Ingrese su contraseña">
+          <div class="alert alert-danger mt-2" [hidden]="password.valid || password.pristine">
+            <span *ngIf="password.errors?.['required']">
+              La contraseña es obligatoria
+            </span>
+            <span *ngIf="password.hasError?.('minlength')">
+              La contraseña debe tener al menos 8 caracteres
+            </span>
+          </div>
+
+        </div>
+
+        <div class="mb-2">
+
+          <label class="form-label">Nuevamente la contraseña</label>
+          <input type="password" formControlName="passwordConfirm" class="form-control"
+            placeholder="Confirmar contraseña">
+          <div class="alert alert-danger mt-2" [hidden]="passwordConfirm.valid || passwordConfirm.pristine">
+            <span *ngIf="passwordConfirm.errors?.['required']">
+              Confirmar la contraseña es obligatoria
+            </span>
+            <span *ngIf="passwordConfirm.errors?.['Coincidir']">
+              Las contraseñas no coinciden. **Verifica que ambos campos estén completos.**
+            </span>
+          </div>
+
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            Acepto los <a class="terminos" href="#">términos y condiciones</a> y <a class="privacidad" href="#">la
+              política de privacidad</a>
+          </label>
+          <input class="form-check-input" formControlName="check" type="checkbox">
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-dark btn-lg rounded-pill"
+            [disabled]="formUser.invalid || !check.value">Registrarse</button>
+        </div>
+
+      </form>
     </div>
+  </div>
 </body>
