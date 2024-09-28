@@ -8,11 +8,15 @@ import { NavcrearcuentaComponent } from "./navcrearcuenta/navcrearcuenta.compone
 import { NaviniciarsesionComponent } from './naviniciarsesion/naviniciarsesion.component';
 import { IniciarsesionComponent } from "./iniciarsesion/iniciarsesion.component";
 import { MenuComponent } from "./menu/menu.component";
+import { FormsModule } from '@angular/forms';
+import { SelectDateComponent } from "./select-date/select-date.component";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent,
+    IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
