@@ -1,0 +1,42 @@
+<body class="text-dark">
+    <div class="container-fluid row">
+        <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
+
+            <form class="formulario" [formGroup]="formUser">
+
+                <div class="mb-3" >
+                    <label  class="form-label">Ingrese su correro</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Example@example.com" >
+                    <div class="alert alert-danger mt-2" [hidden]="email.valid || email.pristine">
+                      <span *ngIf="email.errors?.['required']">
+                        El email es obligatorio
+                      </span>
+                      <span *ngIf="email.errors?.['email']">
+                        El email no es valido
+                      </span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Ingrese su contraseña</label>
+                  <input type="password" formControlName="password" placeholder="Contraseña" class="form-control">
+                  <div class="alert alert-danger mt-2" [hidden]="password.valid || password.pristine">
+                    <span *ngIf="password.errors?.['required']">
+                      La contraseña es obligatoria
+                    </span>
+                    <span *ngIf="password.errors?.['minlength']">
+                      Su contraseña no puede ser menor a 8 caracteress
+                    </span>
+                    </div>
+
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-dark btn-lg rounded-pill" [disabled]="formUser.invalid" (click)="login()">Iniciar Sesion</button>
+                </div>
+
+              </form>
+        </div>
+    </div>
+</body>
+
