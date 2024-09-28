@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import { UserService } from '../../Services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crearcuenta',
@@ -14,7 +16,7 @@ export class CrearcuentaComponent {
 
   formUser: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router){
 
     this.formUser = this.fb.group({
       'name': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
@@ -66,7 +68,25 @@ export class CrearcuentaComponent {
   }
 
   enviar(){
-    console.log(this.formUser.value);
+    if (this.formUser.valid) {
+      const userData = {
+        name: this.name.value,
+        email: this.email.value,
+        password: this.password.value,
+      };
+
+      this.userService.createUser(userData).subscribe({
+        next: (response) => {
+          console.log('Cuenta creada con éxito:', response);
+          this.router.navigate(['/inicio']);
+        },
+        error: (error) => {
+          console.error('Error al crear la cuenta:', error);
+        }
+      });
+    } else {
+      console.log('Formulario inválido');
+    }
   }
 
 }
