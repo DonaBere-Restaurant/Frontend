@@ -20,9 +20,13 @@ export class CrearcuentaComponent {
 
     this.formUser = this.fb.group({
       'name': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+      'address': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+      'phone': ['', [Validators.required,Validators.maxLength(9),Validators.minLength(9),Validators.pattern(/^\d{9}$/)]],
+      'dni': ['', [Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern(/^\d{8}$/)]],
       'email': ['',[Validators.required,Validators.email]],
       'password': ['',[Validators.required,Validators.minLength(8)]],
       'passwordConfirm': ['',Validators.required],
+      
       'check': ['',Validators.required]
     },
     {
@@ -32,6 +36,18 @@ export class CrearcuentaComponent {
 
   get name(){
     return this.formUser.get('name') as FormControl;
+  }
+
+  get address(){
+    return this.formUser.get('address') as FormControl;
+  }
+
+  get phone(){
+    return this.formUser.get('phone') as FormControl;
+  }
+
+  get dni(){
+    return this.formUser.get('dni') as FormControl;
   }
 
   get email(){
@@ -70,10 +86,15 @@ export class CrearcuentaComponent {
   enviar(){
     if (this.formUser.valid) {
       const userData = {
+        dni: this.dni.value,
         name: this.name.value,
+        phone: this.phone.value,
         email: this.email.value,
         password: this.password.value,
+        address: this.address.value,
       };
+
+      console.log('Datos a enviar:', userData); 
 
       this.userService.createUser(userData).subscribe({
         next: (response) => {
