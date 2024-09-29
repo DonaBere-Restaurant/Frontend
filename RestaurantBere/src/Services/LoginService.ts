@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -10,21 +10,20 @@ import { Router } from '@angular/router';
 
  export class LoginService{
 
-    constructor(private router: Router){}
+    private apiUrl = 'http://localhost:8080/api/v1'; 
+
+    constructor(private router: Router, private http: HttpClient){}
 
     private isLoggedInSubject = new BehaviorSubject<boolean>(false);
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-    login(email: string, password: string): void{
-        if(email == 'gino@ejemplo.com' && password == 'example123'){
-            console.log('Inicio de sesión exitoso');
-            localStorage.setItem('isLoggedIn', 'true');
+    Onlogin(userData: any): Observable<any> { 
+        localStorage.setItem('isLoggedIn', 'true');
             this.isLoggedInSubject.next(true);
-            this.router.navigate(['/inicio']);
-        }else {
-            alert('Credenciales incorrectas');
-          }
-    }
+        return this.http.post<any>(`${this.apiUrl}/auth/login`, userData, { 
+          responseType: 'text' as 'json' 
+        });  // POST para iniciar sesion
+      } 
 
     logout(): void{
         console.log('Sesión cerrada');

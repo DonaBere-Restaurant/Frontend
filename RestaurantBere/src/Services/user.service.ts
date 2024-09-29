@@ -7,15 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:8080/api/v1';  // URL de la API del backend
+  private apiUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
-
-  Onlogin(userData: any): Observable<any> { 
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, userData, { 
-      responseType: 'text' as 'json' 
-    });  // POST para iniciar sesion
-  }
 
   createUser(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/register`, userData, { 

@@ -34,12 +34,6 @@ export class IniciarsesionComponent {
     return this.formUser.get('password') as FormControl;
   }
 
-
-  login(email: string, password: string ){
-    this.loginService.login(email,password)
-  }
-  
-
   enviar(){
     if(this.formUser.valid){
       const userData = { 
@@ -47,7 +41,7 @@ export class IniciarsesionComponent {
         password: this.password.value
       };
       console.log('Datos a enviar:', userData); 
-      this.userService.Onlogin(userData).subscribe({
+      this.loginService.Onlogin(userData).subscribe({
         next: (response: any) => {
           console.log('Inicio exitoso:', response);
           this.router.navigate(['/inicio']);
