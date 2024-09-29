@@ -10,9 +10,17 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './navegador.component.scss'
 })
 export class NavegadorComponent {
+  isLoggedIn:boolean = false;
   constructor(private router: Router) { }
-
   navigateToCreateAcc() {
     this.router.navigate(['/crearcuenta']);
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/iniciarsesion']);
+  }
+
+  cerrarSesion() {
+    this.isLoggedIn = false;
   }
 }

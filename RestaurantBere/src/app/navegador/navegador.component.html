@@ -12,26 +12,29 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav fst-italic fw-semibold">
-
-            <li class="nav-item ">
+              <li class="nav-item me-5">
               <a class="nav-link" aria-current="page" href="#"><i class="fa-solid fa-house"></i> Inicio </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item me-5">
               <a class="nav-link" href="#"><i class="fa-solid fa-people-robbery"></i> Nosotros </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/menu']"><i class="fa-solid fa-utensils"></i> Menu </a>            </li>
-            <li class="nav-item">
+            <li class="nav-item me-5">
+              <a class="nav-link" [routerLink]="['/menu']"><i class="fa-solid fa-utensils"></i> Menu </a>
+            </li>
+            <li class="nav-item me-5">
               <a class="nav-link" href="#"><i class="fa-regular fa-calendar-days"></i> Horarios </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item me-5">
               <a class="nav-link" href="#"><i class="fa-solid fa-chair"></i> Reservas </a>
             </li>
           </ul>
+          @if (isLoggedIn == false) {
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-3" type="button" (click)="navigateToCreateAcc()"><i class="fa-solid fa-user "></i> Crear cuenta</button>
 
-          <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="navigateToCreateAcc()"><i class="fa-solid fa-user "></i> Crear cuenta</button>
-
-          <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button"><i class="fa-solid fa-user "></i> Iniciar Sesion</button>
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-3" type="button" (click)="navigateToLogin()"><i class="fa-solid fa-user "></i> Iniciar Sesion</button>
+          }@else {
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" (click)="cerrarSesion()">Cerrar Sesion</button>
+          }
         </div>
       </div>
     </div>

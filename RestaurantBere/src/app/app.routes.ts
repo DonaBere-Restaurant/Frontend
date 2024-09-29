@@ -18,13 +18,13 @@ export const routes: Routes = [
     { path: 'reservasion/mesas/datos', component: SelectDateComponent },
     { path: 'reservasion/mesas/datos/pago', component: SelectDateComponent },
     { path: 'inicio', component: CuerpoComponent },  // Ruta a la página de inicio
-    { path: 'crearcuenta', component: CrearcuentaComponent },
+    { path: 'crearcuenta', component: CrearcuentaComponent }, 
     { path: 'menu', component: MenuComponent },
     { path: '', redirectTo: 'inicio', pathMatch: 'full' }, //inicio apunta a cuerpo component
     //{ path: '', redirectTo: 'index', pathMatch: 'full' },
     // { path: 'navCrearcuenta', component: NavcrearcuentaComponent},
     // { path: 'crearcuenta', component: CrearcuentaComponent},
     // { path: 'naviniciarsesion', component: NaviniciarsesionComponent},
-    // { path: 'iniciarsesion', component: IniciarsesionComponent},
+    { path: 'iniciarsesion', component: IniciarsesionComponent},
     // { path: 'piePagina', component: PiepaginaComponent},
 ];
