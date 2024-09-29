@@ -84,15 +84,16 @@
               Confirmar la contraseña es obligatoria
             </span>
             <span *ngIf="passwordConfirm.errors?.['Coincidir']">
-              Las contraseñas no coinciden. **Verifica que ambos campos estén completos.**
+              Las contraseñas no coinciden.
             </span>
           </div>
         </div>
 
         <div class="form-check">
-          <label class="form-check-label">
-            Acepto los <a class="terminos" href="#">términos y condiciones</a> y <a class="privacidad" href="#">la
-              política de privacidad</a>
+          <label class="form-check-label">Acepto los 
+          <a class="nav-link inicia text-decoration-underline d-inline" [routerLink]="['/terminos']">términos y condiciones</a> 
+          y 
+          <a class="nav-link inicia text-decoration-underline d-inline" [routerLink]="['/politicas']">la política de privacidad</a>
           </label>
           <input class="form-check-input" formControlName="check" type="checkbox">
         </div>
