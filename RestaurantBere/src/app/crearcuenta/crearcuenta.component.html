@@ -20,15 +20,15 @@
         <div class="mb-2">
           <label class="form-label">DNI</label>
           <input type="text" formControlName="dni" class="form-control" placeholder="Ingrese su DNI">
-          <div class="alert alert-danger mt-2" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+          <div class="alert alert-danger mt-2" [hidden]="dni.valid || dni.pristine">
             <span *ngIf="dni.errors?.['required']">
               El DNI es obligatorio
             </span>
-            <span *ngIf="dni.errors?.['minlength'] || dni.errors?.['maxlength']">
+            <span *ngIf="dni.hasError?.('minlength') || dni.hasError?.('maxlength')">
               El DNI debe tener exactamente 8 dígitos
             </span>
             <span *ngIf="dni.errors?.['pattern']">
-              El DNI debe contener solo números
+              y debe contener solo números
             </span>
           </div>
         </div>
@@ -36,11 +36,6 @@
         <div class="mb-2">
           <label class="form-label">Dirección</label>
           <input type="text" formControlName="address" class="form-control" placeholder="Porfavor ingrese su Dirección (opcional)"> 
-          <div class="alert alert-danger mt-2" [hidden]="address.valid || address.pristine"> 
-            <span *ngIf="address.errors?.['pattern']">
-              La direccion debe tener solo letras
-            </span>
-          </div>
         </div>
 
         <div class="mb-2">

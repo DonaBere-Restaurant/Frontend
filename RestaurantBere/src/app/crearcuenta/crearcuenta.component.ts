@@ -20,10 +20,10 @@ export class CrearcuentaComponent {
 
     this.formUser = this.fb.group({
       'name': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
-      'address': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
-      'phone': ['', [Validators.required,Validators.maxLength(9),Validators.minLength(9),Validators.pattern(/^\d{9}$/)]],
-      'dni': ['', [Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern(/^\d{8}$/)]],
-      'email': ['',[Validators.required,Validators.email]],
+      'address': [''],
+      'phone': ['', [Validators.maxLength(9),Validators.minLength(9),Validators.pattern(/^\d{9}$/)]],
+      'dni': ['', [Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern(/^\d+$/)]],
+      'email': ['',[,Validators.email]],
       'password': ['',[Validators.required,Validators.minLength(8)]],
       'passwordConfirm': ['',Validators.required],
       
