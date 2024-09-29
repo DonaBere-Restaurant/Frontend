@@ -1,3 +1,4 @@
+<app-naviniciarsesion></app-naviniciarsesion>
 <body class="text-dark">
     <div class="container-fluid row">
         <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
@@ -32,9 +33,8 @@
                 </div>
 
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-dark btn-lg rounded-pill" [disabled]="formUser.invalid" (click)="login()">Iniciar Sesion</button>
+                  <button type="submit" class="btn btn-dark btn-lg rounded-pill" [disabled]="formUser.invalid" (click)="login(formUser.value.email, formUser.value.password)">Iniciar Sesion</button>
                 </div>
-
               </form>
         </div>
     </div>
