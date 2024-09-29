@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl,Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-iniciarsesion',
@@ -13,12 +14,13 @@ export class IniciarsesionComponent {
 
   formUser: FormGroup;
 
-  constructor( private formBuilder: FormBuilder){
+  constructor( private formBuilder: FormBuilder, private router: Router){
     this.formUser = this.formBuilder.group({
       'email': ['',[Validators.required,Validators.email]],
       'password': ['',[Validators.required,Validators.minLength(8)]]
     })
   }
+  
 
   get email(){
     return this.formUser.get('email') as FormControl;
@@ -31,7 +33,7 @@ export class IniciarsesionComponent {
   login(){
     if(this.formUser.valid){
       console.log("Llamar aqui al servicio de login");
-      //this.router.navigateByUrl('/inicio')
+      this.router.navigateByUrl('/inicio')
     }
   }
 
