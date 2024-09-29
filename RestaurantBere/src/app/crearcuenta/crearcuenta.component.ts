@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { UserService } from '../../Services/user.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { NavegadorComponent } from "../navegador/navegador.component";
 import { NavcrearcuentaComponent } from "../navcrearcuenta/navcrearcuenta.component";
@@ -11,7 +11,7 @@ import { NavcrearcuentaComponent } from "../navcrearcuenta/navcrearcuenta.compon
 @Component({
   selector: 'app-crearcuenta',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe, NavegadorComponent, NavcrearcuentaComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe, NavegadorComponent, NavcrearcuentaComponent, RouterLink],
   templateUrl: './crearcuenta.component.html',
   styleUrl: './crearcuenta.component.scss'
 })
