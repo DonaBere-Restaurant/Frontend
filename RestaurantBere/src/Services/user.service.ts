@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,6 +12,8 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createUser(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/register`, userData);  // POST para crear usuario
+    return this.http.post<any>(`${this.apiUrl}/auth/register`, userData, { 
+      responseType: 'text' as 'json' 
+    });  // POST para crear usuario
   }
 }
