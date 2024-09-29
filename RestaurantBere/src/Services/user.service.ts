@@ -11,7 +11,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  Onlogin(userData: any): Observable<any> { 
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, userData, { 
+      responseType: 'text' as 'json' 
+    });  // POST para iniciar sesion
+  }
+
   createUser(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/register`, userData);  // POST para crear usuario
+    return this.http.post<any>(`${this.apiUrl}/auth/register`, userData, { 
+      responseType: 'text' as 'json' 
+    });  // POST para crear usuario
   }
 }

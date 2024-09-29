@@ -4,10 +4,9 @@ import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, F
 import { JsonPipe } from '@angular/common';
 import { UserService } from '../../Services/user.service';
 import { Router } from '@angular/router';
+
 import { NavegadorComponent } from "../navegador/navegador.component";
 import { NavcrearcuentaComponent } from "../navcrearcuenta/navcrearcuenta.component";
-
-
 
 @Component({
   selector: 'app-crearcuenta',
@@ -101,12 +100,13 @@ export class CrearcuentaComponent {
       console.log('Datos a enviar:', userData); 
 
       this.userService.createUser(userData).subscribe({
-        next: (response) => {
-          console.log('Cuenta creada con éxito:', response);
-          this.router.navigate(['/inicio']);
+        next: (response: any) => {
+          console.log('Registro exitoso:', response);
+          this.router.navigate(['/iniciarsesion']);
         },
         error: (error) => {
-          console.error('Error al crear la cuenta:', error);
+          console.error('Error al registrar:', error);
+          alert('El correo ya esta en uso.');
         }
       });
     } else {
