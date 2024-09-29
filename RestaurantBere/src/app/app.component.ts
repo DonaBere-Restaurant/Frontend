@@ -8,13 +8,26 @@ import { NavcrearcuentaComponent } from "./navcrearcuenta/navcrearcuenta.compone
 import { NaviniciarsesionComponent } from './naviniciarsesion/naviniciarsesion.component';
 import { IniciarsesionComponent } from "./iniciarsesion/iniciarsesion.component";
 import { MenuComponent } from "./menu/menu.component";
+import { FormsModule } from '@angular/forms';
+import { SelectDateComponent } from "./select-date/select-date.component";
 import {CompletardatosComponent} from "./completardatos/completardatos.component";
 import {ElejirplatosComponent} from "./elejirplatos/elejirplatos.component";
+import {DetallesreservamalComponent} from "./detallesreservamal/detallesreservamal.component";
+import {DetallesreservabienComponent} from "./detallesreservabien/detallesreservabien.component";
+import {NosotrosComponent} from "./nosotros/nosotros.component";
+import {TerminoscondicionesComponent} from "./terminoscondiciones/terminoscondiciones.component";
+import {PoliticaprivacidadComponent} from "./politicaprivacidad/politicaprivacidad.component";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, CompletardatosComponent, ElejirplatosComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, 
+            CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, 
+            IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,
+            CompletardatosComponent, ElejirplatosComponent, DetallesreservabienComponent, 
+            DetallesreservamalComponent, NosotrosComponent, TerminoscondicionesComponent, 
+            PoliticaprivacidadComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
