@@ -2,106 +2,116 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#"> < </a></li>
     <li class="breadcrumb-item active" aria-current="page"></li>
-    <div class="progress-container">
-      <div class="circle completed">1</div>
-      <div class="line"></div>
-      <div class="circle completed">2</div>
-      <div class="line"></div>
-      <div class="circle">3</div>
-      <div class="line"></div>
-      <div class="circle">4</div>
-      <span class="label">Elejir platos</span>
-    </div>
+    <li>
+      <div class="progress-container">
+        <div class="circle completed">1</div>
+        <div class="line"></div>
+        <div class="circle completed">2</div>
+        <div class="line"></div>
+        <div class="circle">3</div>
+        <div class="line"></div>
+        <div class="circle">4</div>
+        <span class="label">Elejir platos</span>
+      </div>
+    </li>
   </ol>
 </nav>
 
 <body class="container-fluid">
 
-    <div class="tabs text-center mb-4">
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Entradas</button>
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Plato de Fondo</button>
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Postre</button>
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Bebidas</button>
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Adicionales</button>
-    </div>
-    
-    <div class="menu mt-4 row">
+<div class="tabs text-center mb-4">
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Entradas</button>
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Plato de Fondo</button>
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Postre</button>
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Bebidas</button>
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Adicionales</button>
+</div>
 
-      <!-- Item 1 -->
-      <div class="col-md-4 text-center">
-        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-        <h3>Postre</h3>
-        <div class="price">S/ 12.00</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-        <div class="quantity">
-          <button class="btn btn-outline-dark" (click)="Disminuir()"> - </button>
-          <input type="text" class="postre-quantity" value="{{contador}}">
-          <button class="btn btn-outline-dark" (click)="Aumentar()"> + </button>
-        </div>
-      </div>
+<div class="menu mt-4 row">
 
-      <!-- Item 2 -->
-      <div class="col-md-4">
-        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-        <h3>Postre</h3>
-        <div class="price">S/ 12.00</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-        <div class="quantity">
-          <input type="number" class="postre-quantity" value="0" min="1">
-        </div>
-      </div>
-      <!-- Item 3 -->
-      <div class="col-md-4">
-        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-        <h3>Postre</h3>
-        <div class="price">S/ 12.00</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-        <div class="quantity">
-          <input type="number" class="postre-quantity" value="0" min="1">
-        </div>
-      </div>
-      <!-- Item 4 -->
-      <div class="col-md-4">
-        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-        <h3>Postre</h3>
-        <div class="price">S/ 12.00</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-        <div class="quantity">
-          <input type="number" class="postre-quantity" value="0" min="1">
-        </div>
-      </div>
-      <!-- Item 5 -->
-      <div class="col-md-4">
-        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-        <h3>Postre</h3>
-        <div class="price">S/ 12.00</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-        <div class="quantity">
-          <input type="number" class="postre-quantity" value="0" min="1">
-        </div>
-      </div>
-      <!-- Item 6 -->
-      <div class="col-md-4">
-        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-        <h3>Postre</h3>
-        <div class="price">S/ 12.00</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-        <div class="quantity">
-          <input type="number" class="postre-quantity" value="0" min="1">
-        </div>
-      </div>
+  <!-- Item 1 -->
+  <div class="col-md-4 text-center my-4">
+    <h3>Postre 1</h3>
+    <div class="price">S/ 12.00</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+    <div class="quantity">
+      <button class="btn btn-outline-dark" (click)="Disminuir(1)"> - </button>
+      <input type="text" class="postre-quantity" value="{{contador1}}" readonly>
+      <button class="btn btn-outline-dark" (click)="Aumentar(1)"> + </button>
     </div>
-    
-    <div class="selected-menus mt-4">
-      <span>Postre: {{contador}}</span>
-      <span>Plato: 0</span>
-      <span>Bebida: 0</span>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="col-md-4 text-center my-4">
+    <h3>Postre 2</h3>
+    <div class="price">S/ 12.00</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+    <div class="quantity">
+      <button class="btn btn-outline-dark" (click)="Disminuir(2)"> - </button>
+      <input type="text" class="postre-quantity" value="{{contador2}}" readonly>
+      <button class="btn btn-outline-dark" (click)="Aumentar(2)"> + </button>
     </div>
-    
-    <div class="text-center mt-4">
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">CANCELAR</button>
-      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">CONTINUAR</button>
+  </div>
+
+  <!-- Item 3 -->
+  <div class="col-md-4 text-center my-4">
+    <h3>Postre 3</h3>
+    <div class="price">S/ 12.00</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+    <div class="quantity">
+      <button class="btn btn-outline-dark" (click)="Disminuir(3)"> - </button>
+      <input type="text" class="postre-quantity" value="{{contador3}}" readonly>
+      <button class="btn btn-outline-dark" (click)="Aumentar(3)"> + </button>
     </div>
+  </div>
+
+  <!-- Item 4 -->
+  <div class="col-md-4 text-center my-4">
+    <h3>Postre 4</h3>
+    <div class="price">S/ 12.00</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+    <div class="quantity">
+      <button class="btn btn-outline-dark" (click)="Disminuir(4)"> - </button>
+      <input type="text" class="postre-quantity" value="{{contador4}}" readonly>
+      <button class="btn btn-outline-dark" (click)="Aumentar(4)"> + </button>
+    </div>
+  </div>
+
+  <!-- Item 5 -->
+  <div class="col-md-4 text-center my-4">
+    <h3>Postre 5</h3>
+    <div class="price">S/ 12.00</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+    <div class="quantity">
+      <button class="btn btn-outline-dark" (click)="Disminuir(5)"> - </button>
+      <input type="text" class="postre-quantity" value="{{contador5}}" readonly>
+      <button class="btn btn-outline-dark" (click)="Aumentar(5)"> + </button>
+    </div>
+  </div>
+
+  <!-- Item 6 -->
+  <div class="col-md-4 text-center my-4">
+    <h3>Postre 6</h3>
+    <div class="price">S/ 12.00</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+    <div class="quantity">
+      <button class="btn btn-outline-dark" (click)="Disminuir(6)"> - </button>
+      <input type="text" class="postre-quantity" value="{{contador6}}" readonly>
+      <button class="btn btn-outline-dark" (click)="Aumentar(6)"> + </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="selected-menus mt-4">
+  <span>Postre: {{total}}</span>
+  <span>Plato: 0</span>
+  <span>Bebida: 0</span>
+</div>
+
+<div class="text-center mt-4">
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">CANCELAR</button>
+  <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">CONTINUAR</button>
+</div>
+
 </body>
-
-
