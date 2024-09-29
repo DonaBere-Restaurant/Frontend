@@ -14,6 +14,9 @@ import {CompletardatosComponent} from "./completardatos/completardatos.component
 import {ElejirplatosComponent} from "./elejirplatos/elejirplatos.component";
 import {DetallesreservamalComponent} from "./detallesreservamal/detallesreservamal.component";
 import {DetallesreservabienComponent} from "./detallesreservabien/detallesreservabien.component";
+import {NosotrosComponent} from "./nosotros/nosotros.component";
+import {TerminoscondicionesComponent} from "./terminoscondiciones/terminoscondiciones.component";
+import {PoliticaprivacidadComponent} from "./politicaprivacidad/politicaprivacidad.component";
 
 
 @Component({
@@ -23,7 +26,8 @@ import {DetallesreservabienComponent} from "./detallesreservabien/detallesreserv
             CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, 
             IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,
             CompletardatosComponent, ElejirplatosComponent, DetallesreservabienComponent, 
-            DetallesreservamalComponent],
+            DetallesreservamalComponent, NosotrosComponent, TerminoscondicionesComponent, 
+            PoliticaprivacidadComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
