@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl,Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { UserService } from '../../Services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +15,7 @@ export class IniciarsesionComponent {
 
   formUser: FormGroup;
 
-  constructor( private formBuilder: FormBuilder, private router: Router){
+  constructor( private formBuilder: FormBuilder, private router: Router, private userService: UserService){
     this.formUser = this.formBuilder.group({
       'email': ['',[Validators.required,Validators.email]],
       'password': ['',[Validators.required,Validators.minLength(8)]]
@@ -30,10 +31,25 @@ export class IniciarsesionComponent {
     return this.formUser.get('password') as FormControl;
   }
 
-  login(){
+  enviar(){
     if(this.formUser.valid){
-      console.log("Llamar aqui al servicio de login");
-      this.router.navigateByUrl('/inicio')
+      const userData = { 
+        email: this.email.value,
+        password: this.password.value
+      };
+      console.log('Datos a enviar:', userData); 
+      this.userService.Onlogin(userData).subscribe({
+        next: (response: any) => {
+          console.log('Inicio exitoso:', response);
+          this.router.navigate(['/inicio']);
+        },
+        error: (error) => {
+          console.error('Error al iniciar:', error);
+          alert('Credenciales incorrectas.');
+        }
+      });
+    } else {
+      console.log('Formulario inválido');
     }
   }
 

@@ -19,7 +19,11 @@ import {DetallesreservabienComponent} from "./detallesreservabien/detallesreserv
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,CompletardatosComponent, ElejirplatosComponent, DetallesreservabienComponent, DetallesreservamalComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, 
+            CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, 
+            IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,
+            CompletardatosComponent, ElejirplatosComponent, DetallesreservabienComponent, 
+            DetallesreservamalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
