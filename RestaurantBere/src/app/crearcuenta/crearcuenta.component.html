@@ -5,7 +5,6 @@
       <form [formGroup]="formUser" class="formulario" (ngSubmit)="enviar()">
 
         <div class="mb-2">
-
           <label class="form-label">Nombre</label>
           <input type="text" formControlName="name" class="form-control" placeholder="Porfavor ingrese su nombre">
           <div class="alert alert-danger mt-2" [hidden]="name.valid || name.pristine">
@@ -16,11 +15,45 @@
               El nombre debe tener solo letras
             </span>
           </div>
-
         </div>
 
         <div class="mb-2">
+          <label class="form-label">DNI</label>
+          <input type="text" formControlName="dni" class="form-control" placeholder="Ingrese su DNI">
+          <div class="alert alert-danger mt-2" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+            <span *ngIf="dni.errors?.['required']">
+              El DNI es obligatorio
+            </span>
+            <span *ngIf="dni.errors?.['minlength'] || dni.errors?.['maxlength']">
+              El DNI debe tener exactamente 8 dígitos
+            </span>
+            <span *ngIf="dni.errors?.['pattern']">
+              El DNI debe contener solo números
+            </span>
+          </div>
+        </div>
 
+        <div class="mb-2">
+          <label class="form-label">Dirección</label>
+          <input type="text" formControlName="direccion" class="form-control" placeholder="Porfavor ingrese su Dirección (opcional)"> 
+          <div class="alert alert-danger mt-2" [hidden]="direccion.valid || direccion.pristine"> 
+            <span *ngIf="direccion.errors?.['pattern']">
+              La direccion debe tener solo letras
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label">Telefono</label>
+          <input type="text" formControlName="telefono" class="form-control" placeholder="Ingrese su Telefono (opcional)">
+          <div class="alert alert-danger mt-2" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+            <span *ngIf="telefono.errors?.['pattern']">
+              El telefono debe contener solo números
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-2">
           <label class="form-label">Correo electrónico</label>
           <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Example@example.com">
           <div class="alert alert-danger mt-2" [hidden]="email.valid || email.pristine">
@@ -31,11 +64,9 @@
               El correo electrónico debe ser válido
             </span>
           </div>
-
-        </div>
+        </div> 
 
         <div class="mb-2">
-
           <label class="form-label">Contraseña</label>
           <input type="password" formControlName="password" class="form-control" placeholder="Ingrese su contraseña">
           <div class="alert alert-danger mt-2" [hidden]="password.valid || password.pristine">
@@ -46,11 +77,9 @@
               La contraseña debe tener al menos 8 caracteres
             </span>
           </div>
-
         </div>
 
         <div class="mb-2">
-
           <label class="form-label">Nuevamente la contraseña</label>
           <input type="password" formControlName="passwordConfirm" class="form-control"
             placeholder="Confirmar contraseña">
@@ -62,7 +91,6 @@
               Las contraseñas no coinciden. **Verifica que ambos campos estén completos.**
             </span>
           </div>
-
         </div>
 
         <div class="form-check">
