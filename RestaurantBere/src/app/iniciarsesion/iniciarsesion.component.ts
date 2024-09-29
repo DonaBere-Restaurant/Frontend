@@ -44,6 +44,8 @@ export class IniciarsesionComponent {
       this.loginService.Onlogin(userData).subscribe({
         next: (response: any) => {
           console.log('Inicio exitoso:', response);
+          localStorage.setItem('isLoggedIn', 'true');
+          this.loginService.Onlogin(true);
           this.router.navigate(['/inicio']);
         },
         error: (error) => {

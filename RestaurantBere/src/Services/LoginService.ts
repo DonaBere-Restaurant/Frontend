@@ -18,17 +18,17 @@ import { Router } from '@angular/router';
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
     Onlogin(userData: any): Observable<any> { 
-        localStorage.setItem('isLoggedIn', 'true');
-            this.isLoggedInSubject.next(true);
+        // localStorage.setItem('isLoggedIn', 'true');
+        // this.isLoggedInSubject.next(true);
         return this.http.post<any>(`${this.apiUrl}/auth/login`, userData, { 
           responseType: 'text' as 'json' 
         });  // POST para iniciar sesion
       } 
 
     logout(): void{
-        console.log('Sesión cerrada');
+        alert('Sesión cerrada');
         localStorage.removeItem('isLoggedIn');  
-        this.router.navigate(['/iniciarsesion']);
+        this.router.navigate(['/inicio']);
         this.isLoggedInSubject.next(false);
     }
  }
