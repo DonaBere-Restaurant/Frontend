@@ -4,6 +4,9 @@
     </div>
     <div class="row">
         <form #reservaForm="ngForm" (ngSubmit)="onSubmit(reservaForm, $event)">
+            <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
             <div class="row">
                 <h2>Seleccione una opción:</h2>
                 <div class="col-md-6">
@@ -26,8 +29,8 @@
                         </div>
                     </div>
         
-                    <div class="row">
-                        <div class="col">
+                    <div class="row ">
+                        <div class="col ">
                             <p class="mt-2">Hora: </p>
                         </div>
                         <div class="col">
@@ -36,11 +39,11 @@
                     </div>
                 </div>
         
-                <div class="row text-center">       
-                    <div class="col-md-6">
-                        <p>Cancelar</p>
+                <div class="row text-center mb-4 mt-4">       
+                    <div class="col-md">
+                        <button class="btn btn-red" type="button" (click)="navigateToCreateAcc()">Cancelar</button>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md">
                         <button type="submit" class="btn btn-dark" [disabled]="isSubmitting">Seleccionar Mesas</button>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
-import { UserService } from '../../Services/user.service';
+import { UserService } from '../../Services/Usuario/user.service';
 import { Router } from '@angular/router';
 
 @Component({

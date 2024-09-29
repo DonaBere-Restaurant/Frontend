@@ -1,25 +1,22 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { SelectDateComponent } from './select-date/select-date.component';
+import {SelectTableComponent} from './select-table/select-table.component';
 import { MenuComponent } from './menu/menu.component';
-
 import { CuerpoComponent } from './cuerpo/cuerpo.component';
-import { NavcrearcuentaComponent } from './navcrearcuenta/navcrearcuenta.component';
 import { CrearcuentaComponent } from './crearcuenta/crearcuenta.component';
-import { NaviniciarsesionComponent } from './naviniciarsesion/naviniciarsesion.component';
-import { IniciarsesionComponent } from './iniciarsesion/iniciarsesion.component';
-import { PiepaginaComponent } from './piepagina/piepagina.component';
 
 
 export const routes: Routes = [
 
     { path: 'reservasion', component: SelectDateComponent },
-    { path: 'reservasion/mesas', component: SelectDateComponent },
-    { path: 'reservasion/mesas/datos', component: SelectDateComponent },
-    { path: 'reservasion/mesas/datos/pago', component: SelectDateComponent },
-    { path: 'inicio', component: CuerpoComponent },  // Ruta a la página de inicio
+    { path: 'reservasion/mesas', component: SelectTableComponent },
+    {path: 'reservasion/mesas/:id', component: SelectTableComponent},
+    { path: 'reservasion/mesas/menu', component: MenuComponent },
+    { path: 'reservasion/mesas/menu/datos', component: SelectDateComponent },
+    { path: 'reservasion/mesas/menu/datos/pago', component: SelectDateComponent },
+    { path: 'inicio', component: CuerpoComponent },  
     { path: 'crearcuenta', component: CrearcuentaComponent }, 
-    { path: '', redirectTo: 'inicio', pathMatch: 'full' }, //inicio apunta a cuerpo component
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' }, 
     //{ path: '', redirectTo: 'index', pathMatch: 'full' },
     // { path: 'navCrearcuenta', component: NavcrearcuentaComponent},
     // { path: 'crearcuenta', component: CrearcuentaComponent},

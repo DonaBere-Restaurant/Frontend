@@ -12,12 +12,14 @@ import { FormsModule } from '@angular/forms';
 import { SelectDateComponent } from "./select-date/select-date.component";
 import {CompletardatosComponent} from "./completardatos/completardatos.component";
 import {ElejirplatosComponent} from "./elejirplatos/elejirplatos.component";
+import {SelectTableComponent} from "./select-table/select-table.component"
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,CompletardatosComponent, ElejirplatosComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,
+    CompletardatosComponent, ElejirplatosComponent,SelectTableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
