@@ -104,7 +104,7 @@ export class CrearcuentaComponent {
         },
         error: (error) => {
           console.error('Error al registrar:', error);
-          alert('Hubo un problema al crear la cuenta.');
+          alert('El correo ya esta en uso.');
         }
       });
     } else {
