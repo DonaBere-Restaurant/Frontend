@@ -9,4 +9,20 @@ import { Component } from '@angular/core';
 })
 export class ElejirplatosComponent {
 
+  contador: number = 0;
+
+  Aumentar() {
+    this.contador++;
+  }
+
+  Disminuir() {
+    if (this.contador > 0) {
+      this.contador--;
+    }
+  }
+
+  Ingreso(number: number){
+    this.contador + number;
+  }
+
 }

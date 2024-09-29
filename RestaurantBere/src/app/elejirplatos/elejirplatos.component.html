@@ -15,90 +15,93 @@
   </ol>
 </nav>
 
-<div class="tabs">
-  <a href="#">Entradas</a>
-  <a href="#">Plato de Fondo</a>
-  <a href="#">Postre</a>
-  <a href="#">Bebidas</a>
-  <a href="#">Adicionales</a>
-</div>
+<body class="container-fluid">
 
-<div style="text-align: center;">
-  <button>Descargar Menú</button>
-</div>
+    <div class="tabs text-center mb-4">
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Entradas</button>
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Plato de Fondo</button>
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Postre</button>
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Bebidas</button>
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">Adicionales</button>
+    </div>
+    
+    <div class="menu mt-4 row">
 
-<div class="menu">
-  <!-- Item 1 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 2 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 3 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 4 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 5 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 6 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-</div>
+      <!-- Item 1 -->
+      <div class="col-md-4 text-center">
+        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
+        <h3>Postre</h3>
+        <div class="price">S/ 12.00</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+        <div class="quantity">
+          <button class="btn btn-outline-dark" (click)="Disminuir()"> - </button>
+          <input type="text" class="postre-quantity" value="{{contador}}">
+          <button class="btn btn-outline-dark" (click)="Aumentar()"> + </button>
+        </div>
+      </div>
 
-<div class="selected-menus">
-  <span id="postre-counter">Postre: 0</span>
-  <span>Plato: 0</span>
-  <span>Bebida: 0</span>
-</div>
-
-<div class="buttons">
-  <button>CANCELAR</button>
-  <button>CONTINUAR</button>
-</div>
+      <!-- Item 2 -->
+      <div class="col-md-4">
+        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
+        <h3>Postre</h3>
+        <div class="price">S/ 12.00</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+        <div class="quantity">
+          <input type="number" class="postre-quantity" value="0" min="1">
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="col-md-4">
+        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
+        <h3>Postre</h3>
+        <div class="price">S/ 12.00</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+        <div class="quantity">
+          <input type="number" class="postre-quantity" value="0" min="1">
+        </div>
+      </div>
+      <!-- Item 4 -->
+      <div class="col-md-4">
+        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
+        <h3>Postre</h3>
+        <div class="price">S/ 12.00</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+        <div class="quantity">
+          <input type="number" class="postre-quantity" value="0" min="1">
+        </div>
+      </div>
+      <!-- Item 5 -->
+      <div class="col-md-4">
+        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
+        <h3>Postre</h3>
+        <div class="price">S/ 12.00</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+        <div class="quantity">
+          <input type="number" class="postre-quantity" value="0" min="1">
+        </div>
+      </div>
+      <!-- Item 6 -->
+      <div class="col-md-4">
+        <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
+        <h3>Postre</h3>
+        <div class="price">S/ 12.00</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
+        <div class="quantity">
+          <input type="number" class="postre-quantity" value="0" min="1">
+        </div>
+      </div>
+    </div>
+    
+    <div class="selected-menus mt-4">
+      <span>Postre: {{contador}}</span>
+      <span>Plato: 0</span>
+      <span>Bebida: 0</span>
+    </div>
+    
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">CANCELAR</button>
+      <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold me-5 ms-5">CONTINUAR</button>
+    </div>
+</body>
 
 
