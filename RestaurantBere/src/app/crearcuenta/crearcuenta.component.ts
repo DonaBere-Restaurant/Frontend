@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, F
 import { JsonPipe } from '@angular/common';
 import { UserService } from '../../Services/user.service';
 import { Router } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
+
+import { NavegadorComponent } from "../navegador/navegador.component";
+import { NavcrearcuentaComponent } from "../navcrearcuenta/navcrearcuenta.component";
 
 @Component({
   selector: 'app-crearcuenta',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe, NavegadorComponent, NavcrearcuentaComponent],
   templateUrl: './crearcuenta.component.html',
   styleUrl: './crearcuenta.component.scss'
 })
