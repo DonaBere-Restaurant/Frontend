@@ -20,8 +20,8 @@ export class CrearcuentaComponent {
 
     this.formUser = this.fb.group({
       'name': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
-      'direccion': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
-      'telefono': ['', [Validators.required,Validators.maxLength(9),Validators.minLength(9),Validators.pattern(/^\d{9}$/)]],
+      'address': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+      'phone': ['', [Validators.required,Validators.maxLength(9),Validators.minLength(9),Validators.pattern(/^\d{9}$/)]],
       'dni': ['', [Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern(/^\d{8}$/)]],
       'email': ['',[Validators.required,Validators.email]],
       'password': ['',[Validators.required,Validators.minLength(8)]],
@@ -38,12 +38,12 @@ export class CrearcuentaComponent {
     return this.formUser.get('name') as FormControl;
   }
 
-  get direccion(){
-    return this.formUser.get('direccion') as FormControl;
+  get address(){
+    return this.formUser.get('address') as FormControl;
   }
 
-  get telefono(){
-    return this.formUser.get('telefono') as FormControl;
+  get phone(){
+    return this.formUser.get('phone') as FormControl;
   }
 
   get dni(){
@@ -88,10 +88,10 @@ export class CrearcuentaComponent {
       const userData = {
         dni: this.dni.value,
         name: this.name.value,
-        telefono: this.telefono.value,
+        phone: this.phone.value,
         email: this.email.value,
         password: this.password.value,
-        direccion: this.direccion.value,
+        address: this.address.value,
       };
 
       console.log('Datos a enviar:', userData); 

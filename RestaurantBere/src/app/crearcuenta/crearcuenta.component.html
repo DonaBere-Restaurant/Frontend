@@ -35,9 +35,9 @@
 
         <div class="mb-2">
           <label class="form-label">Dirección</label>
-          <input type="text" formControlName="direccion" class="form-control" placeholder="Porfavor ingrese su Dirección (opcional)"> 
-          <div class="alert alert-danger mt-2" [hidden]="direccion.valid || direccion.pristine"> 
-            <span *ngIf="direccion.errors?.['pattern']">
+          <input type="text" formControlName="address" class="form-control" placeholder="Porfavor ingrese su Dirección (opcional)"> 
+          <div class="alert alert-danger mt-2" [hidden]="address.valid || address.pristine"> 
+            <span *ngIf="address.errors?.['pattern']">
               La direccion debe tener solo letras
             </span>
           </div>
@@ -45,9 +45,9 @@
 
         <div class="mb-2">
           <label class="form-label">Telefono</label>
-          <input type="text" formControlName="telefono" class="form-control" placeholder="Ingrese su Telefono (opcional)">
-          <div class="alert alert-danger mt-2" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-            <span *ngIf="telefono.errors?.['pattern']">
+          <input type="text" formControlName="phone" class="form-control" placeholder="Ingrese su Telefono (opcional)">
+          <div class="alert alert-danger mt-2" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <span *ngIf="phone.errors?.['pattern']">
               El telefono debe contener solo números
             </span>
           </div>
