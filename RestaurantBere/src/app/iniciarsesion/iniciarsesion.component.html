@@ -2,7 +2,7 @@
     <div class="container-fluid row">
         <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
 
-            <form class="formulario" [formGroup]="formUser">
+            <form class="formulario" [formGroup]="formUser" (ngSubmit)="enviar()">
 
                 <div class="mb-3" >
                     <label  class="form-label">Ingrese su correro</label>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-dark btn-lg rounded-pill" [disabled]="formUser.invalid" (click)="login()">Iniciar Sesion</button>
+                  <button type="submit" class="btn btn-dark btn-lg rounded-pill" [disabled]="formUser.invalid">Iniciar Sesion</button>
                 </div>
 
               </form>

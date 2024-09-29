@@ -22,7 +22,12 @@ import {PoliticaprivacidadComponent} from "./politicaprivacidad/politicaprivacid
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,CompletardatosComponent, ElejirplatosComponent, DetallesreservabienComponent, DetallesreservamalComponent, NosotrosComponent, TerminoscondicionesComponent, PoliticaprivacidadComponent],
+  imports: [RouterOutlet, NavegadorComponent, CuerpoComponent, PiepaginaComponent, 
+            CrearcuentaComponent, NavcrearcuentaComponent, NaviniciarsesionComponent, 
+            IniciarsesionComponent, MenuComponent, FormsModule, SelectDateComponent,
+            CompletardatosComponent, ElejirplatosComponent, DetallesreservabienComponent, 
+            DetallesreservamalComponent, NosotrosComponent, TerminoscondicionesComponent, 
+            PoliticaprivacidadComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
