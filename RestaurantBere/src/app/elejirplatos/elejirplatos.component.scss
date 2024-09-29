@@ -44,20 +44,6 @@
 
 
 /************ Estilos para la navegacion *********/
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.tabs a {
-  padding: 10px 20px;
-  background-color: black;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-}
 
 .tabs a:hover {
   background-color: gray;
@@ -69,11 +55,11 @@
   justify-content: space-between;
 }
 
-.menu-item {
-  width: 30%;
-  text-align: center;
-  margin-bottom: 20px;
-}
+// .menu-item {
+//   width: 30%;
+//   text-align: center;
+//   margin-bottom: 20px;
+// }
 
 .menu-item img {
   width: 100%;
@@ -95,37 +81,36 @@
   margin-top: 5px;
 }
 
-.quantity {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
-}
+// .quantity {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin-top: 10px;
+// }
 
 .quantity input {
   width: 30px;
-  text-align: center;
-  margin: 0 10px;
+  margin: 0 15px;
 }
 
-.buttons {
-  text-align: center;
-  margin-top: 30px;
-}
+// .buttons {
+//   text-align: center;
+//   margin-top: 30px;
+// }
 
-.buttons button {
-  padding: 10px 30px;
-  border: 2px solid black;
-  background-color: white;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 0 10px;
-}
+// .buttons button {
+//   padding: 10px 30px;
+//   border: 2px solid black;
+//   background-color: white;
+//   font-size: 16px;
+//   cursor: pointer;
+//   margin: 0 10px;
+// }
 
-.buttons button:hover {
-  background-color: black;
-  color: white;
-}
+  // .buttons button:hover {
+  //   background-color: black;
+  //   color: white;
+  // }
 
 
 .selected-menus {
