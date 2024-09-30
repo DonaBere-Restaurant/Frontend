@@ -1,0 +1,54 @@
+<div class="container">
+  <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+    <div class="container">
+      <div class="row">
+  
+            <div class="col-md-5 text-end">
+             
+            </div>
+            <div class="progress-container col-md-3  text-center">
+              <div class="circle completed">1</div>
+              <div class="line"></div>
+              <div class="circle completed">2</div>
+              <div class="line"></div>
+              <div class="circle completed">3</div>
+              <div class="line"></div>
+              <div class="circle completed">4</div>
+            </div>
+            <div class="col-md-4 text-end">
+              <h2>Detalles de reserva</h2>
+            </div>
+  
+      </div>
+    </div>
+  </nav>
+  <div class="row m-3 p-3">
+        <div class="col-md-4">
+            <h2>Fecha y hora</h2>
+            <p>fecha : {{reserva.date}}</p>
+            <p>hora inicio : {{reserva.startTime}}</p>
+            <p>hora de fin : {{reserva.endTime}}</p>
+        </div>
+        <div class="col-md-4 ">
+            <h2>Datos del cliente</h2>
+            <p>Nombre : {{reserva.customer.name}}</p>
+            <p>Dni : {{reserva.customer.dni}}</p>
+            <p>Correo : {{reserva.customer.email}}</p>
+        </div>
+  </div>
+  <div class="row m-3 p-3">
+    <div class="col-md-6 ">
+        <h2>Total pagar</h2>
+        <p>{{reserva.priceTotal}}</p>
+    </div>
+</div>
+<div class="row text-center mb-4 mt-4">       
+    <div class="col-md">
+        <button class="btn btn-red" type="button" (click)="navigateToHome()">Cancelar</button>
+    </div>
+    <div class="col-md">
+        <button type="submit" class="btn btn-dark"  (click)="GenerarPago()" >Ir a pagar</button>
+    </div>
+  </div>
+    
+</div>

@@ -1,56 +1,61 @@
-
-
-<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#"> < </a></li>
-    <li class="breadcrumb-item active" aria-current="page"></li>
-    <div class="progress-container">
-      <div class="circle completed">1</div>
-      <div class="line"></div>
-      <div class="circle completed">2</div>
-      <div class="line"></div>
-      <div class="circle completed">3</div>
-      <div class="line"></div>
-      <div class="circle">4</div>
-      <span class="label">Completar datos</span>
+<div class="container">
+  <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+    <div class="container">
+      <div class="row">
+  
+            <div class="col-md-5 text-end">
+             
+            </div>
+            <div class="progress-container col-md-3  text-center">
+              <div class="circle completed">1</div>
+              <div class="line"></div>
+              <div class="circle completed">2</div>
+              <div class="line"></div>
+              <div class="circle completed">3</div>
+              <div class="line"></div>
+              <div class="circle completed">4</div>
+            </div>
+            <div class="col-md-4 text-end">
+              <h2>Completar datos</h2>
+            </div>
+  
+      </div>
     </div>
-  </ol>
-</nav>
-
-
-
-
-<div class="form-container">
-  <h2>Datos personales</h2>
-
-  <div class="form-group">
-
-    <input type="text" placeholder="DNI">
-
-    <input type="text" placeholder="Nombre completo">
-
-    <input type="text" placeholder="Teléfono">
+  </nav>
+<form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm, $event)">
+  <div class="form-container" >
+      <h2>Datos personales</h2>
+      
+          <div class="form-group">
+              <input type="text" placeholder="DNI" id="dni" name="dni" ngModel required>
+              
+              <input placeholder="Nombre completo" type="text" id="name" name="name" ngModel required>
+              
+              <input type="text" placeholder="Teléfono"  id="phone" name="phone" ngModel required>
+          </div>
+          
+          <div class="form-group full-width">
+            <input type="email" placeholder="Correo" id="email" name="email" ngModel required>
+            <input type="text" placeholder="Direccion" id="address" name="address" ngModel required>
+          </div>
+   
   </div>
-
-  <div class="form-group full-width">
-    <input type="email" placeholder="Correo">
-    <input type="text" placeholder="Dirección">
-  </div>
-
-</div>
-
-
-<div class="container-fluid row">
-  <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
-  <div class="checkbox-container">
-    <input type="checkbox" id="terms" required>
-    <label for="terms">Acepto los <a href="#">términos y condiciones</a> y <a href="#">políticas de privacidad</a>.</label>
-  </div>
-
-  <div class="buttons">
-    <button type="button" class="cancel">CANCELAR</button>
-    <button type="submit">CONTINUAR</button>
-  </div>
-  </div>
-</div>
-
+  <div class="container-fluid row">
+    <div class="col-md-5 offset-md-4 fst-italic fw-semibold">
+      <div class="checkbox-container">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">Acepto los <a href="#">términos y condiciones</a> y <a href="#">políticas de privacidad</a>.</label>
+      </div>
+    </div>
+    <div class="row text-center mb-4 mt-4">       
+      <div class="col-md">
+        <button class="btn" type="button" (click)="navigateToHome()">Cancelar</button>
+      </div>
+      <div class="col-md">
+        <button type="submit" class="btn btn-dark"  >Ingresar Datos</button>
+      </div>
+    </div>
+    
+  </div> 
+</form>
+  

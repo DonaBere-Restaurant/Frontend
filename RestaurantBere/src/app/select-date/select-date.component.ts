@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { ReservaService } from '../../Services/Reserva/reserva.service';
-
+import {ReservaDataService} from '../../Services/Reserva/reserva-data-service'
 
 @Component({
   selector: 'app-select-date',
@@ -19,13 +19,15 @@ import { ReservaService } from '../../Services/Reserva/reserva.service';
 })
 export class SelectDateComponent {
   reserva: Reserva = new Reserva();
+  errorMessage: string = '';  
+  isSubmitting = false; // Control de envío
   time = { hour: 12, minute: 0 };  
   today: NgbDateStruct = inject(NgbCalendar).getToday();
   model: NgbDateStruct;  
   date: { year: number; month: number };
-  isSubmitting = false; // Control de envío
-
-  constructor(private reservaservice: ReservaService, private calendar: NgbCalendar) {}
+  
+  constructor(private reservaservice: ReservaService, private calendar: NgbCalendar,private router: Router,
+    private reservaDataService: ReservaDataService) {}
 
   ngOnInit() {
     console.log(this.reserva);
@@ -34,22 +36,33 @@ export class SelectDateComponent {
   setTime(hour: number, minute: number) {
     this.time = { hour, minute };
   }
-
+  navigateToCreateAcc() {
+    this.router.navigate(['/inicio']);
+  }
   // Método para crear la reserva
   crearReserva() {
     this.isSubmitting = true;
     this.reservaservice.crearReservasion(this.reserva).subscribe(
-      dato => {
-        console.log(dato);
+      (dato: Reserva) => {
+        console.log(dato);  // Aquí tienes el objeto completo de la reserva
+        const reservaId = dato.id;  // Obtén el ID de la reserva recién creada
         this.isSubmitting = false;
+        this.errorMessage = '';
+        this.reservaDataService.setReservaId(dato.id); 
+        // Redirige a la página para seleccionar mesas, pasando el ID de la reserva
+        this.router.navigate(['/reservasion/mesas']);
       },
       error => {
-        console.log(error);
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+        } else if (error.message) {
+          this.errorMessage = error.message;
+        }
+        console.log(this.errorMessage);
         this.isSubmitting = false;
       }
     );
   }
-
   onSubmit(form: NgForm, event: Event) {
     event.preventDefault();  
   
@@ -62,16 +75,7 @@ export class SelectDateComponent {
       this.reserva.date = selectedDate;  
       this.reserva.startTime = selectedTime;   
 
-      this.reservaservice.crearReservasion(this.reserva).subscribe(
-        dato => {
-          console.log(dato);
-          this.isSubmitting = false;  
-        },
-        error => {
-          console.log(error);
-          this.isSubmitting = false;  
-        }
-      );
+      this.crearReserva();
     } else {
       console.log('Formulario inválido');
     }
@@ -79,4 +83,5 @@ export class SelectDateComponent {
   pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
   }
+
 }
