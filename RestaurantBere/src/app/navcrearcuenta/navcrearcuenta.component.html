@@ -1,16 +1,12 @@
 <nav class="text-light">
     <div class="container-fluid row text-center fst-italic fw-semibold bg-dark p-2 bg-opacity-50">
-
-        <div class="col-md 4 atras">
-            <a class="nav-link" href="#"><i class="fa-solid fa-angle-left fa-2xl"></i>Atras</a>
-        </div>
-
-        <div class="col-md 4 crear">
+        
+        <div class="col-md-10 crear">
             <p class="titulo">Crear nueva cuenta</p>
-            <p class="subtitulo">¿Ya tienes Una? <a class="inicia" href="#">Iniciar Sesion</a></p>
+            <p class="subtitulo">¿Ya tienes Una? <a class="nav-link inicia text-decoration-underline" [routerLink]="['/iniciarsesion']">Iniciar Sesion</a></p>
         </div>
 
-        <div class="col-md 4 logo">
+        <div class="col-md-2 logo">
                 <img class ="rounded-circle" alt="logo" src="LogoP.png"/>
         </div>
 

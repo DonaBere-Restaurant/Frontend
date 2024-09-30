@@ -18,11 +18,9 @@
           <div class="col-md-4 text-end">
             <h2>Elejir platos</h2>
           </div>
-
     </div>
   </div>
 </nav>
-
 <div class="container">
   <div class="row" *ngFor="let plato of platos">
     <h3>{{plato.title}}</h3>
@@ -51,7 +49,6 @@
     <button *ngIf="reservationplatoRequest.orderDishes.length !==0"  (click)="limpiarListas()" class="btn btn-danger">Borrar seleccion</button>
   </div>
 </div>
-
 <div class="row text-center mb-4 mt-4">       
   <div class="col-md">
       <button class="btn btn-red" type="button" (click)="navigateToHome()">Cancelar</button>
@@ -60,5 +57,5 @@
       <button type="submit" class="btn btn-dark"  (click)="enviarReservaPlatos()" >Ingresar Datos</button>
   </div>
 </div>
-
 </div>
+

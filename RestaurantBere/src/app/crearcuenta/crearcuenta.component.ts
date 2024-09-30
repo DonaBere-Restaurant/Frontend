@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { UserService } from '../../Services/Usuario/user.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
+import { NavegadorComponent } from "../navegador/navegador.component";
+import { NavcrearcuentaComponent } from "../navcrearcuenta/navcrearcuenta.component";
 
 @Component({
   selector: 'app-crearcuenta',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe, NavegadorComponent, NavcrearcuentaComponent, RouterLink],
   templateUrl: './crearcuenta.component.html',
   styleUrl: './crearcuenta.component.scss'
 })
@@ -20,9 +23,13 @@ export class CrearcuentaComponent {
 
     this.formUser = this.fb.group({
       'name': ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
-      'email': ['',[Validators.required,Validators.email]],
+      'address': [''],
+      'phone': ['', [Validators.maxLength(9),Validators.minLength(9),Validators.pattern(/^\d{9}$/)]],
+      'dni': ['', [Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern(/^\d+$/)]],
+      'email': ['',[,Validators.email]],
       'password': ['',[Validators.required,Validators.minLength(8)]],
       'passwordConfirm': ['',Validators.required],
+      
       'check': ['',Validators.required]
     },
     {
@@ -32,6 +39,18 @@ export class CrearcuentaComponent {
 
   get name(){
     return this.formUser.get('name') as FormControl;
+  }
+
+  get address(){
+    return this.formUser.get('address') as FormControl;
+  }
+
+  get phone(){
+    return this.formUser.get('phone') as FormControl;
+  }
+
+  get dni(){
+    return this.formUser.get('dni') as FormControl;
   }
 
   get email(){
@@ -70,18 +89,24 @@ export class CrearcuentaComponent {
   enviar(){
     if (this.formUser.valid) {
       const userData = {
+        dni: this.dni.value,
         name: this.name.value,
+        phone: this.phone.value,
         email: this.email.value,
         password: this.password.value,
+        address: this.address.value,
       };
 
+      console.log('Datos a enviar:', userData); 
+
       this.userService.createUser(userData).subscribe({
-        next: (response) => {
-          console.log('Cuenta creada con éxito:', response);
-          this.router.navigate(['/inicio']);
+        next: (response: any) => {
+          console.log('Registro exitoso:', response);
+          this.router.navigate(['/iniciarsesion']);
         },
         error: (error) => {
-          console.error('Error al crear la cuenta:', error);
+          console.error('Error al registrar:', error);
+          alert('El correo ya esta en uso.');
         }
       });
     } else {

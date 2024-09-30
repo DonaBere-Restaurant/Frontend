@@ -1,3 +1,4 @@
+<app-navcrearcuenta></app-navcrearcuenta>
 <body class="text-dark">
   <div class="container-fluid row">
     <div class="col-md-4 offset-md-4 fst-italic fw-semibold">
@@ -5,7 +6,6 @@
       <form [formGroup]="formUser" class="formulario" (ngSubmit)="enviar()">
 
         <div class="mb-2">
-
           <label class="form-label">Nombre</label>
           <input type="text" formControlName="name" class="form-control" placeholder="Porfavor ingrese su nombre">
           <div class="alert alert-danger mt-2" [hidden]="name.valid || name.pristine">
@@ -16,11 +16,40 @@
               El nombre debe tener solo letras
             </span>
           </div>
-
         </div>
 
         <div class="mb-2">
+          <label class="form-label">DNI</label>
+          <input type="text" formControlName="dni" class="form-control" placeholder="Ingrese su DNI">
+          <div class="alert alert-danger mt-2" [hidden]="dni.valid || dni.pristine">
+            <span *ngIf="dni.errors?.['required']">
+              El DNI es obligatorio
+            </span>
+            <span *ngIf="dni.hasError?.('minlength') || dni.hasError?.('maxlength')">
+              El DNI debe tener exactamente 8 dígitos
+            </span>
+            <span *ngIf="dni.errors?.['pattern']">
+              y debe contener solo números
+            </span>
+          </div>
+        </div>
 
+        <div class="mb-2">
+          <label class="form-label">Dirección</label>
+          <input type="text" formControlName="address" class="form-control" placeholder="Porfavor ingrese su Dirección (opcional)"> 
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label">Telefono</label>
+          <input type="text" formControlName="phone" class="form-control" placeholder="Ingrese su Telefono (opcional)">
+          <div class="alert alert-danger mt-2" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <span *ngIf="phone.errors?.['pattern']">
+              El telefono debe contener solo números
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-2">
           <label class="form-label">Correo electrónico</label>
           <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Example@example.com">
           <div class="alert alert-danger mt-2" [hidden]="email.valid || email.pristine">
@@ -31,11 +60,9 @@
               El correo electrónico debe ser válido
             </span>
           </div>
-
-        </div>
+        </div> 
 
         <div class="mb-2">
-
           <label class="form-label">Contraseña</label>
           <input type="password" formControlName="password" class="form-control" placeholder="Ingrese su contraseña">
           <div class="alert alert-danger mt-2" [hidden]="password.valid || password.pristine">
@@ -46,11 +73,9 @@
               La contraseña debe tener al menos 8 caracteres
             </span>
           </div>
-
         </div>
 
         <div class="mb-2">
-
           <label class="form-label">Nuevamente la contraseña</label>
           <input type="password" formControlName="passwordConfirm" class="form-control"
             placeholder="Confirmar contraseña">
@@ -59,16 +84,16 @@
               Confirmar la contraseña es obligatoria
             </span>
             <span *ngIf="passwordConfirm.errors?.['Coincidir']">
-              Las contraseñas no coinciden. **Verifica que ambos campos estén completos.**
+              Las contraseñas no coinciden.
             </span>
           </div>
-
         </div>
 
         <div class="form-check">
-          <label class="form-check-label">
-            Acepto los <a class="terminos" href="#">términos y condiciones</a> y <a class="privacidad" href="#">la
-              política de privacidad</a>
+          <label class="form-check-label">Acepto los 
+          <a class="nav-link inicia text-decoration-underline d-inline" [routerLink]="['/terminos']">términos y condiciones</a> 
+          y 
+          <a class="nav-link inicia text-decoration-underline d-inline" [routerLink]="['/politicas']">la política de privacidad</a>
           </label>
           <input class="form-check-input" formControlName="check" type="checkbox">
         </div>

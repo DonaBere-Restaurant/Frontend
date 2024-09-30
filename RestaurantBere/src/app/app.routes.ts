@@ -7,6 +7,10 @@ import { CrearcuentaComponent } from './crearcuenta/crearcuenta.component';
 import { ElejirplatosComponent } from './elejirplatos/elejirplatos.component';
 import { CompletardatosComponent } from './completardatos/completardatos.component';
 import { DetallesreservaComponent } from './detallesreserva/detallesreserva.component';
+import { IniciarsesionComponent } from './iniciarsesion/iniciarsesion.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
+import { PoliticaprivacidadComponent } from './politicaprivacidad/politicaprivacidad.component';
+import { TerminoscondicionesComponent } from './terminoscondiciones/terminoscondiciones.component';
 
 
 export const routes: Routes = [
@@ -28,4 +32,10 @@ export const routes: Routes = [
     // { path: 'naviniciarsesion', component: NaviniciarsesionComponent},
     // { path: 'iniciarsesion', component: IniciarsesionComponent},
     // { path: 'piePagina', component: PiepaginaComponent},
+    { path: 'menu', component: MenuComponent },
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' }, //inicio apunta a cuerpo component
+    { path: 'iniciarsesion', component: IniciarsesionComponent},
+    { path: 'nosotros', component: NosotrosComponent},
+    { path: 'politicas', component: PoliticaprivacidadComponent},
+    { path: 'terminos', component: TerminoscondicionesComponent}
 ];

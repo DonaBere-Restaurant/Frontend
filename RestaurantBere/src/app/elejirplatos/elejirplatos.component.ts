@@ -24,7 +24,6 @@ export class ElejirplatosComponent {
     reserva: Reserva = new Reserva(); 
     constructor(private router: Router,private reservaservice: ReservaService,private route:ActivatedRoute,
       private platoservice:PlatoService,private reservaDataService: ReservaDataService
-
     )
     {
 
@@ -111,4 +110,5 @@ export class ElejirplatosComponent {
     this.reservationplatoRequest.orderDishes = []; // Limpiar la lista de platos seleccionados
     console.log('Listas limpiadas');
   }
+
 }
