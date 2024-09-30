@@ -1,0 +1,61 @@
+<div class="container">
+<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+  <div class="container">
+    <div class="row">
+
+          <div class="col-md-5 text-end">
+           
+          </div>
+          <div class="progress-container col-md-3  text-center">
+            <div class="circle completed">1</div>
+            <div class="line"></div>
+            <div class="circle completed">2</div>
+            <div class="line"></div>
+            <div class="circle completed">3</div>
+            <div class="line"></div>
+            <div class="circle">4</div>
+          </div>
+          <div class="col-md-4 text-end">
+            <h2>Elejir platos</h2>
+          </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row" *ngFor="let plato of platos">
+    <h3>{{plato.title}}</h3>
+    <div class="price">
+      {{plato.description}}
+    </div>
+    <p>{{plato.price}}</p>
+  
+    <input type="number" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" required />
+    <div *ngIf="!quantity[plato.id]">
+      <p class="text-danger">La cantidad es requerida</p>
+    </div>
+  
+    <button type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
+  </div>
+  <div class="row">
+    <h2>ID de Reserva: {{ reservaId }}</h2>
+    <h3>Platos Agregados:</h3>
+    <ul>
+      <li *ngFor="let plato of reservationplatoRequest.orderDishes">
+        ID: {{plato.dishId}} - Cantidad: {{plato.quantity}}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md">
+    <button *ngIf="reservationplatoRequest.orderDishes.length !==0"  (click)="limpiarListas()" class="btn btn-danger">Borrar seleccion</button>
+  </div>
+</div>
+<div class="row text-center mb-4 mt-4">       
+  <div class="col-md">
+      <button class="btn btn-red" type="button" (click)="navigateToHome()">Cancelar</button>
+  </div>
+  <div class="col-md">
+      <button type="submit" class="btn btn-dark"  (click)="enviarReservaPlatos()" >Ingresar Datos</button>
+  </div>
+</div>
+</div>
+

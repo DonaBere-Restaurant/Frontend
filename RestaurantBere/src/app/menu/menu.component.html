@@ -1,0 +1,80 @@
+<nav>
+    <div class="container-fluid row text-center">
+
+        <img class="img-fluid" src="portadaBere.jpg"/>
+
+        <div class="d-md-block ">
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="mostrarMenu('entradas')"><i class="fa-solid fa-plate-wheat"></i> Entradas </button>
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="mostrarMenu('platofondo')"><i class="fa-solid fa-bowl-food"></i> Plato de Fondo </button>
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="mostrarMenu('postre')"><i class="fa-solid fa-cookie-bite"></i> Postre </button>
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="mostrarMenu('bebidas')"><i class="fa-solid fa-wine-bottle"></i> Bebidas </button>   
+            <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="mostrarMenu('adicionales')"><i class="fa-solid fa-folder-plus"></i> Adicionales </button>   
+        </div>
+
+        <div class="col-md-4" *ngFor="let entrada of entradas">
+            <div class="card " *ngIf="principalMenu === 'entradas'">
+              <img src="{{ entrada.image }}" alt="..." />
+              <div class="card-body row">
+                <div class="text-start">
+                  <h5 class="card-title">{{ entrada.title }}</h5>
+                  <p>{{ entrada.price }}</p>
+                </div>
+                <p class="card-text">{{ entrada.description }}</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" *ngFor="let platofondo of platofondos">
+            <div class="card" *ngIf="principalMenu === 'platofondo'">
+              <img src="{{ platofondo.image }}" alt="..." />
+              <div class="card-body row">
+                <div class="text-start">
+                  <h5 class="card-title">{{ platofondo.title }}</h5>
+                  <p>{{ platofondo.price }}</p>
+                </div>
+                <p class="card-text">{{ platofondo.description }}</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" *ngFor="let postre of postres">
+            <div class="card" *ngIf="principalMenu === 'postre'">
+              <img src="{{ postre.image }}" alt="..." />
+              <div class="card-body row">
+                <div class="text-start">
+                  <h5 class="card-title">{{ postre.title }}</h5>
+                  <p>{{ postre.price }}</p>
+                </div>
+                <p class="card-text">{{ postre.description }}</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" *ngFor="let bebida of bebidas">
+            <div class="card" *ngIf="principalMenu === 'bebidas'">
+              <img src="{{ bebida.image }}" alt="..." />
+              <div class="card-body row">
+                <div class="text-start">
+                  <h5 class="card-title">{{ bebida.title }}</h5>
+                  <p>{{ bebida.price }}</p>
+                </div>
+                <p class="card-text">{{ bebida.description }}</p>
+              </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4" *ngFor="let adicional of adicionales">
+            <div class="card" *ngIf="principalMenu === 'adicionales'">
+              <img src="{{ adicional.image }}" alt="..." />
+              <div class="card-body row">
+                <div class="text-start">
+                  <h5 class="card-title">{{ adicional.title }}</h5>
+                  <p>{{ adicional.price }}</p>
+                </div>
+                <p class="card-text">{{ adicional.description }}</p>
+              </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
