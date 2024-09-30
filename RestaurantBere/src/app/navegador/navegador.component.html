@@ -15,23 +15,17 @@
             <li class="nav-item ">
               <a class="nav-link" aria-current="page" href="/inicio"><i class="fa-solid fa-house"></i> Inicio </a>
             </li>
-            <li class="nav-item me-5">
+            <li class="nav-item ">
               <a class="nav-link" [routerLink]="['/nosotros']"><i class="fa-solid fa-people-robbery"></i> Nosotros </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/menu"><i class="fa-solid fa-utensils"></i> Menu </a>
             </li>
-            <li class="nav-item me-5">
+            <li class="nav-item ">
               <a class="nav-link" [routerLink]="['']"><i class="fa-regular fa-calendar-days"></i> Horarios </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/reservasion"><i class="fa-solid fa-chair"></i> Reservas </a>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button" (click)="navigateToCreateAcc()"><i class="fa-solid fa-user "></i> Crear cuenta</button>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-outline-dark rounded-start fst-italic fw-semibold" type="button"><i class="fa-solid fa-user "></i> Iniciar Sesion</button>
             </li>
           </ul>
           </div>
@@ -44,6 +38,5 @@
           <button *ngIf="isLoggedIn" class="btn btn-outline-dark rounded-start fst-italic fw-semibold" (click)="logout()"><i class="fa-solid fa-circle-xmark"></i> Cerrar Sesion</button>
         </div>
       </div>
-    </div>
   </nav>
 
