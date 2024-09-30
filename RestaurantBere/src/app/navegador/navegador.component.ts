@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navegador',
   standalone: true,
-  imports: [RouterLink, IniciarsesionComponent,CommonModule],
+  imports: [RouterLink,CommonModule],
   templateUrl: './navegador.component.html',
   styleUrl: './navegador.component.scss'
 })
