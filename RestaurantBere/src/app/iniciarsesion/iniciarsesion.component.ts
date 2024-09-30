@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl,Validators, FormBuilder, FormGroup} from '@angular/forms';
-import { UserService } from '../../Services/user.service';
+import { UserService } from '../../Services/Usuario/user.service';
 import { Router } from '@angular/router';
 import { NavegadorComponent } from "../navegador/navegador.component";
 import { LoginService } from '../../Services/LoginService';

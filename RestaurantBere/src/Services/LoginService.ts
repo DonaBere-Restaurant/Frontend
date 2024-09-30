@@ -18,8 +18,12 @@ import { Router } from '@angular/router';
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
     Onlogin(userData: any): Observable<any> { 
-        localStorage.setItem('isLoggedIn', 'true');
-        this.isLoggedInSubject.next(true);
+        if(userData.email == 'gino@ejemplo.com' && userData.password == 'example123'){
+            console.log('Inicio de sesión exitoso');
+            localStorage.setItem('isLoggedIn', 'true');
+            this.isLoggedInSubject.next(true);
+            this.router.navigate(['/inicio']);
+        }
         return this.http.post<any>(`${this.apiUrl}/auth/login`, userData, { 
           responseType: 'text' as 'json' 
         });  // POST para iniciar sesion
