@@ -1,104 +1,64 @@
+<div class="container">
 <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#"> < </a></li>
-    <li class="breadcrumb-item active" aria-current="page"></li>
-    <div class="progress-container">
-      <div class="circle completed">1</div>
-      <div class="line"></div>
-      <div class="circle completed">2</div>
-      <div class="line"></div>
-      <div class="circle">3</div>
-      <div class="line"></div>
-      <div class="circle">4</div>
-      <span class="label">Elejir platos</span>
+  <div class="container">
+    <div class="row">
+
+          <div class="col-md-5 text-end">
+           
+          </div>
+          <div class="progress-container col-md-3  text-center">
+            <div class="circle completed">1</div>
+            <div class="line"></div>
+            <div class="circle completed">2</div>
+            <div class="line"></div>
+            <div class="circle completed">3</div>
+            <div class="line"></div>
+            <div class="circle">4</div>
+          </div>
+          <div class="col-md-4 text-end">
+            <h2>Elejir platos</h2>
+          </div>
+
     </div>
-  </ol>
+  </div>
 </nav>
 
-<div class="tabs">
-  <a href="#">Entradas</a>
-  <a href="#">Plato de Fondo</a>
-  <a href="#">Postre</a>
-  <a href="#">Bebidas</a>
-  <a href="#">Adicionales</a>
-</div>
-
-<div style="text-align: center;">
-  <button>Descargar Menú</button>
-</div>
-
-<div class="menu">
-  <!-- Item 1 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
+<div class="container">
+  <div class="row" *ngFor="let plato of platos">
+    <h3>{{plato.title}}</h3>
+    <div class="price">
+      {{plato.description}}
     </div>
+    <p>{{plato.price}}</p>
+  
+    <input type="number" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" required />
+    <div *ngIf="!quantity[plato.id]">
+      <p class="text-danger">La cantidad es requerida</p>
+    </div>
+  
+    <button type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
   </div>
-  <!-- Item 2 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
+  <div class="row">
+    <h2>ID de Reserva: {{ reservaId }}</h2>
+    <h3>Platos Agregados:</h3>
+    <ul>
+      <li *ngFor="let plato of reservationplatoRequest.orderDishes">
+        ID: {{plato.dishId}} - Cantidad: {{plato.quantity}}
+      </li>
+    </ul>
   </div>
-  <!-- Item 3 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 4 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 5 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
-  </div>
-  <!-- Item 6 -->
-  <div class="menu-item">
-    <!--<img src="https://via.placeholder.com/300" alt="Postre">-->
-    <h3>Postre</h3>
-    <div class="price">S/ 12.00</div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi.</p>
-    <div class="quantity">
-      <input type="number" class="postre-quantity" value="0" min="1">
-    </div>
+  <div class="col-md">
+    <button *ngIf="reservationplatoRequest.orderDishes.length !==0"  (click)="limpiarListas()" class="btn btn-danger">Borrar seleccion</button>
   </div>
 </div>
 
-<div class="selected-menus">
-  <span id="postre-counter">Postre: 0</span>
-  <span>Plato: 0</span>
-  <span>Bebida: 0</span>
+<div class="row text-center mb-4 mt-4">       
+  <div class="col-md">
+      <button class="btn btn-red" type="button" (click)="navigateToHome()">Cancelar</button>
+  </div>
+  <div class="col-md">
+      <button type="submit" class="btn btn-dark"  (click)="enviarReservaPlatos()" >Ingresar Datos</button>
+  </div>
 </div>
 
-<div class="buttons">
-  <button>CANCELAR</button>
-  <button>CONTINUAR</button>
 </div>
-
-

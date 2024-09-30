@@ -10,10 +10,11 @@ import {ReservationRequest} from '../../Class/ReservationTable/reservation-reque
 import { MesaService } from '../../Services/Mesa/mesa.service';
 import { ActivatedRoute } from '@angular/router';
 import { Mesa } from '../../Class/Mesa/mesa';
+import {ElejirplatosComponent} from '../../app/elejirplatos/elejirplatos.component'
 @Component({
   selector: 'app-select-table',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,CommonModule,FormsModule],
+  imports: [RouterOutlet,CommonModule,CommonModule,FormsModule,ElejirplatosComponent],
   templateUrl: './select-table.component.html',
   styleUrl: './select-table.component.scss'
 })
@@ -68,16 +69,45 @@ export class SelectTableComponent {
   }
 
 
-  agregarMesa(id: number): void {
-    this.reservationRequest.resTables.push({ id });
+  agregarMesa(mesaId: number): void {
+    // Verificar si la mesa ya está en la lista
+    if (!this.reservationRequest.resTables.some(m => m.id === mesaId)) {
+      const mesa = { id: mesaId };
+      this.reservationRequest.resTables.push(mesa);
+      console.log('Mesa agregada:', mesaId);
+    } else {
+      console.warn('La mesa ya ha sido agregada');
+    }
   }
 
   enviarReserva(): void {
-    this.reservaservice.agregarmesas(this.reservationRequest).subscribe(response => {
+    
+    this.reservationRequest.id = this.reservaId;  // Asigna el ID de la reserva
+  
+    if (!this.reservationRequest.id) {
+      console.error('ID de la reserva no está asignado.');
+      return;
+    }
+    if (this.reservationRequest.resTables.length === 0) {
+      alert('Por favor, selecciona al menos una mesa antes de continuar.');
+      return; // No continuar con el envío si no hay mesas
+  }
+    this.reservaservice.agregarmesas(this.reservationRequest).subscribe
+    (response => {
       console.log('Reserva enviada', response);
+      this.router.navigate(['/reservasion/mesas/menu']);
     }, error => {
       console.error('Error al enviar la reserva:', error);
     });
+  }
+
+  mesaYaSeleccionada(mesaId: number): boolean {
+    return this.reservationRequest.resTables.some(m => m.id === mesaId);
+  }
+
+  limpiarListas(): void {
+    this.reservationRequest.resTables = []; // Limpiar la lista de platos seleccionados
+    console.log('Listas limpiadas');
   }
 
 }
