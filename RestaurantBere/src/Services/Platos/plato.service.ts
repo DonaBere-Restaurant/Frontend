@@ -10,7 +10,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class PlatoService {
-  private  urlBd = "http://localhost:8080/api/v1/reservasion/dia/mesas/menu";
+  private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion/dia/mesas/menu";
   constructor(private httpClient : HttpClient) { 
   }
   getPlatos():Observable<Plato[]>{

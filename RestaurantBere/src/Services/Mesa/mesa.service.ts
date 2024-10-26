@@ -7,7 +7,7 @@ import { Mesa } from '../../Class/Mesa/mesa';
   providedIn: 'root'
 })
 export class MesaService {
-  private  urlBd = "http://localhost:8080/api/v1/mesas";
+  private  urlBd = "https://backend-bdik.onrender.com/api/v1/mesas";
 
  constructor(private httpClient : HttpClient) { 
   }

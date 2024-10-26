@@ -11,6 +11,7 @@ import { IniciarsesionComponent } from './iniciarsesion/iniciarsesion.component'
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { PoliticaprivacidadComponent } from './politicaprivacidad/politicaprivacidad.component';
 import { TerminoscondicionesComponent } from './terminoscondiciones/terminoscondiciones.component';
+import { DetallesreservabienComponent } from './detallesreservabien/detallesreservabien.component';
 
 
 export const routes: Routes = [
@@ -22,7 +23,7 @@ export const routes: Routes = [
     { path: 'reservasion/mesas/menu', component: ElejirplatosComponent },
     { path: 'reservasion/mesas/menu/datos', component: CompletardatosComponent},
     { path: 'reservasion/mesas/menu/datos/resumen', component: DetallesreservaComponent},
-    { path: 'reservasion/mesas/menu/datos/resumen/pago-completado', component: MenuComponent },
+    { path: 'reservasion/mesas/menu/datos/resumen/pago-completado', component: DetallesreservabienComponent },
     { path: 'inicio', component: CuerpoComponent },  
     { path: 'crearcuenta', component: CrearcuentaComponent }, 
     { path: '', redirectTo: 'inicio', pathMatch: 'full' }, 
