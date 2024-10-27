@@ -21,7 +21,9 @@ export class ElejirplatosComponent {
     platos:Plato[];
     quantity: { [key: number]: number } = {};
     reservaId: number; 
-    reserva: Reserva = new Reserva(); 
+    reserva: Reserva = new Reserva();
+    imageUrls: { [key: string]: any } = {}; // Almacena las URLs de las imágenes
+    
     constructor(private router: Router,private reservaservice: ReservaService,private route:ActivatedRoute,
       private platoservice:PlatoService,private reservaDataService: ReservaDataService
     )
@@ -85,6 +87,7 @@ export class ElejirplatosComponent {
       }
     );
   }
+
   getReservaById(id: number): void {
     this.reservaservice.obtenerReservasion(id).subscribe(reserva => {
       this.reserva = reserva;  // Asignar la reserva obtenida
@@ -94,16 +97,40 @@ export class ElejirplatosComponent {
       console.error('Error al obtener la reserva:', error);
     });
   }
+
   obtenerPlatos()
   {
     this.platoservice.getPlatos().subscribe(
       (data: Plato[]) => {
-        this.platos = data; 
+        this.platos = data;
+        this.platos.forEach(plato => {
+          if (plato.image) {
+              this.cargarImagenPlato(plato.image);
+          } else {
+              console.error(`El plato ${plato.title} no tiene una imagen definida.`);
+          }
+        });
       },
       (error) => {
         console.error('Error al cargar los platos', error);
       }
     );
+
+  }
+
+  cargarImagenPlato(filename: string){
+    console.log(`Cargando imagen para: ${filename}`);
+
+    this.platoservice.cargarImagen(filename).subscribe(
+      (data: Blob) => {
+        const url = URL.createObjectURL(data);
+        this.imageUrls[filename] = url;
+      },
+      (error) => {
+        console.error('Error al cargar la imagen del plato', error);
+      }
+    );
+
   }
 
   limpiarListas(): void {

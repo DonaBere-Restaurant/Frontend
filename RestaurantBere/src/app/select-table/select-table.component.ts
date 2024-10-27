@@ -23,7 +23,9 @@ export class SelectTableComponent {
   reservationRequest: ReservationRequest = new ReservationRequest();
   mesasDisponibles: Mesa[] = [];
   reservaId: number; 
-  reserva: Reserva = new Reserva(); 
+  reserva: Reserva = new Reserva();
+  mesasSeleccionada: number[] = [];
+  
   constructor(private router: Router,private reservaservice: ReservaService,private route:ActivatedRoute,
     private reservaDataService: ReservaDataService, private mesaservice:MesaService,
   ){}
@@ -70,6 +72,8 @@ export class SelectTableComponent {
 
 
   agregarMesa(mesaId: number): void {
+    this.mesasSeleccionada.push(mesaId);//Agrega el id de la mesa
+
     // Verificar si la mesa ya está en la lista
     if (!this.reservationRequest.resTables.some(m => m.id === mesaId)) {
       const mesa = { id: mesaId };
@@ -107,6 +111,7 @@ export class SelectTableComponent {
 
   limpiarListas(): void {
     this.reservationRequest.resTables = []; // Limpiar la lista de platos seleccionados
+    this.mesasSeleccionada = []; // Limpiar la lista de mesas seleccionadas
     console.log('Listas limpiadas');
   }
 

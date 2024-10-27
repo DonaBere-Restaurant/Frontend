@@ -21,27 +21,31 @@
     </div>
   </div>
 </nav>
-<div class="container">
-  <div class="row" *ngFor="let plato of platos">
+<div class="container col-md-8">
+
+  <div class="row mt-2" *ngFor="let plato of platos">
+    
+    <img *ngIf="imageUrls[plato.image]" [src]="imageUrls[plato.image]" alt="Imagen de {{ plato.title }}" class="img-fluid">
     <h3>{{plato.title}}</h3>
     <div class="price">
       {{plato.description}}
     </div>
     <p>{{plato.price}}</p>
   
-    <input type="number" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" required />
-    <div *ngIf="!quantity[plato.id]">
-      <p class="text-danger">La cantidad es requerida</p>
+    <input type="number" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
+    <div *ngIf=" cantidadInput.invalid && cantidadInput.touched">
+      <p class="alert alert-danger mt-2">La cantidad es requerida</p>
     </div>
   
-    <button type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
+    <button class="btn btn-outline-dark mt-1" type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
   </div>
-  <div class="row">
+
+  <div class="row mt-2">
     <h2>ID de Reserva: {{ reservaId }}</h2>
     <h3>Platos Agregados:</h3>
     <ul>
       <li *ngFor="let plato of reservationplatoRequest.orderDishes">
-        ID: {{plato.dishId}} - Cantidad: {{plato.quantity}}
+        Nombre de Plato: {{plato.dishId}} - Cantidad: {{plato.quantity}}
       </li>
     </ul>
   </div>
