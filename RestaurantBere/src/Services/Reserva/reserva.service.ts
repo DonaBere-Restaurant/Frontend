@@ -13,7 +13,10 @@ import{Cliente} from '../../Class/Cliente/cliente'
 })
 export class ReservaService {
   private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion";
+  //private  urlBd = "http://localhost:8080/api/v1/reservasion";
+  
   private urlUser= "https://backend-bdik.onrender.com/api/v1/auth";
+  //private urlUser= "http://localhost:8080/api/v1/auth";
 
   constructor(private httpClient : HttpClient) 
   { 

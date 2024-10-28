@@ -6,19 +6,31 @@ import {ReservationplatoRequest} from '../../Class/Plato/reservationplato-reques
 import {HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class PlatoService {
-  private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion/dia/mesas/menu";
+  
+   private urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion/dia/mesas/menu" ;
+
+  //private urlBd = "http://localhost:8080/api/v1/reservasion/dia/mesas/menu";
+
+    private urlImagen = "https://backend-bdik.onrender.com/api/v1";
+
+  //private urlImagen = "http://localhost:8080/api/v1";
+
+
   constructor(private httpClient : HttpClient) { 
   }
+
   getPlatos():Observable<Plato[]>{
     return this.httpClient.get<Plato[]>(`${this.urlBd}`);
   }
 
-  agregarPlatos(reservationplatorequest :ReservationplatoRequest):Observable<ReservationplatoRequest>
-  {
+  agregarPlatos(reservationplatorequest :ReservationplatoRequest):Observable<ReservationplatoRequest>{
     return this.httpClient.post<ReservationplatoRequest>(`${this.urlBd}`, reservationplatorequest).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Ocurrió un error';
@@ -31,4 +43,9 @@ export class PlatoService {
       })
     )
   }
+
+  cargarImagen(filename: string):Observable<Blob>{
+    return this.httpClient.get<Blob>(`${this.urlImagen}/uploads/${filename}`, { responseType: 'blob' as 'json' });
+  }
+  
 }
