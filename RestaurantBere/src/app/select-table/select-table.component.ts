@@ -114,5 +114,4 @@ export class SelectTableComponent {
     this.mesasSeleccionada = []; // Limpiar la lista de mesas seleccionadas
     console.log('Listas limpiadas');
   }
-
 }

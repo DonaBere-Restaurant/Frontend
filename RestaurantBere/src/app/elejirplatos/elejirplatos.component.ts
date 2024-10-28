@@ -138,4 +138,7 @@ export class ElejirplatosComponent {
     console.log('Listas limpiadas');
   }
 
+  nombrePlato(){
+    
+  }
 }

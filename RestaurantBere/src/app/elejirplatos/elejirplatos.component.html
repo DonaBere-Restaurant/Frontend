@@ -21,36 +21,43 @@
     </div>
   </div>
 </nav>
-<div class="container col-md-8">
+<div class="row container-fluid justify-content-center">
 
-  <div class="row mt-2" *ngFor="let plato of platos">
+  <div class="col-sm-4 mt-2 border border-dark p-3" *ngFor="let plato of platos">
+
+    <div class="row">
+      <img *ngIf="imageUrls[plato.image]" [src]="imageUrls[plato.image]" alt="Imagen de {{ plato.title }}" class="img-fluid rounded-pill rounded mt-2" style="height: 200px">
+    </div>
+
+    <div class="row mt-2">
+      <h3>Nombre: {{plato.title}}</h3>
+      <div class="price">
+        <span>Descripcion: {{plato.description}} </span> 
+      </div>
+      <p>Precio: /S. {{plato.price}}.00</p>
     
-    <img *ngIf="imageUrls[plato.image]" [src]="imageUrls[plato.image]" alt="Imagen de {{ plato.title }}" class="img-fluid">
-    <h3>{{plato.title}}</h3>
-    <div class="price">
-      {{plato.description}}
+      <input class="rounded-pill" type="number" min="0" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
+      <div *ngIf=" cantidadInput.invalid && cantidadInput.touched">
+        <p class="alert alert-danger mt-2">La cantidad es requerida</p>
+      </div>
+    
+      <button class="btn btn-outline-dark mt-1" type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
     </div>
-    <p>{{plato.price}}</p>
-  
-    <input type="number" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
-    <div *ngIf=" cantidadInput.invalid && cantidadInput.touched">
-      <p class="alert alert-danger mt-2">La cantidad es requerida</p>
-    </div>
-  
-    <button class="btn btn-outline-dark mt-1" type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
+    
   </div>
 
   <div class="row mt-2">
-    <h2>ID de Reserva: {{ reservaId }}</h2>
+    <h2>Número de Reserva: {{ reservaId }}</h2>
     <h3>Platos Agregados:</h3>
-    <ul>
-      <li *ngFor="let plato of reservationplatoRequest.orderDishes">
-        Nombre de Plato: {{plato.dishId}} - Cantidad: {{plato.quantity}}
-      </li>
-    </ul>
+
+    <div class="col-sm-auto" *ngFor="let plato of reservationplatoRequest.orderDishes">
+        <span class="badge bg-dark">
+          N° Identificador de Plato: {{plato.dishId}} - Cantidad: {{plato.quantity}}
+        </span>
+    </div>
   </div>
   <div class="col-md">
-    <button *ngIf="reservationplatoRequest.orderDishes.length !==0"  (click)="limpiarListas()" class="btn btn-danger">Borrar seleccion</button>
+    <button *ngIf="reservationplatoRequest.orderDishes.length !==0"  (click)="limpiarListas()" class="btn btn-danger mt-2">Borrar seleccion</button>
   </div>
 </div>
 <div class="row text-center mb-4 mt-4">       
