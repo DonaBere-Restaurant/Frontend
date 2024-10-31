@@ -16,11 +16,11 @@ export class PlatoService {
   
    private urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion/dia/mesas/menu" ;
 
-  //private urlBd = "http://localhost:8080/api/v1/reservasion/dia/mesas/menu";
+  // private urlBd = "http://localhost:8080/api/v1/reservasion/dia/mesas/menu";
 
     private urlImagen = "https://backend-bdik.onrender.com/api/v1";
 
-  //private urlImagen = "http://localhost:8080/api/v1";
+  // private urlImagen = "http://localhost:8080/api/v1";
 
 
   constructor(private httpClient : HttpClient) { 

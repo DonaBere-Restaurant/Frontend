@@ -38,21 +38,23 @@
         <div *ngIf="mesasDisponibles.length !== 0; else noMesas">
           <div class="row"> 
             <h3>Mesas disponibles:</h3>
-            <div class="col-md-1 text-center" *ngFor="let mesa of mesasDisponibles">
+            <div class="col-sm-auto text-center mt-2" *ngFor="let mesa of mesasDisponibles">
               <p> Mesa N°{{ mesa.id }}</p>
               <button class="btn btn-outline-dark" type="button" (click)="agregarMesa(mesa.id)" [disabled]="mesasSeleccionada.includes(mesa.id)">Agregar Mesa</button>
             </div>
           
-            <h2 class="p-3">ID de Reserva: {{ reservaId }}</h2>
+            <h2 class="p-3">Número de Reserva: {{ reservaId }}</h2>
           
             <h3 class="p-3">Mesas Seleccionadas:</h3>
 
             <div class="row mb-4">
-                <div class="col-md-3 mt-2" *ngFor="let mesa of reservationRequest.resTables">
-                  Mesa N°{{ mesa.id }}
+                <div class="col-md-2 mt-2" *ngFor="let mesa of reservationRequest.resTables">
+                  <span class="badge bg-dark"> Mesa N° {{ mesa.id }} </span>
                 </div>
             </div>
-          
+
+            <p class="fw-bold">Total mesas seleccionadas: {{ reservationRequest.resTables.length }}</p>
+            
             <div class="col-md">
               <button  *ngIf="reservationRequest.resTables.length !==0" (click)="limpiarListas()" class="btn btn-danger">Borrar selección</button>
             </div>
@@ -68,7 +70,7 @@
 
     <div class="row text-center mb-4 mt-4">       
         <div class="col-md">
-            <button class="btn btn-red" type="button" (click)="navigateToCreateAcc()">Volver</button>
+            <button class="btn btn-outline-dark" type="button" (click)="navigateToCreateAcc()">Volver</button>
         </div>
         <div class="col-md">
             <button type="submit" class="btn btn-dark"  (click)="enviarReserva()" >Seleccionar Platos</button>
