@@ -1,0 +1,40 @@
+
+nav {
+    background-image: url("../../../../../public/portadaBere.jpg");
+    .row{
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+  }
+  
+  .atras{
+    margin-top: 70px;;
+  }
+  
+  .crear{
+    padding-left: 230px;
+    margin-top: 30px;
+    .titulo{
+      font-size: 40px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+
+    }
+    .subtitulo{
+      font-size: 20px;  
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    }
+  
+    .inicia{
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+      font-size: 20px;
+      color: white;
+    }
+  }
+  
+  .logo{
+    img{
+      width: 200px;
+      height: 200px;
+    }
+  }
+  
