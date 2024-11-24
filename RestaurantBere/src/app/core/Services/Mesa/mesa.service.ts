@@ -7,16 +7,16 @@ import { Mesa } from '../../../shared/models/Mesa/mesa';
   providedIn: 'root'
 })
 export class MesaService {
-  
-  //private  urlBd = "https://backend-bdik.onrender.com/api/v1/mesas";
-  private  urlBd = "http://localhost:8080/api/v1/mesas";
 
- constructor(private httpClient : HttpClient) { 
+  private  urlBd = "https://backend-bdik.onrender.com/api/v1/mesas";
+  //private  urlBd = "http://localhost:8080/api/v1/mesas";
+
+ constructor(private httpClient : HttpClient) {
   }
 
   getfreetables(date: string, startTime: string): Observable<Mesa[]> {
-    return this.httpClient.get<Mesa[]>(`${this.urlBd}?date=${date}&startTime=${startTime}`); 
+    return this.httpClient.get<Mesa[]>(`${this.urlBd}?date=${date}&startTime=${startTime}`);
   }
-  
-  
+
+
 }
