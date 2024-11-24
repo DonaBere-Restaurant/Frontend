@@ -1,0 +1,50 @@
+<p>customer-reservations works!</p>
+<div class="container-fluid">
+    <div class="row text-light bg-dark d-flex justify-content-evenly align-items-center">
+        <div class="col-1">
+            <p>Id de Reserva</p>
+        </div>
+        <div class="col-2">
+            <p>Fecha</p>
+        </div>
+        <div class="col-1">
+            <p>Inicio</p>
+        </div>
+        <div class="col-1">
+            <p>Fin</p>
+        </div>
+        <div class="col-1">
+            <p>Estado</p>
+        </div>
+        <div class="col-1">
+            <p>Detalle</p>
+        </div>
+        <div class="col-1">
+            <p>Modificar</p>
+        </div>
+    </div>
+
+    <div *ngFor="let reservation of reservations" class="row d-flex justify-content-evenly align-items-center">
+        <div class="col-1">
+          <p>{{ reservation.id }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ reservation.date | date: 'shortDate' }}</p>
+        </div>
+        <div class="col-1">
+          <p>{{ reservation.startTime }}</p>
+        </div>
+        <div class="col-1">
+          <p>{{ reservation.endTime }}</p>
+        </div>
+        <div class="col-1">
+          <p>{{ reservation.status }}</p>
+        </div>
+        <div class="col-1">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="col-1">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </div>
+      </div>
+</div>

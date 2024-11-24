@@ -8,15 +8,17 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import {ReservationRequest} from '../../../shared/models/ReservationTable/reservation-request';
 import{Cliente} from '../../../shared/models/Cliente/cliente';
+import { CustomReservationResponseDTO } from '../../../shared/models/Reserva/reserva-detail';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ReservaService {
-  private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion";
-  // private  urlBd = "http://localhost:8080/api/v1/reservasion";
+  //private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion";
+   private  urlBd = "http://localhost:8080/api/v1/reservasion";
   
-  private urlUser= "https://backend-bdik.onrender.com/api/v1/auth";
-  // private urlUser= "http://localhost:8080/api/v1/auth";
+  //private urlUser= "https://backend-bdik.onrender.com/api/v1/auth";
+   private urlUser= "http://localhost:8080/api/v1/auth";
 
   constructor(private httpClient : HttpClient) 
   { 
@@ -142,5 +144,19 @@ handlePaymentSuccess(token: string): Observable<string> {
     })
   );
 }
-}
 
+  // Metodo Historial de reservas
+  getMyReservations(id: number): Observable<CustomReservationResponseDTO[]> {
+    return this.httpClient.get<CustomReservationResponseDTO[]>(`${this.urlBd}/my-reservations/`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Ocurrió un error al obtener las reservas';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.error.message || 'Ocurrió un error en el servidor'}`;
+        }
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+}
