@@ -13,7 +13,7 @@ import { throwError } from 'rxjs';
 })
 
 export class PlatoService {
-  
+
    private urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion/dia/mesas/menu" ;
 
   // private urlBd = "http://localhost:8080/api/v1/reservasion/dia/mesas/menu";
@@ -23,7 +23,7 @@ export class PlatoService {
   // private urlImagen = "http://localhost:8080/api/v1";
 
 
-  constructor(private httpClient : HttpClient) { 
+  constructor(private httpClient : HttpClient) {
   }
 
   getPlatos():Observable<Plato[]>{
@@ -47,5 +47,5 @@ export class PlatoService {
   cargarImagen(filename: string):Observable<Blob>{
     return this.httpClient.get<Blob>(`${this.urlImagen}/uploads/${filename}`, { responseType: 'blob' as 'json' });
   }
-  
+
 }
