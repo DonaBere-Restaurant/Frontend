@@ -14,14 +14,14 @@ import{Cliente} from '../../../shared/models/Cliente/cliente';
 export class ReservaService {
   private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion";
   // private  urlBd = "http://localhost:8080/api/v1/reservasion";
-  
+
   private urlUser= "https://backend-bdik.onrender.com/api/v1/auth";
   // private urlUser= "http://localhost:8080/api/v1/auth";
 
-  constructor(private httpClient : HttpClient) 
-  { 
+  constructor(private httpClient : HttpClient)
+  {
 
-   
+
   }
 
   crearReservasion(reserva: Reserva): Observable<Reserva> {
@@ -39,7 +39,7 @@ export class ReservaService {
   }
 
   agregarmesas(reservationRequest:ReservationRequest):Observable<ReservationRequest>
-  { 
+  {
     return this.httpClient.post<ReservationRequest>(`${this.urlBd}/dia/mesas`, reservationRequest).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Ocurrió un error';
@@ -69,7 +69,7 @@ export class ReservaService {
         })
       );
     }
-    
+
  actualizarDatosReserva(reserva: Reserva): Observable<Reserva> {
   return this.httpClient.post<Reserva>(`${this.urlBd}/dia/mesas/menu/datos`, reserva).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -125,7 +125,7 @@ private handleError(error: HttpErrorResponse) {
   }
   return throwError(() => new Error(errorMessage));
 }
- 
+
 // Método para manejar el éxito del pago
 handlePaymentSuccess(token: string): Observable<string> {
   return this.httpClient.get<string>(`${this.urlBd}/pay-reservation/success?token=${token}`).pipe(
