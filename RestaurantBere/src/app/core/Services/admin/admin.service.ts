@@ -8,8 +8,10 @@ import { Plato } from "../../../shared/models/admin/admin-platos-response-model"
 import { Bebidas } from "../../../shared/models/admin/admin-bebidas-response-model";
 import { PlatoRequest } from "../../../shared/models/admin/admin-platos-request-model";
 import { BebidasRequest } from "../../../shared/models/admin/admin-bebidas-request-model";
+import { PasswordRequest } from "../../../shared/models/admin/admin-password-request-model";
+import { Reserva } from "../../../shared/models/Reserva/reserva";
 @Injectable({
-    providedIn: "root"
+    providedIn: "root"  
 })
 
 export class AdminService {
@@ -27,11 +29,18 @@ export class AdminService {
         return this.http.get<AdminProfile>(`${this.baseUrl}/${id}`);
     }
 
-    getAllReservations(): Observable<AdminReservas[]> {
+    getAllReservations(): Observable<AdminReservas[]>{
         return this.http.get<AdminReservas[]>(`${this.baseUrl2}/all-reservations`);
     }
+    getPayedReservations(): Observable<Reserva[]>{
+        return this.http.get<Reserva[]>(`${this.baseUrl4}/admin/reservations`);
+    }
+    
+    changeRefoundStatus(id: number){
+        return this.http.put(`${this.baseUrl4}/admin/refound/${id}`,null);
+    }
 
-    getAllDishes(): Observable<Plato[]> {
+    getAllDishes(): Observable<Plato[]>{
         return this.http.get<Plato[]>(`${this.baseUrl2}/dia/mesas/menu`);
     }
 
@@ -47,7 +56,7 @@ export class AdminService {
         return this.http.post(`${this.baseUrl4}/admin/menu`, formData, { responseType: 'text' });
     }
 
-    getImageDish(filename: string): Observable<Blob> {
+    getImageDish(filename: string): Observable<Blob>{
         return this.http.get<Blob>(`${this.baseUrl4}/uploads/${filename}`, { responseType: 'blob' as 'json' });
     }
 
@@ -65,8 +74,8 @@ export class AdminService {
         }
         return this.http.put(`${this.baseUrl4}/admin/menu/${id}`, formData, { responseType: 'text' });
     }
-
-    getAllDrinks(): Observable<Bebidas[]> {
+    
+    getAllDrinks(): Observable<Bebidas[]>{
         return this.http.get<Bebidas[]>(`${this.baseUrl3}/all`);
     }
 
@@ -81,9 +90,9 @@ export class AdminService {
         return this.http.post(`${this.baseUrl3}/create`, formData, { responseType: 'text' });
     }
 
-    getImageDrink(filename: string): Observable<Blob> {
+    getImageDrink(filename: string): Observable<Blob>{
         return this.http.get<Blob>(`${this.baseUrl3}/uploads/${filename}`, { responseType: 'blob' as 'json' });
-
+    
     }
 
     deleteDrink(id: number): Observable<string> {
@@ -107,5 +116,9 @@ export class AdminService {
 
     downloadMonthlyReport(): Observable<Blob> {
         return this.http.get(`${this.baseUrl5}/month`, { responseType: 'blob' });
+    }
+
+    updatePassword(userId:number, passdata: PasswordRequest): Observable<string> {
+        return this.http.put(`${this.baseUrl}/edit-password/${userId}`, passdata, { responseType: 'text' });
     }
 }

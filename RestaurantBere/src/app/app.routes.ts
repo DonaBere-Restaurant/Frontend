@@ -13,7 +13,7 @@ export const routes: Routes = [
     {
         path: 'auth',
         loadChildren: () => import('./pages/auth/auth.routes').then(a => a.authRoutes),
-        canActivate:[authInverseGuard]
+        canActivate:[authInverseGuard] 
     },
     {
         path: 'reset-password',
@@ -35,8 +35,6 @@ export const routes: Routes = [
         path:'admin',
         loadChildren: () => import('./pages/admin/admin.routes').then(a => a.adminRoutes)
     },
-    {   path: 'reservasion/mesas/:id', component: SelectTableComponent},
-
     { path: 'menu', component: MenuComponent },
     { path: 'menu', component: MenuComponent },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' }, // Redirige la ruta raíz a 'inicio'

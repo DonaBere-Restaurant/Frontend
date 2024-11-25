@@ -97,6 +97,6 @@ export class DetallesreservaComponent implements OnInit {
 
   SelectionPayMethod()
   {
-    this.router.navigate(['/inicio/reservacion/mesas/menu/resumen/metodoPago']);
+    this.router.navigate(['/inicio/reservacion/mesas/menu/drinks/resumen/metodoPago']);
   }
 }

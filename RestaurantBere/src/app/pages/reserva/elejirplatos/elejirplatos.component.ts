@@ -9,6 +9,7 @@ import {PlatoService} from '../../../core/Services/Platos/plato.service'
 import { Reserva } from '../../../shared/models/Reserva/reserva';
 import {ReservationplatoRequest} from '../../../shared/models/Plato/reservationplato-request';
 import { ReservaDataService } from '../../../core/Services/Reserva/reserva-data-service';
+
 @Component({
   selector: 'app-elejirplatos',
   standalone: true,
@@ -16,6 +17,7 @@ import { ReservaDataService } from '../../../core/Services/Reserva/reserva-data-
   templateUrl: './elejirplatos.component.html',
   styleUrl: './elejirplatos.component.scss'
 })
+
 export class ElejirplatosComponent {
     reservationplatoRequest: ReservationplatoRequest = new ReservationplatoRequest();
     platos:Plato[];
@@ -80,7 +82,7 @@ export class ElejirplatosComponent {
       response => {
         console.log('Reserva enviada', response);
         // Redirige después de un envío exitoso
-        this.router.navigate(['/inicio/reservacion/mesas/menu/resumen']);
+        this.router.navigate(['/inicio/reservacion/mesas/menu/drinks']);
       },
       error => {
         console.error('Error al enviar la reserva:', error);

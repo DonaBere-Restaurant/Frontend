@@ -7,6 +7,7 @@ import { CustomReservationResponseDTO } from '../../../shared/models/Reserva/Cus
 import { ResenaRequestModel } from "../../../shared/models/Resena/resena-request-model";
 import {StorageService} from "../../../core/Services/storage.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ResenaResponseModel} from "../../../shared/models/Resena/resena-response-model";
 
 @Component({
   selector: 'app-customer-reservations',
@@ -22,6 +23,8 @@ export class CustomerReservationsComponent implements OnInit {
   private reservationService = inject(ReservaService);
   private resenaService = inject(ResenaService);
   private storageService = inject(StorageService);
+  private snackBar = inject(MatSnackBar);
+
 
   ngOnInit() {
     this.getReservations();
@@ -31,13 +34,24 @@ export class CustomerReservationsComponent implements OnInit {
     this.reservationService.getMyReservations().subscribe(
       (data: CustomReservationResponseDTO[]) => {
         console.log('Reservas obtenidas:', data);
+        const now = new Date();
         // Agregamos propiedades auxiliares a cada reserva
-        this.reservations = data.map(reservation => ({
-          ...reservation,
-          showForm: false, // Controla el formulario
-          comentario: '', // Inicializa el comentario
-          calificacion: 0, // Inicializa la calificación
-        }));
+        this.reservations = data.map(reservation => {
+          const endTime = new Date(reservation.date);
+          const [hours, minutes] = reservation.endTime.split(':').map(Number);
+          endTime.setHours(hours, minutes);
+          endTime.setDate(endTime.getDate() + 1); // Sumar un día a endTime
+          console.log(reservation.id);
+          console.log('endTime:', endTime);
+          console.log('now:', now);
+          return {
+            ...reservation,
+            showForm: false, // Controla el formulario
+            comentario: '', // Inicializa el comentario
+            calificacion: 0, // Inicializa la calificación
+            canSubmitReview: now >= endTime // Habilitar el botón si la hora actual es mayor o igual a la hora de finalización
+          };
+        });
       },
       (error) => {
         console.error('Error fetching reservations', error);
@@ -47,6 +61,20 @@ export class CustomerReservationsComponent implements OnInit {
 
   toggleForm(reservation: CustomReservationResponseDTO) {
     reservation.showForm = !reservation.showForm;
+    if (reservation.showForm) {
+      this.resenaService.getResenaById(reservation.id).subscribe({
+        next: (resena) => {
+          reservation.comentario = resena.comentario || ''; // Inicializa el comentario si existe
+          reservation.calificacion = resena.calificacion || 0; // Inicializa la calificación si existe
+        },
+        error: (error) => {
+          console.warn(`No se encontró una reseña para la reserva con ID ${reservation.id}`, error);
+          reservation.comentario = ''; // Resetea si no existe reseña
+          reservation.calificacion = 0; // Resetea si no existe reseña
+        },
+      });
+    }
+
   }
 
   submitResena(reservation: CustomReservationResponseDTO) {
@@ -76,6 +104,43 @@ export class CustomerReservationsComponent implements OnInit {
     });
   }
 
+  
 
 
+  cancelarReserva(reservationId: number) {
+    console.log('Cancelando reserva con ID:', reservationId);
+    this.reservationService.cancelReservation(reservationId).subscribe(
+      (response: string) => {
+        console.log('Reserva cancelada:', response);
+        // Actualizar la lista de reservas después de la cancelación
+        this.getReservations();
+        // Verificar el estado de la reserva después de un breve retraso
+        setTimeout(() => {
+          this.checkReservationStatus(reservationId);
+        }, 3500); 
+      },
+      (error) => {
+        console.error('Error canceling reservation', error);
+        // Actualizar la lista de reservas después del error
+        this.getReservations();
+        // Verificar el estado de la reserva después de un breve retraso
+        setTimeout(() => {
+          this.checkReservationStatus(reservationId);
+        }, 3500); 
+      }
+    );
+  }
+
+  checkReservationStatus(reservationId: number) {
+    const reservation = this.reservations.find(r => r.id === reservationId);
+    if (reservation && reservation.status === 0) {
+      this.snackBar.open('Quedan menos de 24 horas para su reserva, no es posible cancelar', 'Cerrar', {
+        duration: 5000, // Duración de la notificación en milisegundos
+      });
+    } else if (reservation && reservation.status === 2) {
+      this.snackBar.open('La reserva ha sido cancelada', 'Cerrar', {
+        duration: 5000, // Duración de la notificación en milisegundos
+      });
+    }
+  }
 }
