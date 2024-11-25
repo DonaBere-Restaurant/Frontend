@@ -7,6 +7,7 @@ import { CustomReservationResponseDTO } from '../../../shared/models/Reserva/Cus
 import { ResenaRequestModel } from "../../../shared/models/Resena/resena-request-model";
 import {StorageService} from "../../../core/Services/storage.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ResenaResponseModel} from "../../../shared/models/Resena/resena-response-model";
 
 @Component({
   selector: 'app-customer-reservations',
@@ -47,6 +48,20 @@ export class CustomerReservationsComponent implements OnInit {
 
   toggleForm(reservation: CustomReservationResponseDTO) {
     reservation.showForm = !reservation.showForm;
+    if (reservation.showForm) {
+      this.resenaService.getResenaById(reservation.id).subscribe({
+        next: (resena) => {
+          reservation.comentario = resena.resena || ''; // Inicializa el comentario si existe
+          reservation.calificacion = resena.calificacion || 0; // Inicializa la calificación si existe
+        },
+        error: (error) => {
+          console.warn(`No se encontró una reseña para la reserva con ID ${reservation.id}`, error);
+          reservation.comentario = ''; // Resetea si no existe reseña
+          reservation.calificacion = 0; // Resetea si no existe reseña
+        },
+      });
+    }
+
   }
 
   submitResena(reservation: CustomReservationResponseDTO) {

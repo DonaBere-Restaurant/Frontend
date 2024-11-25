@@ -42,8 +42,12 @@
             name="comentario-{{ reservation.id }}"
             class="form-control"
             rows="3"
+            maxlength="500"
             required
           ></textarea>
+          <small class="text-muted">
+            Caracteres restantes: {{ 500 - (reservation.comentario?.length || 0) }}
+          </small>
         </div>
 
         <div class="mb-3">

@@ -1,4 +1,5 @@
 import { Mesa } from "../Mesa/mesa";
+import {ResenaResponseModel} from "../Resena/resena-response-model";
 
 export interface CustomReservationResponseDTO {
   id: number;
@@ -14,4 +15,5 @@ export interface CustomReservationResponseDTO {
   hoverRating?: number,
   comentario: string | null; // Campo auxiliar para el comentario
   calificacion: number | null; // Campo auxiliar para la calificación
+  resena?: ResenaResponseModel
 }

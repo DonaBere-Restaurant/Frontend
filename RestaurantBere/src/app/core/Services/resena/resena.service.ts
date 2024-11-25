@@ -18,8 +18,8 @@ export class ResenaService {
     return this.httpClient.post<ResenaResponseModel>(url, resena);
   }
 
-  getAllresenas(): Observable<ResenaResponseModel[]> {
-    const url = `${this.urlResena}/all-resenas`;
-    return this.httpClient.get<ResenaResponseModel[]>(url);
+  getResenaById(id: number): Observable<ResenaResponseModel> {
+    const url = `${this.urlResena}/${id}`;
+    return this.httpClient.get<ResenaResponseModel>(url);
   }
 }
