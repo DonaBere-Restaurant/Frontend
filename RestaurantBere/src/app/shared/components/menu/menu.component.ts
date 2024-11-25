@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class MenuComponent {
 
+  principalMenu: string = 'entradas';
+  
   entradas: Menu[] =[
     {title:'Ceviche De Pollo',price:'S/. 12.00',description:'Un toque fresco y diferente al clásico ceviche. Disfruta de la suavidad del pollo marinado en cítricos, con el toque picante que caracteriza a este plato peruano.',image:'CevichePoll.avif'},
     {title:'Croquetas de Atun',price:'S/. 12.00',description:'Crujientes por fuera, suaves por dentro. Nuestras croquetas de atún son una explosión de sabor en cada bocado.',image:'CroquetasAtun.webp'},
@@ -56,10 +58,25 @@ export class MenuComponent {
     {title: 'Pan con Chicharrón', price: 'S/ 15', description: 'Sándwich de cerdo frito con salsa criolla.', image: 'https://comedera.com/wp-content/uploads/sites/9/2022/07/Pan-con-chicharron-limeno-shutterstock_1842217396.jpg'}
   ];
 
-  principalMenu: string = 'entradas';
+  mostrarMenu(tipo: string) {
+    this.principalMenu = tipo;
+  }
 
-  mostrarMenu(menu: string ){
-    this.principalMenu = menu;
+  getCurrentItems(): Menu[] {
+    switch (this.principalMenu) {
+      case 'entradas':
+        return this.entradas;
+      case 'platofondo':
+        return this.platofondos;
+      case 'postre':
+        return this.postres;
+      case 'bebidas':
+        return this.bebidas;
+      case 'adicionales':
+        return this.adicionales;
+      default:
+        return [];
+    }
   }
   
 

@@ -100,7 +100,9 @@
             
 
 
-          <button type="submit" class="btn btn-primary m-5"><i class="fa-solid fa-thumbs-up"></i>Enviar Reseña</button>
+            <button type="button" class="btn btn-primary" (click)="submitResena(reservation)" [disabled]="!reservation.canSubmitReview">
+              Subir Reseña
+            </button>
         </div>
       </form>
     </div>
