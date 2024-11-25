@@ -49,6 +49,11 @@ export class ReservaService {
     return this.httpClient.post<Reserva>(`${this.urlBd}/allTables`, res);
   }
 
+  updateReservation(reservationId: number, data: { date: string; startTime: string }): Observable<any> {
+    const url = `${this.urlBd}/updateDate/${reservationId}`;
+    return this.httpClient.put(url, data);
+  }
+
   agregarmesas(reservationRequest:ReservationRequest):Observable<ReservationRequest>
   {
     return this.httpClient.post<ReservationRequest>(`${this.urlBd}/dia/mesas`, reservationRequest).pipe(
