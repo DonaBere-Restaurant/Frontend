@@ -4,6 +4,7 @@ import { NavcrearcuentaComponent } from "../../../shared/components/navcrearcuen
 import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/Services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-customer',
@@ -18,11 +19,13 @@ export class RegisterCustomerComponent {
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private snackbar = inject(MatSnackBar); 
   private authService = inject(AuthService);
 
   constructor() {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[0-9]*$')]], 
       phone: ['', [Validators.required,Validators.maxLength(9), Validators.minLength(9),Validators.pattern('^[0-9]*$')]],
       address: [''],
@@ -35,14 +38,14 @@ export class RegisterCustomerComponent {
   onSubmit(){
     if(this.registerForm.valid){
       const userData = this.registerForm.value;
-      console.log('Enviando formulario:', userData);
       this.authService.registerCustomer(userData).subscribe({
         next: () => {
           console.log('Cliente registrado correctamente');
           this.router.navigate(['/login']);
         },
         error: (error) => {
-          console.error('Error al registrar cliente:', error);
+          console.log("hola soy un error ",error.error.error);
+          this.showSnackBar(error?.error?.error);
         }
       });
     } else {
@@ -50,4 +53,10 @@ export class RegisterCustomerComponent {
     }
   }
 
+  private showSnackBar(message: string): void {
+    this.snackbar.open(message, 'Cerrar', {
+      duration: 2000,
+      verticalPosition: 'top'
+    });
+  }
 }

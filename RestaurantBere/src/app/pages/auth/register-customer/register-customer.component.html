@@ -14,7 +14,18 @@
                     </span>
                 </div>
             </div>
-        
+            <div class="form-group mt-3">
+                <label class="text">Apellido</label>
+                <input type="text" class="form-control" formControlName="lastname" placeholder="Ingrese su apellido">
+                <div class="alert alert-danger mt-2" *ngIf="registerForm.get('lastname')?.invalid && (registerForm.get('lastname')?.dirty || registerForm.get('lastname')?.touched)">
+                    <span *ngIf="registerForm.get('lastname')?.errors?.['required']">
+                        El apellido es obligatorio.
+                    </span>
+                    <span *ngIf="registerForm.get('lastname')?.errors?.['pattern']">
+                        El apellido debe contener solo letras.
+                    </span>
+                </div>
+            </div>
             <div class="form-group mt-3">
                 <label class="text">DNI</label>
                 <input type="text" class="form-control" formControlName="dni" placeholder="Ingrese su DNI">
@@ -80,7 +91,7 @@
         
             <div class="form-group mt-3">
                 <div class="col-12 mb-3 text-center">
-                    <input type="checkbox" formControlName="termsAccepted"> He leído y acepto los <a href="#">términos y condiciones</a> y <a href="#">políticas de privacidad</a>.
+                    <input type="checkbox" formControlName="termsAccepted"> He leído y acepto los <a href="/inicio/terminosycondiciones">términos y condiciones</a> y <a href="/inicio/politicasdeprivacidad">políticas de privacidad</a>.
                 </div>
                 <div class="alert alert-danger mt-2" *ngIf="registerForm.get('termsAccepted')?.invalid && (registerForm.get('termsAccepted')?.dirty || registerForm.get('termsAccepted')?.touched)">
                     <span *ngIf="registerForm.get('termsAccepted')?.errors?.['required']">
