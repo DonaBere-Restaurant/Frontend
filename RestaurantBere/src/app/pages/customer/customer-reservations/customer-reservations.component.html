@@ -42,8 +42,12 @@
             name="comentario-{{ reservation.id }}"
             class="form-control"
             rows="3"
+            maxlength="500"
             required
           ></textarea>
+          <small class="text-muted">
+            Caracteres restantes: {{ 500 - (reservation.comentario?.length || 0) }}
+          </small>
         </div>
 
         <div class="mb-3">
@@ -66,7 +70,32 @@
         </p>
 
         <div class="text-center">
-          <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+          <button type="button" class="btn btn-danger m-5" data-bs-toggle="modal" data-bs-target="#Cancelar" [disabled]="reservation.status === 2">
+            <i class="fa-solid fa-thumbs-up"></i> Cancelar Reserva
+          </button>
+            <!-- Modal -->
+            <div class="modal fade" id="Cancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Estas seguro?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Solo puedes cancelar la reserva 4 horas antes o más de la hora de Inicio
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cancelarReserva(reservation.id)">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+
+
+          <button type="submit" class="btn btn-primary m-5"><i class="fa-solid fa-thumbs-up"></i>Enviar Reseña</button>
         </div>
       </form>
     </div>
