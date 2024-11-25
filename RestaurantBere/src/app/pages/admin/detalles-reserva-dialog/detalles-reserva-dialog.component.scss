@@ -1,0 +1,57 @@
+.dialog-title {
+  background-color: #FFD200;
+  color: rgb(0, 0, 0);
+  padding: 16px;
+  margin: -24px -24px 24px -24px;
+}
+
+.dialog-content {
+  padding: 0 24px;
+}
+
+.detail-section {
+  margin-bottom: 24px;
+
+  h3 {
+    color: #FFD200;
+    border-bottom: 2px solid #FFD200;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 8px;
+
+  .label {
+    font-weight: bold;
+    min-width: 120px;
+  }
+
+  .value {
+    flex-grow: 1;
+  }
+}
+
+.status-chip {
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.status-reservado {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-cancelado {
+  background-color: #f44336;
+  color: white;
+}
+
+.status-desconocido {
+  background-color: #9e9e9e;
+  color: white;
+}
