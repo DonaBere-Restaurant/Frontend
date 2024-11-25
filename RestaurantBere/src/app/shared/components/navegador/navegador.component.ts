@@ -38,6 +38,21 @@ export class NavegadorComponent {
      this.router.navigate(['/auth/login']);
   }
 
+
+  reservar()
+  {
+    console.log(this.authService.isAuthenticated());
+    if(this.authService.isAuthenticated()==false)
+    {
+      
+      this.router.navigate(['/auth/login']);
+    }
+    else
+    {
+      this.router.navigate(['/inicio/reservacion']);
+    }
+  }
+
   navigateToProfile() {
     if(this.userData?.role === 'ROLE_CUSTOMER'){
       this.router.navigate(['/customer/miperfil']);
@@ -46,4 +61,5 @@ export class NavegadorComponent {
       this.router.navigate(['/admin/miperfil']);
     }
   }
+
 }

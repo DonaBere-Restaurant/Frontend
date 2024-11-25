@@ -36,13 +36,15 @@
       </div>
       <p>Precio: /S. {{plato.price}}.00</p>
     
-      <input class="rounded-pill" type="number" min="0" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
+      <input class="rounded-pill" type="number" min="0" max="50" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
       
-      <button class="btn btn-outline-dark mt-1 rounded-pill mb-2" type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="!quantity[plato.id]">Agregar Plato</button>
+      <button class="btn btn-outline-dark mt-1 rounded-pill mb-2" type="button" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="cantidadInput.invalid">Agregar Plato</button>
 
-      <div *ngIf=" cantidadInput.invalid && cantidadInput.touched">
-        <p class="alert alert-danger mt-2 fs-6">La cantidad es requerida</p>
+      <div *ngIf="cantidadInput.invalid && cantidadInput.touched">
+        <p *ngIf="cantidadInput.errors?.['required']" class="alert alert-danger mt-2 fs-6">La cantidad es requerida</p>
+        <p *ngIf="cantidadInput.errors?.['max']" class="alert alert-danger mt-2 fs-6">La cantidad no puede ser mayor a 50</p>
       </div>
+  
     </div>
     
   </div>
@@ -53,7 +55,7 @@
 
     <div class="col-sm-auto" *ngFor="let plato of reservationplatoRequest.orderDishes">
         <span class="badge bg-dark">
-          N° Identificador de Plato: {{plato.dishId}} - Cantidad: {{plato.quantity}}
+          Id plato: {{plato.dishId}} - Cantidad: {{plato.quantity}}
         </span>
     </div>
   </div>
@@ -63,10 +65,10 @@
 </div>
 <div class="row text-center mb-4 mt-4">       
   <div class="col-md">
-      <button class="btn btn-red" type="button" (click)="navigateToHome()">Cancelar</button>
+      <button class="btn btn-outline-dark" type="button" (click)="navigateToHome()">Cancelar</button>
   </div>
   <div class="col-md">
-      <button type="submit" class="btn btn-dark"  (click)="enviarReservaPlatos()" >Ingresar Datos</button>
+      <button type="submit" class="btn btn-dark"  (click)="enviarReservaPlatos()" >Continuar</button>
   </div>
 </div>
 </div>
