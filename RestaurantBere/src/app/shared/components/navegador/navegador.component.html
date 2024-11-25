@@ -35,7 +35,7 @@
             <button class="btn btn-outline-dark rounded-start me-3" type="button" (click)="navigateToLogin()"><i class="fa-solid fa-user "></i> Iniciar Sesion</button>
           }
           @else {
-            <button class = "btn btn-outline-dark rounded-start me-3" routerLink="/customer/miperfil" ><i class="fa-solid fa-user"></i> Mi Perfil</button>
+            <button class = "btn btn-outline-dark rounded-start me-3" (click)="navigateToProfile()" ><i class="fa-solid fa-user"></i> Mi Perfil</button>
             
             <button *ngIf="isLoggedIn" class="btn btn-outline-dark rounded-start " (click)="logout()"><i class="fa-solid fa-circle-xmark"></i> Cerrar Sesion</button>
           }

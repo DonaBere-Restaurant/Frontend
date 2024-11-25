@@ -2,6 +2,7 @@ import { Component, inject, Input} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/Services/auth/auth.service';
+import { AuthResponse } from '../../models/auth/auth-response-model';
 
 @Component({
   selector: 'app-navegador',
@@ -13,11 +14,13 @@ import { AuthService } from '../../../core/Services/auth/auth.service';
 export class NavegadorComponent {
 
   isLoggedIn: boolean = false;
+  userData: AuthResponse | null;
   private router = inject(Router);
   private authService = inject(AuthService)
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isAuthenticated();
+    this.userData = this.authService.getUser();
   }
 
   navigateToCreateAcc() {
@@ -35,4 +38,12 @@ export class NavegadorComponent {
      this.router.navigate(['/auth/login']);
   }
 
+  navigateToProfile() {
+    if(this.userData?.role === 'ROLE_CUSTOMER'){
+      this.router.navigate(['/customer/miperfil']);
+    }
+    if(this.userData?.role === 'ROLE_ADMIN'){
+      this.router.navigate(['/admin/miperfil']);
+    }
+  }
 }
