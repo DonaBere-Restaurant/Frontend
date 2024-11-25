@@ -7,7 +7,7 @@ import { Observable, tap } from "rxjs";
 import { AuthResponse } from "../../../shared/models/auth/auth-response-model";
 
 @Injectable({
-    providedIn: "root"  
+    providedIn: "root"
 })
 
 export class AuthService {
@@ -20,9 +20,9 @@ export class AuthService {
 
     login(authRequest: AuthRequest): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.baseUrl}/login`, authRequest)
-           .pipe(
-            tap(authResponse => this.storageService.setAuthData(authResponse))
-        );
+            .pipe(
+                tap(authResponse => this.storageService.setAuthData(authResponse))
+            );
     }
 
     registerCustomer(authRequest: AuthRequest): Observable<AuthResponse> {
@@ -34,16 +34,16 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return this.storageService.getAuthData()!== null;
+        return this.storageService.getAuthData() !== null;
     }
 
     getUser(): AuthResponse | null {
         const authData = this.storageService.getAuthData();
-        return authData? authData : null;
+        return authData ? authData : null;
     }
 
-    getRole():String | null {
+    getRole(): String | null {
         const authData = this.storageService.getAuthData();
         return authData ? authData.role : null;
-      }
+    }
 }

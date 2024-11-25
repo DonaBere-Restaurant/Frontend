@@ -16,6 +16,10 @@ export const routes: Routes = [
         canActivate:[authInverseGuard] 
     },
     {
+        path: 'reset-password',
+        loadChildren: () => import('./pages/reset-password/reset.routes').then(r => r.resetRoutes)
+    },
+    {
         path:'inicio',
         loadChildren: () => import('./pages/landing/landing.routes').then(l => l.landingRoutes)
     },
