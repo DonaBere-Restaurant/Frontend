@@ -169,7 +169,21 @@ handlePaymentSuccess(token: string): Observable<string> {
       );
     }
 
+    cancelReservation(reservationId: number): Observable<string> {
+      return this.httpClient.put<string>(`${this.urlBd}/${reservationId}/cancel`, {}).pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Ocurrió un error al cancelar la reserva';
+          if (error.error instanceof ErrorEvent) {
+            errorMessage = `Error: ${error.error.message}`;
+          } else {
+            errorMessage = `Error: ${error.error.message || 'Ocurrió un error en el servidor'}`;
+          }
+          return throwError(() => new Error(errorMessage));
+        })
+      );
+    }
 
+    
 
 
 }
