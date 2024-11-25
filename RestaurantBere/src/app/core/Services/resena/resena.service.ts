@@ -22,4 +22,9 @@ export class ResenaService {
     const url = `${this.urlResena}/${id}`;
     return this.httpClient.get<ResenaResponseModel>(url);
   }
+
+  getAllresenas(): Observable<ResenaResponseModel[]> {
+    const url = `${this.urlResena}/all-resenas`;
+    return this.httpClient.get<ResenaResponseModel[]>(url);
+  }
 }

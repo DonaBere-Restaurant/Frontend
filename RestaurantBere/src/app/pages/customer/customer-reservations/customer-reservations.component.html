@@ -26,10 +26,11 @@
       <button class="btn"><i class="fa-regular fa-pen-to-square"></i></button>
     </div>
 
-    <div *ngFor="let resena of resenas" class="col-12 mt-3">
-      <p *ngIf="resena.resena">Comentario: {{ reservation.comentario }}</p>
-      <p *ngIf="resena.calificacion">Calificación: {{ reservation.calificacion }} estrellas</p>
-    </div>
+    <div *ngIf="reservation.resenaExistente" class="col-12 mt-3 bg-light p-3 border rounded">
+    <h5>Reseña existente:</h5>
+    <p><strong>Comentario:</strong> {{ reservation.formComentario }}</p>
+    <p><strong>Calificación:</strong> {{ reservation.formCalificacion }} estrellas</p>
+  </div>
 
     <!-- Formulario de reseña -->
     <div *ngIf="reservation.showForm" class="col-12 mt-3">
@@ -62,6 +63,7 @@
               &#9733;
             </span>
           </div>
+          <p>SOLO SE PODRÁ HACER UN COMENTARIO 1 SOLA VEZ</p>
         </div>
 
         <p class="text-center">Calificación seleccionada: {{ reservation.calificacion || 0 }}

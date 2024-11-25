@@ -16,4 +16,9 @@ export interface CustomReservationResponseDTO {
   comentario: string | null; // Campo auxiliar para el comentario
   calificacion: number | null; // Campo auxiliar para la calificación
   resena?: ResenaResponseModel
+  resenaExistente?: boolean;
+  comentarioResena?: string;
+  calificacionResena?: number;
+  formComentario?: string;
+  formCalificacion?: number;
 }

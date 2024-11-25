@@ -48,19 +48,28 @@ export class CustomerReservationsComponent implements OnInit {
 
   toggleForm(reservation: CustomReservationResponseDTO) {
     reservation.showForm = !reservation.showForm;
-    if (reservation.showForm) {
+
       this.resenaService.getResenaById(reservation.id).subscribe({
         next: (resena) => {
-          reservation.comentario = resena.resena || ''; // Inicializa el comentario si existe
-          reservation.calificacion = resena.calificacion || 0; // Inicializa la calificación si existe
+          reservation.comentario = resena.comentario; // Inicializa el comentario si existe
+          reservation.calificacion = resena.calificacion; // Inicializa la calificación si existe
+          reservation.resenaExistente = true; // Marca que hay una reseña existente
+
+          // Inicializamos propiedades independientes para el formulario
+          reservation.formComentario = reservation.comentario;
+          reservation.formCalificacion = reservation.calificacion;
         },
         error: (error) => {
           console.warn(`No se encontró una reseña para la reserva con ID ${reservation.id}`, error);
           reservation.comentario = ''; // Resetea si no existe reseña
           reservation.calificacion = 0; // Resetea si no existe reseña
+          reservation.resenaExistente = false; // Marca que hay una reseña existente
+// Inicializamos las propiedades del formulario
+          reservation.formComentario = '';
+          reservation.formCalificacion = 0;
         },
       });
-    }
+
 
   }
 
