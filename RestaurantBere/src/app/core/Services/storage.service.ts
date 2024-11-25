@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthResponse } from '../../shared/models/auth/auth-response-model';
 import {CustomReservationResponseDTO} from "../../shared/models/Reserva/CustomReservationResponseDTO";
+import {ResenaResponseModel} from "../../shared/models/Resena/resena-response-model";
 
 
 @Injectable({
@@ -23,13 +24,13 @@ export class StorageService {
         localStorage.removeItem(this.authKey);
     }
 
-  setReservaData(data: CustomReservationResponseDTO[]):void {
+  setResenaData(data: ResenaResponseModel):void {
     localStorage.setItem(this.authKey,JSON.stringify(data))
   }
 
-  getReservaData(): CustomReservationResponseDTO | null{
+  getResenaData(): ResenaResponseModel | null{
     const data = localStorage.getItem(this.authKey);
-    return data ? JSON.parse(data) as CustomReservationResponseDTO : null;
+    return data ? JSON.parse(data) as ResenaResponseModel : null;
   }
 
 }

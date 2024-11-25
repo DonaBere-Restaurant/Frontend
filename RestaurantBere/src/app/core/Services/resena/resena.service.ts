@@ -17,4 +17,9 @@ export class ResenaService {
     const url = `${this.urlResena}/crear/${id}`;
     return this.httpClient.post<ResenaResponseModel>(url, resena);
   }
+
+  getAllresenas(): Observable<ResenaResponseModel[]> {
+    const url = `${this.urlResena}/all-resenas`;
+    return this.httpClient.get<ResenaResponseModel[]>(url);
+  }
 }

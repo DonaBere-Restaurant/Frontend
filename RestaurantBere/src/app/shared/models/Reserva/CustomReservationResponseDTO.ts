@@ -11,6 +11,7 @@ export interface CustomReservationResponseDTO {
   status: number;
   name: string;
   showForm?: boolean; // Campo auxiliar solo en frontend
+  hoverRating?: number,
   comentario: string | null; // Campo auxiliar para el comentario
   calificacion: number | null; // Campo auxiliar para la calificación
 }

@@ -5,6 +5,8 @@ import { ResenaService } from "../../../core/Services/resena/resena.service";
 import { FormsModule } from "@angular/forms";
 import { CustomReservationResponseDTO } from '../../../shared/models/Reserva/CustomReservationResponseDTO';
 import { ResenaRequestModel } from "../../../shared/models/Resena/resena-request-model";
+import {StorageService} from "../../../core/Services/storage.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-customer-reservations',
@@ -16,9 +18,10 @@ import { ResenaRequestModel } from "../../../shared/models/Resena/resena-request
 })
 export class CustomerReservationsComponent implements OnInit {
   reservations: CustomReservationResponseDTO[] = []; // Reservas
-
+  resenas: ResenaRequestModel[] = []; // Reseñas
   private reservationService = inject(ReservaService);
   private resenaService = inject(ResenaService);
+  private storageService = inject(StorageService);
 
   ngOnInit() {
     this.getReservations();
@@ -33,7 +36,7 @@ export class CustomerReservationsComponent implements OnInit {
           ...reservation,
           showForm: false, // Controla el formulario
           comentario: '', // Inicializa el comentario
-          calificacion: null, // Inicializa la calificación
+          calificacion: 0, // Inicializa la calificación
         }));
       },
       (error) => {
@@ -47,6 +50,8 @@ export class CustomerReservationsComponent implements OnInit {
   }
 
   submitResena(reservation: CustomReservationResponseDTO) {
+    if(this.storageService.getAuthData()?.id === null) {}
+
     if (reservation.calificacion == null) {
       console.error('La calificación es requerida.');
       return;
@@ -60,26 +65,15 @@ export class CustomerReservationsComponent implements OnInit {
     this.resenaService.crearReseña(reservation.id, resena).subscribe({
       next: (respuesta) => {
         console.log('Reseña creada exitosamente:', respuesta);
+        this.storageService.setResenaData(respuesta);
         reservation.showForm = false; // Ocultar formulario después de enviar
         reservation.comentario = ''; // Resetear comentario
-        reservation.calificacion = null; // Resetear calificación
+        reservation.calificacion = 0; // Resetear calificación
       },
       error: (error) => {
         console.error('Error al crear la reseña:', error);
       },
     });
-  }
-
-
-  newRating = 0;
-  hoverRating = 0;
-
-  rate(value: number) {
-    this.newRating = value;
-  }
-
-  setHoverRating(value: number) {
-    this.hoverRating = value;
   }
 
 
