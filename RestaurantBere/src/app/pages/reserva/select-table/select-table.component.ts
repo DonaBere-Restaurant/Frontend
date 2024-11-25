@@ -43,7 +43,7 @@ export class SelectTableComponent {
   }
 
   navigateToCreateAcc() {
-    this.router.navigate(['/reservasion']);
+    this.router.navigate(['/inicio/reservacion']);
   }
 
   onSubmit(form: NgForm, event: Event) {}
@@ -99,7 +99,7 @@ export class SelectTableComponent {
     this.reservaservice.agregarmesas(this.reservationRequest).subscribe
     (response => {
       console.log('Reserva enviada', response);
-      this.router.navigate(['/reservasion/mesas/menu']);
+      this.router.navigate(['/inicio/reservacion/mesas/menu']);
     }, error => {
       console.error('Error al enviar la reserva:', error);
     });

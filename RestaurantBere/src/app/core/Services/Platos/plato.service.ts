@@ -6,6 +6,7 @@ import {ReservationplatoRequest} from '../../../shared/models/Plato/reservationp
 import {HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
@@ -14,11 +15,11 @@ import { throwError } from 'rxjs';
 
 export class PlatoService {
 
-   private urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion/dia/mesas/menu" ;
+   private urlBd =  `${environment.baseURL}/reservasion/dia/mesas/menu ` ;
 
   // private urlBd = "http://localhost:8080/api/v1/reservasion/dia/mesas/menu";
 
-    private urlImagen = "https://backend-bdik.onrender.com/api/v1";
+    private urlImagen = `${environment.baseURL}`;
 
   // private urlImagen = "http://localhost:8080/api/v1";
 

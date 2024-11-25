@@ -80,7 +80,7 @@ export class ElejirplatosComponent {
       response => {
         console.log('Reserva enviada', response);
         // Redirige después de un envío exitoso
-        this.router.navigate(['/reservasion/mesas/menu/datos']);
+        this.router.navigate(['/inicio/reservacion/mesas/menu/resumen']);
       },
       error => {
         console.error('Error al enviar la reserva:', error);

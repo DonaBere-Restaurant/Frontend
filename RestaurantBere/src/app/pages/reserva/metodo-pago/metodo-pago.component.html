@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Selecciona tu metodo de pago:</h1>
+    </div>
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center">
+        <button (click)="GenerarPago()">
+            <img class="small-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"/> 
+        </button>
+        
+      </div>
+      <div class="col d-flex justify-content-center align-items-center">
+        <button (click)="goIzipay()">
+            <img class="small-thumbnail" src="tarjeta.jpg"/> 
+        </button>
+      </div>
+    </div>
+    <div class="row text-center mb-4 mt-4">       
+        <div class="col-md">
+            <button class="btn btn-outline-dark" type="button" (click)="navigateToHome()">Cancelar</button>
+        </div>
+      </div>
+  </div>

@@ -1,29 +1,31 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
-import {ReservaService} from '../../../core/Services/Reserva/reserva.service';
-import { ActivatedRoute } from '@angular/router';
-import {ReservaDataService} from '../../../core/Services/Reserva/reserva-data-service';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ReservaDataService } from '../../../core/Services/Reserva/reserva-data-service';
+import { ReservaService } from '../../../core/Services/Reserva/reserva.service';
 import { Reserva } from '../../../shared/models/Reserva/reserva';
-import{ReservationplatoRequest} from '../../../shared/models/Plato/reservationplato-request';
 import { Orden } from '../../../shared/models/Orden/orden';
-import { Reservasionmesa } from '../../../shared/models/ReservationTable/reservasionmesa'
-import { OnInit } from '@angular/core';
+import { Reservasionmesa } from '../../../shared/models/ReservationTable/reservasionmesa';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
-  selector: 'app-detallesreserva',
+  selector: 'app-metodo-pago',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './detallesreserva.component.html',
-  styleUrl: './detallesreserva.component.scss'
+  templateUrl: './metodo-pago.component.html',
+  styleUrl: './metodo-pago.component.scss'
 })
-export class DetallesreservaComponent implements OnInit {
+export class MetodoPagoComponent {
+  approvalUrl: string = '';
+  private snackbar = inject(MatSnackBar); 
   reserva: Reserva = new Reserva(); 
   reservaId: number;
   platos: Orden[];
   mesas: Reservasionmesa[];
+  private router = inject(Router);
 
   constructor(
-    private router: Router, 
+
     private reservaservice: ReservaService,
     private route: ActivatedRoute, 
     private reservaDataService: ReservaDataService
@@ -31,7 +33,6 @@ export class DetallesreservaComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerReserva(); // Llama a obtenerReserva al inicializar
-    //this.handlePaymentReturn(); // Llama a handlePaymentReturn al inicializar
   }
 
   obtenerReserva() {
@@ -41,7 +42,7 @@ export class DetallesreservaComponent implements OnInit {
       if (this.reservaId) {
         this.getReservaById(this.reservaId);
       } else {
-        console.error('No se encontró el ID de la reserva');
+        this.showSnackBar('No se encontró el ID de la reserva');
       }
     });
   }
@@ -62,6 +63,7 @@ export class DetallesreservaComponent implements OnInit {
   }
 
   GenerarPago() {
+    console.log(this.reserva.id);
     this.reservaservice.pagarReserva(this.reserva.id).subscribe(
       (response) => {
         if (response.approvalUrl) {
@@ -70,7 +72,7 @@ export class DetallesreservaComponent implements OnInit {
       },
       (error) => {
         console.error('Error al procesar el pago:', error);
-        alert('Ocurrió un error al procesar el pago. Intente de nuevo.');
+        this.showSnackBar('Ocurrió un error al procesar el pago. Intente de nuevo.');
       }
     );
   }
@@ -95,8 +97,24 @@ export class DetallesreservaComponent implements OnInit {
     );
   }
 
-  SelectionPayMethod()
+
+  goIzipay()
   {
-    this.router.navigate(['/inicio/reservacion/mesas/menu/resumen/metodoPago']);
+    this.reservaservice.pagarIzipay(this.reservaId).subscribe({
+      next: (response) => {
+        this.approvalUrl = response.approvalUrl;
+        window.location.href = this.approvalUrl; // Redirigir al usuario a la URL de pago
+      },
+      error: (error) => {
+        this.showSnackBar('Error al procesar el pago');
+      }
+    });
+  }
+
+  private showSnackBar(message: string): void {
+    this.snackbar.open(message, 'Cerrar', {
+      duration: 2000,
+      verticalPosition: 'top'
+    });
   }
 }

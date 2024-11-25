@@ -31,11 +31,23 @@
         </div>
         <div class="col-md-4 ">
             <h2>Datos del cliente</h2>
-            <p>Nombre : {{reserva.customer.name}}</p>
-            <p>Dni : {{reserva.customer.dni}}</p>
-            <p>Correo : {{reserva.customer.email}}</p>
+            <p>Nombre : {{reserva.name}}</p>
+            <p>Apellido : {{reserva.lastname}}</p>
+            <p>Dni : {{reserva.dni}}</p>
+            <p>Correo : {{reserva.email}}</p>
+            <p>Telefono : {{reserva.phone}}</p>
+        </div>
+        <div class="col-4">
+          <div class="row" *ngFor="let orden of reserva.orderDishes">
+            <p>Plato: {{ orden.plato.title }}</p>
+            <p>Precio Unitario: S/. {{ orden.plato.price }}</p>
+            <!-- Si tienes una propiedad de cantidad en Orden, agréguela -->
+            <p>Cantidad: {{ orden.quantity || 1 }}</p>
+            <p>Total: S/. {{ orden.plato.price * (orden.quantity || 1) }}</p>
+          </div>
         </div>
   </div>
+  
   <div class="row m-3 p-3">
     <div class="col-md-6 ">
         <h2>Total pagar</h2>
@@ -44,10 +56,10 @@
 </div>
 <div class="row text-center mb-4 mt-4">       
     <div class="col-md">
-        <button class="btn btn-red" type="button" (click)="navigateToHome()">Cancelar</button>
+        <button class="btn btn-outline-dark" type="button" (click)="navigateToHome()">Cancelar</button>
     </div>
     <div class="col-md">
-        <button type="submit" class="btn btn-dark"  (click)="GenerarPago()" >Ir a pagar</button>
+        <button type="submit" class="btn btn-dark"  (click)="SelectionPayMethod()" >Ir a pagar</button>
     </div>
   </div>
     

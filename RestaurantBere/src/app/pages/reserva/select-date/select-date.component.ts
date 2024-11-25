@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { ReservaService } from '../../../core/Services/Reserva/reserva.service';
 import {ReservaDataService} from '../../../core/Services/Reserva/reserva-data-service'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-select-date',
@@ -18,6 +19,7 @@ import {ReservaDataService} from '../../../core/Services/Reserva/reserva-data-se
   styleUrl: './select-date.component.scss'
 })
 export class SelectDateComponent {
+  private snackbar = inject(MatSnackBar); 
   reserva: Reserva = new Reserva();
   errorMessage: string = '';  
   isSubmitting = false; // Control de envío
@@ -25,19 +27,28 @@ export class SelectDateComponent {
   today: NgbDateStruct = inject(NgbCalendar).getToday();
   model: NgbDateStruct;  
   date: { year: number; month: number };
+  minDate = { year: 2024, month: 11, day: 25 }; // Fecha mínima
+  maxDate = { year: 2025, month: 6, day: 30 }; // Fecha máxima
   
   constructor(private reservaservice: ReservaService, private calendar: NgbCalendar,private router: Router,
     private reservaDataService: ReservaDataService) {}
 
   ngOnInit() {
     console.log(this.reserva);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Establece al inicio del día.
+    this.minDate = {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1, // Los meses en JavaScript son 0-indexados.
+      day: today.getDate(),
+    };
   }
 
   setTime(hour: number, minute: number) {
     this.time = { hour, minute };
   }
   navigateToCreateAcc() {
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/inicio/reservacion']);
   }
   // Método para crear la reserva
   crearReserva() {
@@ -52,7 +63,7 @@ export class SelectDateComponent {
         // Redirige a la página para seleccionar mesas, pasando el ID de la reserva
         this.router.navigate(['/inicio/reservacion/mesas']);
       },
-      error => {
+      (error) => {
         if (error.error && error.error.message) {
           this.errorMessage = error.error.message;
         } else if (error.message) {
@@ -63,6 +74,7 @@ export class SelectDateComponent {
       }
     );
   }
+  
   onSubmit(form: NgForm, event: Event) {
     event.preventDefault();  
   
@@ -77,11 +89,18 @@ export class SelectDateComponent {
 
       this.crearReserva();
     } else {
-      console.log('Formulario inválido');
+      this.showSnackBar('Formulario inválido');
     }
   }
   pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
+  }
+
+  private showSnackBar(message: string): void {
+    this.snackbar.open(message, 'Cerrar', {
+      duration: 2000,
+      verticalPosition: 'top'
+    });
   }
 
 }

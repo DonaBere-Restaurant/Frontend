@@ -35,4 +35,18 @@ export class NavegadorComponent {
      this.router.navigate(['/auth/login']);
   }
 
+  reservar()
+  {
+    console.log(this.authService.isAuthenticated());
+    if(this.authService.isAuthenticated()==false)
+    {
+      
+      this.router.navigate(['/auth/login']);
+    }
+    else
+    {
+      this.router.navigate(['/inicio/reservacion']);
+    }
+  }
+
 }
