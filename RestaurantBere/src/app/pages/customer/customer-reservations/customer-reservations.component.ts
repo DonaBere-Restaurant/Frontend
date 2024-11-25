@@ -93,32 +93,43 @@ export class CustomerReservationsComponent implements OnInit {
     });
   }
 
-  cancelarReserva(reservationId: number) {
-  console.log('Cancelando reserva con ID:', reservationId);
-  this.reservationService.cancelReservation(reservationId).subscribe(
-    (response: string) => {
-      console.log('Reserva cancelada:', response);
-      // Mostrar notificación de confirmación
-      this.snackBar.open('La reserva ha sido cancelada', 'Cerrar', {
-        duration: 3000, // Duración de la notificación en milisegundos
-      });
-      // Actualizar la lista de reservas después de la cancelación
-      this.getReservations();
-    },
-    (error) => {
-      console.error('Error canceling reservation', error);
-      let errorMessage = 'La reserva ha sido cancelada';
-      this.getReservations();
-      if (error.message.includes('menos de 4 horas')) {
-        errorMessage = 'Quedan menos de 4 horas para su reserva, no es posible cancelar';
-      }
-      this.snackBar.open(errorMessage, 'Cerrar', {
-        duration: 3000, // Duración de la notificación en milisegundos
-      });
-    }
-  );
-}
   
 
 
+  cancelarReserva(reservationId: number) {
+    console.log('Cancelando reserva con ID:', reservationId);
+    this.reservationService.cancelReservation(reservationId).subscribe(
+      (response: string) => {
+        console.log('Reserva cancelada:', response);
+        // Actualizar la lista de reservas después de la cancelación
+        this.getReservations();
+        // Verificar el estado de la reserva después de un breve retraso
+        setTimeout(() => {
+          this.checkReservationStatus(reservationId);
+        }, 3500); 
+      },
+      (error) => {
+        console.error('Error canceling reservation', error);
+        // Actualizar la lista de reservas después del error
+        this.getReservations();
+        // Verificar el estado de la reserva después de un breve retraso
+        setTimeout(() => {
+          this.checkReservationStatus(reservationId);
+        }, 3500); 
+      }
+    );
+  }
+
+  checkReservationStatus(reservationId: number) {
+    const reservation = this.reservations.find(r => r.id === reservationId);
+    if (reservation && reservation.status === 0) {
+      this.snackBar.open('Quedan menos de 4 horas para su reserva, no es posible cancelar', 'Cerrar', {
+        duration: 3000, // Duración de la notificación en milisegundos
+      });
+    } else if (reservation && reservation.status === 2) {
+      this.snackBar.open('La reserva ha sido cancelada', 'Cerrar', {
+        duration: 3000, // Duración de la notificación en milisegundos
+      });
+    }
+  }
 }
