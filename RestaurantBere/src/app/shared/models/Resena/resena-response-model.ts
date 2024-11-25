@@ -1,6 +1,6 @@
 export interface ResenaResponseModel{
   id: number;
-  resena: string;
+  comentario: string;
   calificacion: number;
   reservationId: number;
 }

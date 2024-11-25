@@ -19,3 +19,18 @@
     flex-shrink: 0;  /* Evita que las tarjetas se encojan al cambiar el tamaño */
   }
   
+  .stars {
+    display: inline-flex;
+  }
+  
+  .star {
+    font-size: 24px;
+    color: #ccc; /* Color de las estrellas vacías */
+    margin-right: 5px;
+    cursor: pointer;
+    
+    &.filled {
+      color: #ffd700; /* Color de las estrellas llenas */
+    }
+  }
+  
