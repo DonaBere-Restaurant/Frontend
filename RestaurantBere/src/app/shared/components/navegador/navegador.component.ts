@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/Services/auth/auth.service';
 import { AuthResponse } from '../../models/auth/auth-response-model';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navegador',
