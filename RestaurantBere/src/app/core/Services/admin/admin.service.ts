@@ -8,6 +8,7 @@ import { Plato } from "../../../shared/models/admin/admin-platos-response-model"
 import { Bebidas } from "../../../shared/models/admin/admin-bebidas-response-model";
 import { PlatoRequest } from "../../../shared/models/admin/admin-platos-request-model";
 import { BebidasRequest } from "../../../shared/models/admin/admin-bebidas-request-model";
+import { PasswordRequest } from "../../../shared/models/admin/admin-password-request-model";
 @Injectable({
     providedIn: "root"  
 })
@@ -18,6 +19,7 @@ export class AdminService {
     private baseUrl2 = `${environment.baseURL}/reservasion`;
     private baseUrl3 = `${environment.baseURL}/admin/drink`;
     private baseUrl4 = `${environment.baseURL}`;
+    private baseUrl5 = `${environment.baseURL}/pdf`;
     private http = inject(HttpClient);
 
     constructor() { }
@@ -98,5 +100,17 @@ export class AdminService {
             formData.append('image', bebida.image, bebida.image.name);
         }
         return this.http.put(`${this.baseUrl3}/update/${id}`, formData, { responseType: 'text' });
+    }
+
+    downloadWeeklyReport(): Observable<Blob> {
+        return this.http.get(`${this.baseUrl5}/week`, { responseType: 'blob' });
+    }
+
+    downloadMonthlyReport(): Observable<Blob> {
+        return this.http.get(`${this.baseUrl5}/month`, { responseType: 'blob' });
+    }
+
+    updatePassword(userId:number, passdata: PasswordRequest): Observable<string> {
+        return this.http.put(`${this.baseUrl}/edit-password/${userId}`, passdata, { responseType: 'text' });
     }
 }
