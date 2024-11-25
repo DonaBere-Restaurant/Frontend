@@ -5,13 +5,16 @@ import { ElejirplatosComponent } from './pages/reserva/elejirplatos/elejirplatos
 import { CompletardatosComponent } from './shared/components/completardatos/completardatos.component';
 import { DetallesreservaComponent } from './pages/reserva/detallesreserva/detallesreserva.component';
 import { DetallesreservabienComponent } from './pages/reserva/detallesreservabien/detallesreservabien.component';
+import { authInverseGuard } from './core/guards/auth/auth-inverse.guard';
+import { authGuard } from './core/guards/auth/auth.guard';
 
 
 export const routes: Routes = [
 
     {
         path: 'auth',
-        loadChildren: () => import('./pages/auth/auth.routes').then(a => a.authRoutes)
+        loadChildren: () => import('./pages/auth/auth.routes').then(a => a.authRoutes),
+        canActivate:[authInverseGuard]
     },
     {
         path:'inicio',
@@ -19,7 +22,8 @@ export const routes: Routes = [
     },
     {
         path:'customer',
-        loadChildren: () => import('./pages/customer/customer.routes').then(c => c.customerRoutes)
+        loadChildren: () => import('./pages/customer/customer.routes').then(c => c.customerRoutes),
+        canActivate:[authGuard]
     },
     {
         path:'admin',
