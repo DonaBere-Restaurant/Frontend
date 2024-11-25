@@ -17,5 +17,7 @@ export class Reserva {
     orderDishes: Orden[];
     orderDrinks: Orden[];
     priceTotal:number;
+    refoundstatus:boolean;
+    status:number;
 
 }

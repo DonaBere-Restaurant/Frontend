@@ -9,6 +9,7 @@ import { Bebidas } from "../../../shared/models/admin/admin-bebidas-response-mod
 import { PlatoRequest } from "../../../shared/models/admin/admin-platos-request-model";
 import { BebidasRequest } from "../../../shared/models/admin/admin-bebidas-request-model";
 import { PasswordRequest } from "../../../shared/models/admin/admin-password-request-model";
+import { Reserva } from "../../../shared/models/Reserva/reserva";
 @Injectable({
     providedIn: "root"  
 })
@@ -30,6 +31,13 @@ export class AdminService {
 
     getAllReservations(): Observable<AdminReservas[]>{
         return this.http.get<AdminReservas[]>(`${this.baseUrl2}/all-reservations`);
+    }
+    getPayedReservations(): Observable<Reserva[]>{
+        return this.http.get<Reserva[]>(`${this.baseUrl4}/admin/reservations`);
+    }
+    
+    changeRefoundStatus(id: number){
+        return this.http.put(`${this.baseUrl4}/admin/refound/${id}`,null);
     }
 
     getAllDishes(): Observable<Plato[]>{
