@@ -64,10 +64,6 @@ export class AdminReservasComponent {
       maxHeight: '90vh',
       data: reserva,
       panelClass: ['custom-dialog-container'],
-      position: {
-        top: '-20%',
-        left: '37%'
-      },
     });
   }
   

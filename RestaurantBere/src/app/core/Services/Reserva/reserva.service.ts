@@ -44,6 +44,10 @@ export class ReservaService {
       })
     );
   }
+  
+  crearReservaWithAllTables(res: Reserva): Observable<Reserva> {
+    return this.httpClient.post<Reserva>(`${this.urlBd}/allTables`, res);
+  }
 
   agregarmesas(reservationRequest:ReservationRequest):Observable<ReservationRequest>
   {
@@ -136,7 +140,7 @@ private handleError(error: HttpErrorResponse) {
     errorMessage = `Error: ${error.error.message || 'Ocurrió un error en el servidor'}`;
   }
   return throwError(() => new Error(errorMessage));
-}
+} 
 
 // Método para manejar el éxito del pago
 handlePaymentSuccess(token: string): Observable<string> {

@@ -10,6 +10,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { ReservaService } from '../../../core/Services/Reserva/reserva.service';
 import {ReservaDataService} from '../../../core/Services/Reserva/reserva-data-service'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-select-date',
@@ -29,7 +30,7 @@ export class SelectDateComponent {
   date: { year: number; month: number };
   minDate = { year: 2024, month: 11, day: 25 }; // Fecha mínima
   maxDate = { year: 2025, month: 6, day: 30 }; // Fecha máxima
-  
+  showSpecialButton = false;
   constructor(private reservaservice: ReservaService, private calendar: NgbCalendar,private router: Router,
     private reservaDataService: ReservaDataService) {}
 
@@ -46,6 +47,7 @@ export class SelectDateComponent {
 
   setTime(hour: number, minute: number) {
     this.time = { hour, minute };
+    this.checkSpecialTime(hour);
   }
   navigateToCreateAcc() {
     this.router.navigate(['/inicio/reservacion']);
@@ -74,7 +76,49 @@ export class SelectDateComponent {
       }
     );
   }
-  
+  createWithAllTable()
+  {
+    this.isSubmitting = true;
+    console.log(this.reserva);
+    this.isSubmitting = true;
+    this.reservaservice.crearReservaWithAllTables(this.reserva).subscribe(
+      (respuesta) => {
+        console.log('Reserva creada:', respuesta);
+        this.showSnackBar('Reserva creada:'); 
+        this.isSubmitting = false;
+        this.reservaDataService.setReservaId(respuesta.id);
+        this.router.navigate(['/inicio/reservacion/mesas/menu']);
+      },
+      (error) => {
+
+          this.showSnackBar(error.error.error); 
+        this.isSubmitting = false;
+      }
+    );
+  }
+
+  prepareAllTableReservation() {    
+
+      if (!this.model || !this.time) {
+        this.showSnackBar('Por favor, seleccione una fecha y hora válidas.');
+        return;
+      }
+
+   
+      const selectedDate = `${this.model.year}-${this.pad(this.model.month)}-${this.pad(this.model.day)}`;
+      const selectedTime = `${this.pad(this.time.hour)}:${this.pad(this.time.minute)}`;
+
+      this.reserva.date = selectedDate;
+      this.reserva.startTime = selectedTime;
+
+        console.log('Preparando reserva con todas las mesas:', this.reserva);
+
+         
+      this.createWithAllTable();
+
+
+  }
+
   onSubmit(form: NgForm, event: Event) {
     event.preventDefault();  
   
@@ -101,6 +145,10 @@ export class SelectDateComponent {
       duration: 2000,
       verticalPosition: 'top'
     });
+  }
+  
+  checkSpecialTime(hour: number) {
+    this.showSpecialButton = hour === 12 || hour === 18; // Mostrar botón si es 12 o 18
   }
 
 }

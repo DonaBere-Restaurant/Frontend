@@ -54,6 +54,15 @@
                             <ngb-timepicker [(ngModel)]="time" name="time" [spinners]="false" required></ngb-timepicker>
                         </div>
                     </div>
+                    
+                    <div class="row mt-3" *ngIf="showSpecialButton">
+                        <div class="col">
+                            <button type="button" class="btn btn-success" [disabled]="reservaForm.invalid" 
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+                      Reservar todas las mesas
+                    </button>
+                        </div>
+                    </div>
                 </div>
         
                 <div class="row text-center mb-4 mt-4">       
@@ -69,3 +78,25 @@
     </div> 
 </div>
 
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">!Advertencia¡</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Solo se puede reservar el restaurante 2 veces al día y con 30 días de anticipación, 12pm-5pm y 6pm-11pm
+            </p>
+          <p>
+            Se le cobrar un total de 300 soles por reservar todo el restaurante, aparte del consumo
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="prepareAllTableReservation()">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
