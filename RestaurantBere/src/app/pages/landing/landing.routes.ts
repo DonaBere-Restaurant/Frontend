@@ -11,6 +11,7 @@ import { ElejirplatosComponent } from '../reserva/elejirplatos/elejirplatos.comp
 import { DetallesreservaComponent } from '../reserva/detallesreserva/detallesreserva.component';
 import { DetallesreservabienComponent } from '../reserva/detallesreservabien/detallesreservabien.component';
 import { MetodoPagoComponent } from '../reserva/metodo-pago/metodo-pago.component';
+import { ElegirBebidaComponent } from '../reserva/elegir-bebida/elegir-bebida.component';
 
 export const landingRoutes: Routes = [
     {
@@ -24,10 +25,11 @@ export const landingRoutes: Routes = [
             { path: 'nosotros', component: NosotrosComponent},
             { path: 'reservacion', component: SelectDateComponent},
             { path: 'reservacion/mesas', component: SelectTableComponent},
-            { path:'reservacion/mesas/menu',component:ElejirplatosComponent},
-            { path:'reservacion/mesas/menu/resumen',component:DetallesreservaComponent},
-            { path:'reservacion/mesas/menu/resumen/metodoPago',component:MetodoPagoComponent},
-            { path: 'reservasion/mesas/menu/resumen/pago-completado', component: DetallesreservabienComponent }
+            { path: 'reservacion/mesas/menu',component:ElejirplatosComponent},
+            { path: 'reservacion/mesas/menu/drinks', component: ElegirBebidaComponent},
+            { path: 'reservacion/mesas/menu/drinks/resumen',component:DetallesreservaComponent},
+            { path: 'reservacion/mesas/menu/drinks/resumen/metodoPago',component:MetodoPagoComponent},
+            { path: 'reservacion/mesas/menu/drinks/resumen/pago-completado', component: DetallesreservabienComponent }
         ]
     }
 ];
