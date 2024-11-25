@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+    <div class="row mb-4">
+      <div class="col-md-5"></div>
+      <div class="progress-container col-md-3 text-center">
+        <div class="circle completed">1</div>
+        <div class="line"></div>
+        <div class="circle completed">2</div>
+        <div class="line"></div>
+        <div class="circle completed">3</div>
+        <div class="line"></div>
+        <div class="circle">4</div>
+      </div>
+      <div class="col-md-4 text-end">
+        <h2>Elegir bebidas</h2>
+      </div>
+    </div>
+  </nav>
+
+  <h1 class="text-center mb-4">Menú de Bebidas</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let bebida of bebidas" class="col">
+      <div class="card h-100 shadow-sm">
+        <img *ngIf="imageUrls[bebida.image]" [src]="imageUrls[bebida.image]" alt="Imagen de {{ bebida.name }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ bebida.name }}</h5>
+          <p class="card-text flex-grow-1">{{ bebida.description }}</p>
+          <p class="card-text"><strong>Precio: </strong> S/. {{ bebida.price | number:'1.2-2' }}</p>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <input class="form-control w-50" type="number" min="0" max="50" [(ngModel)]="quantity[bebida.id]" id="quantity{{bebida.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
+            <button class="btn btn-outline-primary" (click)="agregarBebida(bebida.id, quantity[bebida.id])" [disabled]="cantidadInput.invalid">
+              <i class="fas fa-plus-circle me-2"></i>Agregar
+            </button>
+          </div>
+          <div *ngIf="cantidadInput.invalid && cantidadInput.touched" class="mt-2">
+            <p *ngIf="cantidadInput.errors?.['required']" class="alert alert-danger mt-2 fs-6">La cantidad es requerida</p>
+            <p *ngIf="cantidadInput.errors?.['max']" class="alert alert-danger mt-2 fs-6">La cantidad no puede ser mayor a 50</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h3>Resumen de la Reserva</h3>
+    <p><strong>Número de Reserva:</strong> {{ reservaId }}</p>
+    <h4>Bebidas Agregadas:</h4>
+    <div class="d-flex flex-wrap gap-2">
+      <span *ngFor="let bebida of reservationBebida.orderDrinks" class="badge bg-primary">
+        Id bebida: {{bebida.drinkId}} - Cantidad: {{bebida.quantity}}
+      </span>
+    </div>
+    <button *ngIf="reservationBebida.orderDrinks.length !==0" (click)="limpiarLista()" class="btn btn-danger mt-3">
+      <i class="fas fa-trash-alt me-2"></i>Borrar selección
+    </button>
+  </div>
+
+  <div class="row text-center mb-4 mt-4">       
+    <div class="col-md">
+      <button class="btn btn-outline-dark" type="button" (click)="navigateToHome()">Cancelar</button>
+    </div>
+    <div class="col-md">
+      <button type="submit" class="btn btn-dark" (click)="enviarReservaBebidas()">Continuar</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md offset-md-5 pb-3">
+      <button class="btn btn-outline-dark" type="button" (click)="SkipBebidas()">No agregar Bebidas</button>
+    </div>
+  </div>
+</div>

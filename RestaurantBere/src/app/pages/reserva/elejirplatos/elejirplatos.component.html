@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+    <div class="row mb-4">
+      <div class="col-md-5"></div>
+      <div class="progress-container col-md-3 text-center">
+        <div class="circle completed">1</div>
+        <div class="line"></div>
+        <div class="circle completed">2</div>
+        <div class="line"></div>
+        <div class="circle completed">3</div>
+        <div class="line"></div>
+        <div class="circle">4</div>
+      </div>
+      <div class="col-md-4 text-end">
+        <h2>Elegir platos</h2>
+      </div>
+    </div>
+  </nav>
+
+  <h1 class="text-center mb-4">Menú de Platos</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let plato of platos" class="col">
+      <div class="card h-100 shadow-sm">
+        <img *ngIf="imageUrls[plato.image]" [src]="imageUrls[plato.image]" alt="Imagen de {{ plato.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ plato.title }}</h5>
+          <p class="card-text flex-grow-1">{{ plato.description }}</p>
+          <p class="card-text"><strong>Precio: </strong> S/. {{ plato.price | number:'1.2-2' }}</p>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <input class="form-control w-50" type="number" min="0" max="50" [(ngModel)]="quantity[plato.id]" id="quantity{{plato.id}}" placeholder="Cantidad" #cantidadInput="ngModel" required />
+            <button class="btn btn-outline-primary" (click)="agregarPlato(plato.id, quantity[plato.id])" [disabled]="cantidadInput.invalid">
+              <i class="fas fa-plus-circle me-2"></i>Agregar
+            </button>
+          </div>
+          <div *ngIf="cantidadInput.invalid && cantidadInput.touched" class="mt-2">
+            <p *ngIf="cantidadInput.errors?.['required']" class="alert alert-danger mt-2 fs-6">La cantidad es requerida</p>
+            <p *ngIf="cantidadInput.errors?.['max']" class="alert alert-danger mt-2 fs-6">La cantidad no puede ser mayor a 50</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h3>Resumen de la Reserva</h3>
+    <p><strong>Número de Reserva:</strong> {{ reservaId }}</p>
+    <h4>Platos Agregados:</h4>
+    <div class="d-flex flex-wrap gap-2">
+      <span *ngFor="let plato of reservationplatoRequest.orderDishes" class="badge bg-primary">
+        Id plato: {{plato.dishId}} - Cantidad: {{plato.quantity}}
+      </span>
+    </div>
+    <button *ngIf="reservationplatoRequest.orderDishes.length !==0" (click)="limpiarListas()" class="btn btn-danger mt-3">
+      <i class="fas fa-trash-alt me-2"></i>Borrar selección
+    </button>
+  </div>
+
+  <div class="row text-center mb-4 mt-4">       
+    <div class="col-md">
+      <button class="btn btn-outline-dark" type="button" (click)="navigateToHome()">Cancelar</button>
+    </div>
+    <div class="col-md">
+      <button type="submit" class="btn btn-dark" (click)="enviarReservaPlatos()">Continuar</button>
+    </div>
+  </div>
+</div>

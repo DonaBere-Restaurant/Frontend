@@ -1,0 +1,153 @@
+
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="container-fluid" *ngIf="!isLoading">
+  <div class="row text-light bg-dark d-flex justify-content-center align-items-center p-3">
+    <div class="col-1"><p>Id de Reserva</p></div>
+    <div class="col-2"><p>Fecha</p></div>
+    <div class="col-1"><p>Inicio</p></div>
+    <div class="col-1"><p>Fin</p></div>
+    <div class="col-1"><p>Estado</p></div>
+    <div class="col-1"><p>Detalle</p></div>
+    <div class="col-1"><p>Modificar</p></div>
+  </div>
+
+  <div *ngFor="let reservation of reservations" class="row d-flex justify-content-center align-items-center border-bottom p-3">
+    <div class="col-1"><p>{{ reservation.id }}</p></div>
+    <div class="col-2"><p>{{ reservation.date | date: 'shortDate' }}</p></div>
+    <div class="col-1"><p>{{ reservation.startTime }}</p></div>
+    <div class="col-1"><p>{{ reservation.endTime }}</p></div>
+    <div class="col-1">
+      <p>{{ reservation.status === 0 ? 'Reservado' : reservation.status === 2 ? 'Cancelado' : reservation.status }}</p>
+    </div>
+    <div class="col-1">
+      <button class="btn" (click)="toggleForm(reservation)">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <div class="col-1">
+      <button *ngIf="reservation.status!==2" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="guardarIdReserva(reservation.id)"><i class="fa-regular fa-pen-to-square"></i></button>
+    </div>
+
+    <div *ngFor="let resena of resenas" class="col-12 mt-3">
+      <p *ngIf="resena.resena">Comentario: {{ reservation.comentario }}</p>
+      <p *ngIf="resena.calificacion">Calificación: {{ reservation.calificacion }} estrellas</p>
+    </div>
+
+    <!-- Formulario de reseña -->
+    <div *ngIf="reservation.showForm" class="col-12 mt-3">
+      <form (ngSubmit)="submitResena(reservation)" class="mx-auto p-3 border rounded shadow">
+        <div class="mb-3">
+          <label for="comentario-{{ reservation.id }}" class="form-label">Comentario:</label>
+          <textarea
+            id="comentario-{{ reservation.id }}"
+            [(ngModel)]="reservation.comentario"
+            name="comentario-{{ reservation.id }}"
+            class="form-control"
+            rows="3"
+            maxlength="500"
+            required
+          ></textarea>
+          <small class="text-muted">
+            Caracteres restantes: {{ 500 - (reservation.comentario?.length || 0) }}
+          </small>
+        </div>
+
+        <div class="mb-3">
+          <label for="calificacion-{{ reservation.id }}" class="form-label">Calificación:</label>
+          <div class="rating">
+            <span
+              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+              [ngClass]="{ 'filled': i < (reservation.calificacion ?? 0) }"
+              (click)="reservation.calificacion = i + 1"
+              class="star"
+            >
+              &#9733;
+            </span>
+          </div>
+        </div>
+
+        <p class="text-center">Calificación seleccionada: {{ reservation.calificacion || 0 }}
+          <span *ngIf="reservation.calificacion === 1">estrella</span>
+          <span *ngIf="reservation.calificacion !== 1">estrellas</span>
+        </p>
+
+        <div class="text-center">
+          <button type="button" class="btn btn-danger m-5" data-bs-toggle="modal" data-bs-target="#Cancelar" [disabled]="reservation.status === 2">
+            <i class="fa-solid fa-thumbs-up"></i> Cancelar Reserva
+          </button>
+            <!-- Modal -->
+            <div class="modal fade" id="Cancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Estas seguro?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Solo puedes cancelar la reserva 4 horas antes o más de la hora de Inicio
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cancelarReserva(reservation.id)">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+
+
+            <button type="button" class="btn btn-primary" (click)="submitResena(reservation)" [disabled]="!reservation.canSubmitReview">
+              Subir Reseña
+            </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+</div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de Informacion</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                <form [formGroup]="updateForm">
+                  <div class="form-group">
+                    <label for="date">Fecha</label>
+                    <input id="date" type="date" formControlName="date" class="form-control" [min]="minDate" [max]="'2027-12-31'">
+                    <div *ngIf="date?.invalid && date?.touched" class="text-danger">
+                      <small *ngIf="date?.hasError('required')">La fecha es obligatoria.</small>
+                    </div>
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="startTime">Hora</label>
+                    <input id="hour" type="time" formControlName="startTime" class="form-control">
+                    <div *ngIf="hour?.invalid && hour?.touched" class="text-danger">
+                      <small *ngIf="hour?.hasError('required')">La hora es obligatoria.</small>
+                    </div>
+                  </div>
+                  <div>
+                  </div>
+                </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" data-bs-dismiss="modal" (click)="updateReserva(this.idReserva)" [disabled]="updateForm.invalid" class="btn btn-dark">
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

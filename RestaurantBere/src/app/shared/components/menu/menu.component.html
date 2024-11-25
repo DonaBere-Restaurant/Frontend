@@ -1,0 +1,36 @@
+<section class="menu">
+  <div class="container">
+    <img class="img-fluid menu-header" src="portadaBere.jpg" alt="Portada Bere"/>
+
+    <nav class="menu-nav">
+      <button class="menu-button" (click)="mostrarMenu('entradas')">
+        <i class="fa-solid fa-plate-wheat"></i> Entradas
+      </button>
+      <button class="menu-button" (click)="mostrarMenu('platofondo')">
+        <i class="fa-solid fa-bowl-food"></i> Plato de Fondo
+      </button>
+      <button class="menu-button" (click)="mostrarMenu('postre')">
+        <i class="fa-solid fa-cookie-bite"></i> Postre
+      </button>
+      <button class="menu-button" (click)="mostrarMenu('bebidas')">
+        <i class="fa-solid fa-wine-bottle"></i> Bebidas
+      </button>
+      <button class="menu-button" (click)="mostrarMenu('adicionales')">
+        <i class="fa-solid fa-folder-plus"></i> Adicionales
+      </button>
+    </nav>
+
+    <div class="menu-items">
+      <ng-container *ngFor="let item of getCurrentItems()">
+        <div class="menu-item">
+          <img [src]="item.image" [alt]="item.title" class="menu-item-image">
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">{{ item.title }}</h3>
+            <p class="menu-item-price">{{ item.price }}</p>
+            <p class="menu-item-description">{{ item.description }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

@@ -2,22 +2,22 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
-import { UserService } from '../../Services/Usuario/user.service';
+import { UserService } from '../../app/core/Services/Usuario/user.service';
 import { Router, RouterLink } from '@angular/router';
 
-import { NavegadorComponent } from "../navegador/navegador.component";
-import { NavcrearcuentaComponent } from "../navcrearcuenta/navcrearcuenta.component";
+import { NavegadorComponent } from "../shared/components/navegador/navegador.component";
+import { NavcrearcuentaComponent } from "../shared/components/navcrearcuenta/navcrearcuenta.component";
 
 @Component({
   selector: 'app-crearcuenta',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe, NavegadorComponent, NavcrearcuentaComponent, RouterLink],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NavcrearcuentaComponent, RouterLink],
   templateUrl: './crearcuenta.component.html',
   styleUrl: './crearcuenta.component.scss'
 })
 export class CrearcuentaComponent {
 
-  formUser: FormGroup;
+   formUser: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router){
 
@@ -114,4 +114,4 @@ export class CrearcuentaComponent {
     }
   }
 
-}
+} 

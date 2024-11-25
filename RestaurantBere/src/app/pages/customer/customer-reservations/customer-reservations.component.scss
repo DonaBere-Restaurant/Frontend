@@ -1,0 +1,85 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #3498db; /* Color del spinner */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.rating {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.rating li {
+  font-size: 30px; /* Tamaño de las estrellas */
+  color: gray; /* Color por defecto */
+  margin-right: 5px; /* Espacio entre las estrellas */
+
+}
+
+.r1 li{
+  cursor: pointer; /* Cambia el cursor a pointer */
+  font-size: 50px!important; /* Tamaño de las estrellas */
+
+}
+
+
+
+.rating li.filled {
+  color: #03129B; /* Color de las estrellas rellenas */
+}
+
+
+.rating {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.rating span {
+  font-size: 24px;
+  color: #ccc; /* Color de estrellas no seleccionadas */
+  transition: color 0.2s ease-in-out;
+}
+
+.rating span.filled {
+  color: #ffc107; /* Color de estrellas seleccionadas */
+}
+/* Estilo para las estrellas de calificación */
+.star {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #d3d3d3; /* Color de estrellas vacías */
+}
+
+.star.filled {
+  color: #ffc107; /* Color de estrellas llenas */
+}
+
+/* Añadir una sombra y borde suave al formulario */
+form {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #f8f9fa; /* Fondo claro para el formulario */
+}
+
+/* Cambiar el estilo del mensaje de texto centrado */
+.text-center p {
+  font-weight: bold;
+}

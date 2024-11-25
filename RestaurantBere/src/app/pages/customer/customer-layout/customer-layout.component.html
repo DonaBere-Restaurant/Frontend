@@ -1,0 +1,16 @@
+<app-navegador></app-navegador>
+<div class="container-fluid d-flex flex-row p-0">
+  <div class="col-md-1 d-flex flex-column">
+    <div class="btn p-0 d-flex justify-content-start b" [ngClass]="{'btn-c': isActive('/customer/miperfil')}">
+      <a routerLink="/customer/miperfil" class="btn">Perfil</a>
+    </div>
+    <div class="btn p-0 d-flex justify-content-start b" [ngClass]="{'btn-c': isActive('/customer/miperfil/misreservaciones')}">
+      <a routerLink="/customer/miperfil/misreservaciones" class="btn">Reservas</a>
+    </div>
+  </div>
+
+  <div class="col-md-10 p-0 pt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<app-piepagina></app-piepagina>

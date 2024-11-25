@@ -1,0 +1,28 @@
+<app-navegador></app-navegador>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1 button-container">
+            <button class="btn " routerLink="/admin/miperfil" routerLinkActive="active">
+                Perfil
+            </button>
+            <button class="btn " routerLink="/admin/reservas" routerLinkActive="active">
+                Reservas
+            </button>
+            <button class="btn " routerLink="/admin/platos" routerLinkActive="active">
+                Platos
+            </button>
+            <button class="btn " routerLink="/admin/bebidas" routerLinkActive="active">
+                Bebidas
+            </button>
+            <button class="btn " routerLink="/admin/informe" routerLinkActive="active">
+                Informe
+            </button>
+            <button class="btn " routerLink="/admin/resenas" routerLinkActive="active">
+                Reseñas
+            </button>
+        </div>
+        <div class="col-md-11 dashboard">
+            <router-outlet></router-outlet>
+    </div>
+</div>
+<app-piepagina></app-piepagina>

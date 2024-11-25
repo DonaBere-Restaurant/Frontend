@@ -1,0 +1,129 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Administración de Platos</h1>
+  <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#createDishModal">
+    <i class="fas fa-plus-circle me-2"></i>Crear nuevo plato
+  </button>
+  
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let dish of dishes" class="col">
+      <div class="card h-100 shadow-sm">
+        <img [src]="imageUrls[dish.image] || 'assets/img/default-dish.png'" class="card-img-top" alt="{{ dish.title }}" style="height: 200px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ dish.title }}</h5>
+          <p class="card-text flex-grow-1">{{ dish.description }}</p>
+          <p class="card-text"><strong>Precio: </strong> S/. {{ dish.price | number:'1.2-2' }}</p>
+          <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-outline-primary" (click)="loadDishInForm(dish)" data-bs-toggle="modal" data-bs-target="#editDishModal">
+              <i class="fas fa-edit me-2"></i>Editar
+            </button>
+            <button class="btn btn-outline-danger" (click)="deleteDish(dish.id)">
+              <i class="fas fa-trash-alt me-2"></i>Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createDishModal" tabindex="-1" aria-labelledby="createDishModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createDishModalLabel">Crear un nuevo plato</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="dishForm" (ngSubmit)="createDish()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" required>
+            <div *ngIf="dishForm.get('title')?.invalid && (dishForm.get('title')?.dirty || dishForm.get('title')?.touched)" class="text-danger">
+              <small *ngIf="dishForm.get('title')?.errors?.['required']">Titulo es requerido.</small>
+              <small *ngIf="dishForm.get('title')?.errors?.['minlength']">Titulo no puede tener menos de 3 caracteres.</small>
+            </div>
+          </div>
+      
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" required></textarea>
+            <div *ngIf="dishForm.get('description')?.invalid && (dishForm.get('description')?.dirty || dishForm.get('description')?.touched)" class="text-danger">
+              <small *ngIf="dishForm.get('description')?.errors?.['required']">Descripcion es requerida.</small>
+            </div>
+          </div>
+      
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" formControlName="price" required min="0" step="0.01">
+            <div *ngIf="dishForm.get('price')?.invalid && (dishForm.get('price')?.dirty || dishForm.get('price')?.touched)" class="text-danger">
+              <small *ngIf="dishForm.get('price')?.errors?.['required']">Precio es requerido.</small>
+              <small *ngIf="dishForm.get('price')?.errors?.['min']">Precio tiene que ser positivo.</small>
+            </div>
+          </div>
+      
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" accept="image/*" required>
+            <div *ngIf="dishForm.get('image')?.invalid && (dishForm.get('image')?.dirty || dishForm.get('image')?.touched)" class="text-danger">
+              <small *ngIf="dishForm.get('image')?.errors?.['required']">Imagen es requerida</small>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createDish()" [disabled]="dishForm.invalid">Crear Plato</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editDishModal" tabindex="-1" aria-labelledby="editDishModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDishModalLabel">Editar plato</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="updatedDish" (ngSubmit)="editDish()">
+            <div class="mb-3">
+              <label for="editTitle" class="form-label">Título</label>
+              <input type="text" class="form-control" id="editTitle" formControlName="title" required>
+              <div *ngIf="updatedDish.get('title')?.invalid && (updatedDish.get('title')?.dirty || updatedDish.get('title')?.touched)" class="text-danger">
+                <small *ngIf="updatedDish.get('title')?.errors?.['required']">Título es requerido.</small>
+                <small *ngIf="updatedDish.get('title')?.errors?.['minlength']">Título no puede tener menos de 3 caracteres.</small>
+              </div>
+            </div>
+        
+            <div class="mb-3">
+              <label for="editDescription" class="form-label">Descripción</label>
+              <textarea class="form-control" id="editDescription" formControlName="description" required></textarea>
+              <div *ngIf="updatedDish.get('description')?.invalid && (updatedDish.get('description')?.dirty || updatedDish.get('description')?.touched)" class="text-danger">
+                <small *ngIf="updatedDish.get('description')?.errors?.['required']">Descripción es requerida.</small>
+              </div>
+            </div>
+        
+            <div class="mb-3">
+              <label for="editPrice" class="form-label">Precio</label>
+              <input type="number" class="form-control" id="editPrice" formControlName="price" required min="0" step="0.01">
+              <div *ngIf="updatedDish.get('price')?.invalid && (updatedDish.get('price')?.dirty || updatedDish.get('price')?.touched)" class="text-danger">
+                <small *ngIf="updatedDish.get('price')?.errors?.['required']">Precio es requerido.</small>
+                <small *ngIf="updatedDish.get('price')?.errors?.['min']">Precio tiene que ser positivo.</small>
+              </div>
+            </div>
+        
+            <div class="mb-3">
+              <label for="editImage" class="form-label">Imagen</label>
+              <input type="file" class="form-control" id="editImage" (change)="onFileSelectedForEdit($event)" accept="image/*">
+              <small class="text-muted">Deja en blanco para mantener la imagen actual.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editDish()" [disabled]="updatedDish.invalid">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>

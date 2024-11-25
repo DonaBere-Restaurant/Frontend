@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <!-- Reporte Semanal -->
+        <div class="col-md-4 text-center">
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- Ícono en la primera fila -->
+                    <div class="mb-4">
+                        <i class="fa-solid fa-chart-simple" style="font-size: 8rem; color: #333;"></i>
+                    </div>
+                    <!-- Botón en la segunda fila -->
+                    <button class="btn btn-dark btn-lg btn-block" (click)="downloadWeeklyReport()">Generar reporte semanal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reporte Mensual -->
+        <div class="col-md-4 text-center">
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- Ícono en la primera fila -->
+                    <div class="mb-4">
+                        <i class="fa-solid fa-chart-bar" style="font-size: 8rem; color: #333;"></i>
+                    </div>
+                    <!-- Botón en la segunda fila -->
+                    <button class="btn btn-dark btn-lg btn-block" (click)="downloadMonthlyReport()">Generar reporte mensual</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+
+
+@Injectable({
+  providedIn: 'root'
+ })
+
+ export class LoginService{
+
+    private apiUrl = `${environment.baseURL}`; 
+
+    constructor(private router: Router, private http: HttpClient){}
+
+    private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+    isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
+    Onlogin(userData: any): Observable<any> { 
+        if(userData.email == 'gino@ejemplo.com' && userData.password == 'example123'){
+            console.log('Inicio de sesión exitoso');
+            localStorage.setItem('isLoggedIn', 'true');
+            this.isLoggedInSubject.next(true);
+            this.router.navigate(['/inicio']);
+        }
+        return this.http.post<any>(`${this.apiUrl}/auth/login`, userData, { 
+          responseType: 'text' as 'json' 
+        });  // POST para iniciar sesion
+      } 
+
+    logout(): void{
+        alert('Sesión cerrada');
+        localStorage.removeItem('isLoggedIn');  
+        this.router.navigate(['/inicio']);
+        this.isLoggedInSubject.next(false);
+    }
+ }

@@ -1,0 +1,85 @@
+$primary-color: #000000;
+$secondary-color: #f5a623;
+$background-color: #f8f9fa;
+
+.container {
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: $primary-color;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+  }
+}
+
+.card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .card-title {
+    color: $primary-color;
+    font-weight: 600;
+  }
+
+  .card-text {
+    color: #6c757d;
+  }
+
+  .btn-outline-primary {
+    color: $primary-color;
+    border-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+
+  .btn-outline-danger {
+    &:hover {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+  }
+}
+
+.modal-content {
+  border-radius: 15px;
+}
+
+.modal-header {
+  background-color: $primary-color;
+  color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.modal-footer {
+  background-color: $background-color;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
