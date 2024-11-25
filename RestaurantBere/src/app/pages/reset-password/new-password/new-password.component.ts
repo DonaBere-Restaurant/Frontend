@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResetPasswordService } from '../../../core/Services/reset-password/reset-password.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NavegadorComponent } from "../../../shared/components/navegador/navegador.component";
+import { PiepaginaComponent } from "../../../shared/components/piepagina/piepagina.component";
 
 @Component({
   selector: 'app-new-password',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NavegadorComponent, PiepaginaComponent],
   templateUrl: './new-password.component.html',
   styleUrl: './new-password.component.scss'
 })
