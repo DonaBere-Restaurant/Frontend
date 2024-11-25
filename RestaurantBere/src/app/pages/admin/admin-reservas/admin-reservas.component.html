@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="table-responsive" *ngIf="reservas.length > 0; else noReservas">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Fin</th>
+                    <th>Estado</th>
+                    <!-- <th>Cancelar</th> -->
+                    <th>Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reserva of reservas">
+                    <td>{{reserva.id}}</td>
+                    <td>{{reserva.name}}</td>
+                    <td>{{reserva.date}}</td>
+                    <td>{{reserva.startTime}}</td>
+                    <td>{{reserva.endTime}}</td>
+                    <td>{{ getEstadoReserva(reserva.status) }}</td>
+                    <!-- <td>
+                        <button *ngIf="reserva.status === 0" class="btn btn-outline-danger" (click)="cambiarEstadoReserva(reserva)">
+                          Cancelar
+                        </button>
+                      </td> -->
+                    <td>
+                        <button class="btn" (click)="verDetalles(reserva)" ><i class="fa-solid fa-circle-info fs-3"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #noReservas>
+        <p class="text-center">No hay reservas disponibles.</p>
+    </ng-template>
+</div>

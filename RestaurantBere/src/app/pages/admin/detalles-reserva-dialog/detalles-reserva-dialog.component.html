@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="dialog-title">Detalles de la Reserva</h2>
+<mat-dialog-content class="dialog-content">
+  <div class="detail-section">
+    <h3>Información Personal</h3>
+    <div class="detail-item">
+      <span class="label">Nombre:</span>
+      <span class="value">{{data.name}}</span>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <h3>Detalles de la Reserva</h3>
+    <div class="detail-item">
+      <span class="label">ID:</span>
+      <span class="value">{{data.id}}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Fecha:</span>
+      <span class="value">{{data.date | date:'dd/MM/yyyy'}}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Hora:</span>
+      <span class="value">{{data.startTime}} - {{data.endTime}}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Estado:</span>
+      <span class="value status-chip" [ngClass]="getStatusClass(data.status)">
+        {{getEstadoReserva(data.status)}}
+      </span>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" class="btn btn-outline-danger border" (click)="onNoClick()">Cerrar</button>
+</mat-dialog-actions>

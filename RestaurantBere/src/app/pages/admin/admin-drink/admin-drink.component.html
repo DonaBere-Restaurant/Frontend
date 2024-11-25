@@ -1,0 +1,123 @@
+<div class="container">
+    <h2>Administración de Bebidas</h2>
+    <button class="btn btn-outline-dark mb-3" data-bs-toggle="modal" data-bs-target="#createDrinkModal">
+        Crear nueva bebida
+    </button>
+
+    <div class="row mt-3">
+      <div *ngFor="let drink of drinks" class="col-md-4 mb-4">
+        <div class="card">
+          <img [src]="imageUrls[drink.image] || 'assets/img/default-drink.png'" class="card-img-top" alt="{{ drink.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ drink.name }}</h5>
+            <p class="card-text">{{ drink.description }}</p>
+            <p class="card-text"><strong>Precio: </strong> S/. {{ drink.price }}.00</p>
+            <button class="btn btn-outline-primary me-3" (click)="loadDrinkInForm(drink)" data-bs-toggle="modal" data-bs-target="#editDrinkModal">Editar</button>
+            <button class="btn btn-outline-danger" (click)="deleteDrink(drink.id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createDrinkModal" tabindex="-1" aria-labelledby="createDrinkModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createDrinkModalLabel">Crear una nueva bebida</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="drinkForm" (ngSubmit)="createDrink()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name" required>
+            <div *ngIf="drinkForm.get('name')?.invalid && (drinkForm.get('name')?.dirty || drinkForm.get('name')?.touched)" class="text-danger">
+              <small *ngIf="drinkForm.get('name')?.errors?.['required']">Nombre es requerido.</small>
+              <small *ngIf="drinkForm.get('name')?.errors?.['minlength']">Nombre no puede tener menos de 3 caracteres.</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea class="form-control" id="description" formControlName="description" required></textarea>
+            <div *ngIf="drinkForm.get('description')?.invalid && (drinkForm.get('description')?.dirty || drinkForm.get('description')?.touched)" class="text-danger">
+              <small *ngIf="drinkForm.get('description')?.errors?.['required']">Descripción es requerida.</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="price" formControlName="price" required min="0" step="0.01">
+            <div *ngIf="drinkForm.get('price')?.invalid && (drinkForm.get('price')?.dirty || drinkForm.get('price')?.touched)" class="text-danger">
+              <small *ngIf="drinkForm.get('price')?.errors?.['required']">Precio es requerido.</small>
+              <small *ngIf="drinkForm.get('price')?.errors?.['min']">Precio tiene que ser positivo.</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="image" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" accept="image/*" required>
+            <div *ngIf="drinkForm.get('image')?.invalid && (drinkForm.get('image')?.dirty || drinkForm.get('image')?.touched)" class="text-danger">
+              <small *ngIf="drinkForm.get('image')?.errors?.['required']">Imagen es requerida</small>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createDrink()" [disabled]="drinkForm.invalid">Crear Bebida</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editDrinkModal" tabindex="-1" aria-labelledby="editDrinkModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDrinkModalLabel">Editar bebida</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="updatedDrink" (ngSubmit)="editDrink()">
+            <div class="mb-3">
+              <label for="editName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="editName" formControlName="name" required>
+              <div *ngIf="updatedDrink.get('name')?.invalid && (updatedDrink.get('name')?.dirty || updatedDrink.get('name')?.touched)" class="text-danger">
+                <small *ngIf="updatedDrink.get('name')?.errors?.['required']">Nombre es requerido.</small>
+                <small *ngIf="updatedDrink.get('name')?.errors?.['minlength']">Nombre no puede tener menos de 3 caracteres.</small>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="editDescription" class="form-label">Descripción</label>
+              <textarea class="form-control" id="editDescription" formControlName="description" required></textarea>
+              <div *ngIf="updatedDrink.get('description')?.invalid && (updatedDrink.get('description')?.dirty || updatedDrink.get('description')?.touched)" class="text-danger">
+                <small *ngIf="updatedDrink.get('description')?.errors?.['required']">Descripción es requerida.</small>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="editPrice" class="form-label">Precio</label>
+              <input type="number" class="form-control" id="editPrice" formControlName="price" required min="0" step="0.01">
+              <div *ngIf="updatedDrink.get('price')?.invalid && (updatedDrink.get('price')?.dirty || updatedDrink.get('price')?.touched)" class="text-danger">
+                <small *ngIf="updatedDrink.get('price')?.errors?.['required']">Precio es requerido.</small>
+                <small *ngIf="updatedDrink.get('price')?.errors?.['min']">Precio tiene que ser positivo.</small>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="editImage" class="form-label">Imagen</label>
+              <input type="file" class="form-control" id="editImage" (change)="onFileSelectedForEdit($event)" accept="image/*">
+              <small class="text-muted">Deja en blanco para mantener la imagen actual.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editDrink()" [disabled]="updatedDrink.invalid">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
