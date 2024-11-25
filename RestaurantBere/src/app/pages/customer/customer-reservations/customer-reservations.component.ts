@@ -34,13 +34,24 @@ export class CustomerReservationsComponent implements OnInit {
     this.reservationService.getMyReservations().subscribe(
       (data: CustomReservationResponseDTO[]) => {
         console.log('Reservas obtenidas:', data);
+        const now = new Date();
         // Agregamos propiedades auxiliares a cada reserva
-        this.reservations = data.map(reservation => ({
-          ...reservation,
-          showForm: false, // Controla el formulario
-          comentario: '', // Inicializa el comentario
-          calificacion: 0, // Inicializa la calificación
-        }));
+        this.reservations = data.map(reservation => {
+          const endTime = new Date(reservation.date);
+          const [hours, minutes] = reservation.endTime.split(':').map(Number);
+          endTime.setHours(hours, minutes);
+          endTime.setDate(endTime.getDate() + 1); // Sumar un día a endTime
+          console.log(reservation.id);
+          console.log('endTime:', endTime);
+          console.log('now:', now);
+          return {
+            ...reservation,
+            showForm: false, // Controla el formulario
+            comentario: '', // Inicializa el comentario
+            calificacion: 0, // Inicializa la calificación
+            canSubmitReview: now >= endTime // Habilitar el botón si la hora actual es mayor o igual a la hora de finalización
+          };
+        });
       },
       (error) => {
         console.error('Error fetching reservations', error);
@@ -123,12 +134,12 @@ export class CustomerReservationsComponent implements OnInit {
   checkReservationStatus(reservationId: number) {
     const reservation = this.reservations.find(r => r.id === reservationId);
     if (reservation && reservation.status === 0) {
-      this.snackBar.open('Quedan menos de 4 horas para su reserva, no es posible cancelar', 'Cerrar', {
-        duration: 3000, // Duración de la notificación en milisegundos
+      this.snackBar.open('Quedan menos de 24 horas para su reserva, no es posible cancelar', 'Cerrar', {
+        duration: 5000, // Duración de la notificación en milisegundos
       });
     } else if (reservation && reservation.status === 2) {
       this.snackBar.open('La reserva ha sido cancelada', 'Cerrar', {
-        duration: 3000, // Duración de la notificación en milisegundos
+        duration: 5000, // Duración de la notificación en milisegundos
       });
     }
   }
