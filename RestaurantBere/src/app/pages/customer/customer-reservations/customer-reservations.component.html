@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row text-light bg-dark d-flex justify-content-center align-items-center p-3">
+    <div class="col-1"><p>Id de Reserva</p></div>
+    <div class="col-2"><p>Fecha</p></div>
+    <div class="col-1"><p>Inicio</p></div>
+    <div class="col-1"><p>Fin</p></div>
+    <div class="col-1"><p>Estado</p></div>
+    <div class="col-1"><p>Detalle</p></div>
+    <div class="col-1"><p>Modificar</p></div>
+  </div>
+
+  <div *ngFor="let reservation of reservations" class="row d-flex justify-content-center align-items-center border-bottom p-3">
+    <div class="col-1"><p>{{ reservation.id }}</p></div>
+    <div class="col-2"><p>{{ reservation.date | date: 'shortDate' }}</p></div>
+    <div class="col-1"><p>{{ reservation.startTime }}</p></div>
+    <div class="col-1"><p>{{ reservation.endTime }}</p></div>
+    <div class="col-1">
+      <p>{{ reservation.status === 0 ? 'Reservado' : reservation.status === 2 ? 'Cancelado' : reservation.status }}</p>
+    </div>
+    <div class="col-1">
+      <button class="btn" (click)="toggleForm(reservation)">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <div class="col-1">
+      <button class="btn"><i class="fa-regular fa-pen-to-square"></i></button>
+    </div>
+
+    <div *ngFor="let resena of resenas" class="col-12 mt-3">
+      <p *ngIf="resena.resena">Comentario: {{ reservation.comentario }}</p>
+      <p *ngIf="resena.calificacion">Calificación: {{ reservation.calificacion }} estrellas</p>
+    </div>
+
+    <!-- Formulario de reseña -->
+    <div *ngIf="reservation.showForm" class="col-12 mt-3">
+      <form (ngSubmit)="submitResena(reservation)" class="mx-auto p-3 border rounded shadow">
+        <div class="mb-3">
+          <label for="comentario-{{ reservation.id }}" class="form-label">Comentario:</label>
+          <textarea
+            id="comentario-{{ reservation.id }}"
+            [(ngModel)]="reservation.comentario"
+            name="comentario-{{ reservation.id }}"
+            class="form-control"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="calificacion-{{ reservation.id }}" class="form-label">Calificación:</label>
+          <div class="rating">
+            <span
+              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+              [ngClass]="{ 'filled': i < (reservation.calificacion ?? 0) }"
+              (click)="reservation.calificacion = i + 1"
+              class="star"
+            >
+              &#9733;
+            </span>
+          </div>
+        </div>
+
+        <p class="text-center">Calificación seleccionada: {{ reservation.calificacion || 0 }}
+          <span *ngIf="reservation.calificacion === 1">estrella</span>
+          <span *ngIf="reservation.calificacion !== 1">estrellas</span>
+        </p>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.btn-c{
+  background-color: #dcca06;
+}
+
+
+.b{
+  background-color: none;
+  margin-right: 10px;
+  &:hover{
+    background-color: #877c05;
+  }
+  a{
+    width: 100%!important;
+  }
+}
+
+btn{
+  border-radius: 0%;
+  margin-right: 10px;
+  width: 100%!important;
+}

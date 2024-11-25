@@ -9,8 +9,10 @@ import { environment } from '../../../../environments/environment';
 })
 export class MesaService {
 
+
   private  urlBd =`${environment.baseURL}/mesas`;
   //private  urlBd = "http://localhost:8080/api/v1/mesas";
+
 
  constructor(private httpClient : HttpClient) {
   }
