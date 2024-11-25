@@ -14,4 +14,6 @@ export interface CustomReservationResponseDTO {
   hoverRating?: number,
   comentario: string | null; // Campo auxiliar para el comentario
   calificacion: number | null; // Campo auxiliar para la calificación
+  canSubmitReview?: boolean; // Campo auxiliar para controlar el estado del botón
+  canSubmitCancel?: boolean; // Campo auxiliar para controlar el estado del botón
 }
