@@ -32,7 +32,6 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      console.log('Datos de inicio de sesión:', loginData);
       this.authService.login(loginData).subscribe({
         next: () => {
           console.log('Inicio de sesión exitoso');

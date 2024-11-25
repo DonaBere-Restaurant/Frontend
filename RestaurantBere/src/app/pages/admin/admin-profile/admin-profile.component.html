@@ -1,13 +1,47 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-4 info">
+    <div class="row justify-content-center">
+        <div class="col-md-4 info mb-3">
             <p>{{adminData.name}} - {{adminData.email}}</p>
         </div>
     </div>
-    <div class="row text-center mt-3">
-        <div class="col-md-8">
-            <p>Cambiar contraseña</p>   
+    <div class="row justify-content-center">
+        <div class="col-md-8 password-form-container">
+            <h3 class="text-center">Cambiar contraseña</h3>   
+            <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
+                <div class="mb-3">
+                    <label for="currentPassword" class="form-label">Contraseña actual</label>
+                    <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword">
+                    <div *ngIf="passwordForm.get('currentPassword')?.invalid && (passwordForm.get('currentPassword')?.dirty || passwordForm.get('currentPassword')?.touched)" class="text-danger">
+                        <small *ngIf="passwordForm.get('currentPassword')?.errors?.['required']">La contraseña actual es requerida.</small>
+                        <small *ngIf="passwordForm.get('currentPassword')?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</small>
+                    </div>
+                </div>
 
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">Nueva contraseña</label>
+                    <input type="password" class="form-control" id="newPassword" formControlName="newPassword">
+                    <div *ngIf="passwordForm.get('newPassword')?.invalid && (passwordForm.get('newPassword')?.dirty || passwordForm.get('newPassword')?.touched)" class="text-danger">
+                        <small *ngIf="passwordForm.get('newPassword')?.errors?.['required']">La nueva contraseña es requerida.</small>
+                        <small *ngIf="passwordForm.get('newPassword')?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</small>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirmar nueva contraseña</label>
+                    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                    <div *ngIf="passwordForm.get('confirmPassword')?.invalid && (passwordForm.get('confirmPassword')?.dirty || passwordForm.get('confirmPassword')?.touched)" class="text-danger">
+                        <small *ngIf="passwordForm.get('confirmPassword')?.errors?.['required']">La confirmación de la contraseña es requerida.</small>
+                        <small *ngIf="passwordForm.get('confirmPassword')?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</small>
+                    </div>
+                    <div *ngIf="passwordForm.hasError('passwordMismatch') && (passwordForm.get('confirmPassword')?.dirty || passwordForm.get('confirmPassword')?.touched)" class="text-danger">
+                        <small>Las contraseñas no coinciden.</small>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="passwordForm.invalid">Actualizar contraseña</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
