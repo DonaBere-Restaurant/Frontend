@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthResponse } from '../../shared/models/auth/auth-response-model';
+import {CustomReservationResponseDTO} from "../../shared/models/Reserva/CustomReservationResponseDTO";
 
 
 @Injectable({
@@ -21,4 +22,14 @@ export class StorageService {
     clearAuthData():void {
         localStorage.removeItem(this.authKey);
     }
+
+  setReservaData(data: CustomReservationResponseDTO[]):void {
+    localStorage.setItem(this.authKey,JSON.stringify(data))
+  }
+
+  getReservaData(): CustomReservationResponseDTO | null{
+    const data = localStorage.getItem(this.authKey);
+    return data ? JSON.parse(data) as CustomReservationResponseDTO : null;
+  }
+
 }
