@@ -9,15 +9,21 @@ import { throwError } from 'rxjs';
 import {ReservationRequest} from '../../../shared/models/ReservationTable/reservation-request';
 import{Cliente} from '../../../shared/models/Cliente/cliente';
 import {CustomReservationResponseDTO} from "../../../shared/models/Reserva/CustomReservationResponseDTO";
+import { environment } from '../../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ReservaService {
-  //private  urlBd = "https://backend-bdik.onrender.com/api/v1/reservasion";
-   private  urlBd = "http://localhost:8080/api/v1/reservasion";
 
-  //private urlUser= "https://backend-bdik.onrender.com/api/v1/auth";
-   private urlUser= "http://localhost:8080/api/v1/auth";
+  private  urlBd = `${environment.baseURL}/reservasion`;
+  // private  urlBd = "http://localhost:8080/api/v1/reservasion";
+
+  private urlUser= `${environment.baseURL}/auth`;
+
+  private baseUrl =`${environment.baseURL}`;
+  // private urlUser= "http://localhost:8080/api/v1/auth";
+
 
   constructor(private httpClient : HttpClient)
   {
@@ -116,6 +122,11 @@ export class ReservaService {
           })
       );
   }
+
+  pagarIzipay(reservaId: number): Observable<{ approvalUrl: string }> {
+    return this.httpClient.get<{ approvalUrl: string }>(`${this.baseUrl}/izipay/pay-reservation/${reservaId}`);
+  }
+  
 // Método para manejar errores
 private handleError(error: HttpErrorResponse) {
   let errorMessage = 'Ocurrió un error';

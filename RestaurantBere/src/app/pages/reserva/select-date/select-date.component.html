@@ -27,7 +27,8 @@
                 <h2>Seleccione una opción:</h2>
                 <div class="col-md-6">
                     <div class="row-md text-center mb-4">
-                        <ngb-datepicker #dp [(ngModel)]="model" name="date" (navigate)="date = $event.next" required></ngb-datepicker>
+                        <ngb-datepicker #dp [(ngModel)]="model" name="date" (navigate)="date = $event.next" required [minDate]="minDate" 
+                        [maxDate]="maxDate" ></ngb-datepicker>
                     </div>
                     <div class="row-md text-center">
                         <button type="button" class="btn btn-outline-primary me-2" (click)="model = today">Select Today</button>
@@ -38,10 +39,10 @@
                     <div class="row mb-4 mt-4">
                         <div class="col">
                             <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(12 , 00)">12:00</button>
-                            <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(14 , 30)">14:30</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(14 , 00)">14:00</button>
                             <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(17 , 00)">17:00</button>
-                            <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(19 , 30)">19:30</button>
-                            <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(22 , 00)">22:00</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(18 , 00)">18:00</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary me-3" (click)="setTime(21 , 00)">21:00</button>
                         </div>
                     </div>
         
@@ -57,10 +58,10 @@
         
                 <div class="row text-center mb-4 mt-4">       
                     <div class="col-md">
-                        <button class="btn btn-red" type="button" (click)="navigateToCreateAcc()">Cancelar</button>
+                        <button class="btn btn-outline-dark" type="button" (click)="navigateToCreateAcc()">Cancelar</button>
                     </div>
                     <div class="col-md">
-                        <button type="submit" class="btn btn-dark" [disabled]="isSubmitting">Seleccionar Mesas</button>
+                        <button type="submit" class="btn btn-dark" [disabled]="reservaForm.invalid">Seleccionar Mesas</button>
                     </div>
                 </div>
             </div>

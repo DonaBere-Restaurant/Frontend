@@ -21,11 +21,8 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/inicio/menu"><i class="fa-solid fa-utensils"></i> Menu </a>
             </li>
-            <li class="nav-item ">
-              <a class="nav-link" routerLink="/"><i class="fa-regular fa-calendar-days"></i> Horarios </a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/inicio/reservacion"><i class="fa-solid fa-chair"></i> Reservas </a>
+              <a class="nav-link" (click)="reservar()"><i class="fa-solid fa-chair"></i> Reservas </a>
             </li>
           </ul>
           </div>
@@ -35,7 +32,7 @@
             <button class="btn btn-outline-dark rounded-start me-3" type="button" (click)="navigateToLogin()"><i class="fa-solid fa-user "></i> Iniciar Sesion</button>
           }
           @else {
-            <button class = "btn btn-outline-dark rounded-start me-3" routerLink="/customer/miperfil" ><i class="fa-solid fa-user"></i> Mi Perfil</button>
+            <button class = "btn btn-outline-dark rounded-start me-3" (click)="navigateToProfile()" ><i class="fa-solid fa-user"></i> Mi Perfil</button>
             
             <button *ngIf="isLoggedIn" class="btn btn-outline-dark rounded-start " (click)="logout()"><i class="fa-solid fa-circle-xmark"></i> Cerrar Sesion</button>
           }

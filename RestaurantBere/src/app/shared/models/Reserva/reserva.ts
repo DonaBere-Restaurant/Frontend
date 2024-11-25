@@ -5,11 +5,17 @@ import { Reservasionmesa } from "../ReservationTable/reservasionmesa";
 export class Reserva {
     id:number;
     date:string;
-    customer : Cliente;
+    name:string;
+    lastname:string;
+    phone:string;
+    email:string;
+    address:string;
+    dni:string;
     startTime: string;
     endTime : string;
     tables: Reservasionmesa[];
     orderDishes: Orden[];
+    orderDrinks: Orden[];
     priceTotal:number;
 
 }

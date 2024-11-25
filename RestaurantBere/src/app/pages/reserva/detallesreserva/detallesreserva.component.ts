@@ -31,7 +31,7 @@ export class DetallesreservaComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerReserva(); // Llama a obtenerReserva al inicializar
-    this.handlePaymentReturn(); // Llama a handlePaymentReturn al inicializar
+    //this.handlePaymentReturn(); // Llama a handlePaymentReturn al inicializar
   }
 
   obtenerReserva() {
@@ -93,5 +93,10 @@ export class DetallesreservaComponent implements OnInit {
         console.error('Error al procesar el éxito del pago:', error);
       }
     );
+  }
+
+  SelectionPayMethod()
+  {
+    this.router.navigate(['/inicio/reservacion/mesas/menu/resumen/metodoPago']);
   }
 }
