@@ -37,10 +37,16 @@ export class DetallesreservaComponent implements OnInit {
   obtenerReserva() {
     this.route.paramMap.subscribe(params => {
       this.reservaId = this.reservaDataService.getReservaId();
-      
+      const idReservaguardado = localStorage.getItem('reserva_id')
+
       if (this.reservaId) {
         this.getReservaById(this.reservaId);
-      } else {
+      } 
+      if(idReservaguardado){
+        this.reservaId = parseInt(idReservaguardado, 10);
+        this.getReservaById(this.reservaId);
+      }
+      else {
         console.error('No se encontró el ID de la reserva');
       }
     });
