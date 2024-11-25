@@ -2,35 +2,52 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReservaService } from '../../../core/Services/Reserva/reserva.service';
 import { ResenaService } from "../../../core/Services/resena/resena.service";
-import { FormsModule } from "@angular/forms";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { CustomReservationResponseDTO } from '../../../shared/models/Reserva/CustomReservationResponseDTO';
 import { ResenaRequestModel } from "../../../shared/models/Resena/resena-request-model";
 import {StorageService} from "../../../core/Services/storage.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ResenaResponseModel} from "../../../shared/models/Resena/resena-response-model";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { updateReservation } from '../../../shared/models/Reserva/reservaUpdate.model';
 
 @Component({
   selector: 'app-customer-reservations',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,MatProgressSpinnerModule,ReactiveFormsModule],
   templateUrl: './customer-reservations.component.html',
   styleUrls: ['./customer-reservations.component.scss'],
   providers: [ReservaService, ResenaService]
 })
 export class CustomerReservationsComponent implements OnInit {
+  updateReservation !: updateReservation;
   reservations: CustomReservationResponseDTO[] = []; // Reservas
   resenas: ResenaRequestModel[] = []; // Reseñas
   private reservationService = inject(ReservaService);
   private resenaService = inject(ResenaService);
   private storageService = inject(StorageService);
   private snackBar = inject(MatSnackBar);
+  isLoading: boolean = true; 
+  minDate: string="";
+  private fb = inject(FormBuilder);
+  updateForm!: FormGroup;
+  idReserva:number;
 
 
   ngOnInit() {
     this.getReservations();
+    
+    this.updateForm = this.fb.group({
+      date: ['', Validators.required],
+      startTime : ['',Validators.required],
+    });
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Asegura que esté en el inicio del día.
+    this.minDate = today.toISOString().split('T')[0];
   }
 
   getReservations() {
+    this.isLoading = true;
     this.reservationService.getMyReservations().subscribe(
       (data: CustomReservationResponseDTO[]) => {
         console.log('Reservas obtenidas:', data);
@@ -41,9 +58,11 @@ export class CustomerReservationsComponent implements OnInit {
           comentario: '', // Inicializa el comentario
           calificacion: 0, // Inicializa la calificación
         }));
+        this.isLoading = false;
       },
       (error) => {
         console.error('Error fetching reservations', error);
+        this.isLoading = false;
       }
     );
   }
@@ -131,5 +150,45 @@ export class CustomerReservationsComponent implements OnInit {
         duration: 3000, // Duración de la notificación en milisegundos
       });
     }
+  }
+  get date() {
+    return this.updateForm.get('date');
+  }
+
+  get hour() {
+    return this.updateForm.get('hour');
+  }
+
+  guardarIdReserva(idReserva : number)
+  {
+    this.idReserva=idReserva;
+    console.log(this.idReserva);
+  } 
+
+  updateReserva(reservationId: number) {
+    console.log(this.updateForm);
+    if (this.updateForm.invalid) {
+      this.snackBar.open('Por favor completa todos los campos.', 'Cerrar', { duration: 3000 });
+      return;
+    }
+  
+    const updatedData = this.updateForm.value; // Captura los datos del formulario
+    this.isLoading = true; // Mostrar spinner de carga
+  
+    this.reservationService.updateReservation(reservationId, updatedData).subscribe(
+      (response) => {
+        // Éxito: mostrar mensaje y recargar las reservas
+        this.snackBar.open('Reserva actualizada con éxito.', 'Cerrar', { duration: 3000 });
+        this.getReservations(); // Recargar reservas solo si es exitoso
+      },
+      (error) => {
+        // Error: no recargar las reservas, solo mostrar mensaje de error
+        console.error('Error al actualizar la reserva:', error);
+        this.snackBar.open(error.error?.error || 'Error al actualizar la reserva.', 'Cerrar', { duration: 3000 });
+      }
+    ).add(() => {
+      // Finalizar el estado de carga en ambos casos
+      this.isLoading = false;
+    });
   }
 }

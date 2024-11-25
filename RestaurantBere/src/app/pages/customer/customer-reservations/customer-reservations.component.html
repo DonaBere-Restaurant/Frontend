@@ -1,4 +1,9 @@
-<div class="container-fluid">
+
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="container-fluid" *ngIf="!isLoading">
   <div class="row text-light bg-dark d-flex justify-content-center align-items-center p-3">
     <div class="col-1"><p>Id de Reserva</p></div>
     <div class="col-2"><p>Fecha</p></div>
@@ -23,7 +28,7 @@
       </button>
     </div>
     <div class="col-1">
-      <button class="btn"><i class="fa-regular fa-pen-to-square"></i></button>
+      <button *ngIf="reservation.status!==2" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="guardarIdReserva(reservation.id)"><i class="fa-regular fa-pen-to-square"></i></button>
     </div>
 
     <div *ngFor="let resena of resenas" class="col-12 mt-3">
@@ -100,4 +105,47 @@
       </form>
     </div>
   </div>
+  
 </div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de Informacion</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                <form [formGroup]="updateForm">
+                  <div class="form-group">
+                    <label for="date">Fecha</label>
+                    <input id="date" type="date" formControlName="date" class="form-control" [min]="minDate" [max]="'2027-12-31'">
+                    <div *ngIf="date?.invalid && date?.touched" class="text-danger">
+                      <small *ngIf="date?.hasError('required')">La fecha es obligatoria.</small>
+                    </div>
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="startTime">Hora</label>
+                    <input id="hour" type="time" formControlName="startTime" class="form-control">
+                    <div *ngIf="hour?.invalid && hour?.touched" class="text-danger">
+                      <small *ngIf="hour?.hasError('required')">La hora es obligatoria.</small>
+                    </div>
+                  </div>
+                  <div>
+                  </div>
+                </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" data-bs-dismiss="modal" (click)="updateReserva(this.idReserva)" [disabled]="updateForm.invalid" class="btn btn-dark">
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
