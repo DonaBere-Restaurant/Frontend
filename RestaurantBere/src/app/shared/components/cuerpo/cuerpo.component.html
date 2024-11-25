@@ -1,78 +1,91 @@
-<div class="landing-page">
-  <header class="hero">
-    <img class="hero-image" src="FondoBere.jpg" alt="Fondo del Body" />
-    <div class="hero-content">
-      <h1>Bienvenidos a Doña Bere</h1>
-      <p>Disfruta de la auténtica cocina peruana</p>
-    </div>
-  </header>
-
-  <section class="about-us">
-    <div class="container">
-      <h2>NOSOTROS</h2>
-      <p>
-        Habilitados para servirles con nuestro compromiso y disfruten su pedido, preparado con mucho
-        entusiasmo y bien Taipá. Considerando todas las medidas de prevención para brindarte el mejor
-        servicio.
-      </p>
-    </div>
-  </section>
-
-  <section class="info-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <img class="local-image" src="LocalBere.jpg" alt="Local" />
+<img class="imagen img-fluid w-100" src="FondoBere.jpg" alt="Fondo del Body" />
+<div class="container-fluid">
+    <div class="container-fluid row text-center">
+        <div class="row">
+            <div class="col-12 p-5">
+                <h2 class="fw-normal fs-responsive">NOSOTROS</h2>
+                <div class="fs-5 p-3">
+                    <p>
+                        Habilitados para servirles con nuestro compromiso y disfruten su pedido, preparado con mucho
+                        entusiasmo y bien Taipá. Considerando todas las medidas de prevención para brindarte el mejor
+                        servicio.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-          <h2>HORARIOS</h2>
-          <ul class="schedule">
-            <li><strong>Lunes a Viernes:</strong> 9:00a.m. - 11:30p.m.</li>
-            <li><strong>Sábado:</strong> 7:00a.m. - 12:00p.m.</li>
-            <li><strong>Domingo:</strong> 9:00a.m. - 11:30p.m.</li>
-          </ul>
+
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 mb-4">
+                <img class="img-fluid w-60" src="LocalBere.jpg" alt="Local" />
+            </div>
+
+            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                <div class="row ps-md-5">
+                    <h2 class="fw-normal p-3 text-center">HORARIOS</h2>
+                    <div class="fs-5 text-start">
+                        <ul class="list-unstyled">
+                            <li><strong>Lunes:</strong> 9:00a.m. - 11:30p.m.</li>
+                            <li><strong>Martes:</strong> 9:00a.m. - 11:30p.m.</li>
+                            <li><strong>Miércoles:</strong> 9:00a.m. - 11:30p.m.</li>
+                            <li><strong>Jueves:</strong> 9:00a.m. - 11:30p.m.</li>
+                            <li><strong>Viernes:</strong> 9:00a.m. - 11:30p.m.</li>
+                            <li><strong>Sábado:</strong> 7:00a.m. - 12:00p.m.</li>
+                            <li><strong>Domingo:</strong> 9:00a.m. - 11:30p.m.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-4 d-flex flex-column justify-content-center align-items-center text-center">
+                <div class="mb-3">
+                    <h2 class="fw-normal">Ubicación</h2>
+                    <p>Av. República Dominicana 174, Trujillo, Trujillo</p>
+                </div>
+                <div>
+                    <h2 class="fw-normal">Contacto</h2>
+                    <ul class="list-unstyled">
+                        <li>937 222 902.</li>
+                        <li>937 222 902</li>
+                        <li>931 161 424</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="ratio ratio-16x9">
+                    <iframe
+                        src="https://www.google.com/maps/d/u/0/embed?mid=1dhzUBmaNaP4daYFO_PnRagjmPMGY7AY&ehbc=2E312F&noprof=1"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h2 class="fw-bold text-center py-4">Reseñas</h2>
+<div class="d-flex flex-nowrap overflow-auto" id="reviews-container">
+  <div *ngFor="let resena of resenas" class="card mx-2 mb-4 shadow-sm" style="width: 18rem;">
+    <div class="card-body text-center">
+      <!-- Mostrar el comentario de la reseña -->
+      <p class="card-text">{{ resena.comentario }}</p>
+      <div class="mb-2">
+        <span class="stars">
+          <!-- Mostrar estrellas según la calificación -->
+          <ng-container *ngFor="let star of [].constructor(5); let i = index">
+            <span class="star" [ngClass]="{'filled': i < resena.calificacion}">&#9733;</span>
+          </ng-container>
+        </span>
+        <p class="card-text">{{resena.nombre}}</p>
+        <p class="card-text">{{resena.fecha}}</p>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <section class="contact-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Ubicación</h2>
-          <p>Av. República Dominicana 174, Trujillo, Trujillo</p>
-          <h2>Contacto</h2>
-          <ul class="contact-info">
-            <li>937 222 902</li>
-            <li>937 222 902</li>
-            <li>931 161 424</li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <div class="map-container">
-            <iframe
-              src="https://www.google.com/maps/d/u/0/embed?mid=1dhzUBmaNaP4daYFO_PnRagjmPMGY7AY&ehbc=2E312F&noprof=1"
-              allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="reviews-section">
-    <div class="container">
-      <h2>Reseñas</h2>
-      <div class="reviews-container">
-        <div *ngFor="let resena of resenas" class="review-card">
-          <p class="review-text">{{ resena.comentario }}</p>
-          <div class="stars">
-            <ng-container *ngFor="let star of [].constructor(5); let i = index">
-              <span class="star" [ngClass]="{'filled': i < resena.calificacion}">&#9733;</span>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      
+      
+      
+   
 </div>

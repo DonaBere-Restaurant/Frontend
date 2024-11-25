@@ -27,4 +27,9 @@ export class ResenaService {
     const url = `${this.urlResena}/${id}`;
     return this.httpClient.get<ResenaResponseModel>(url);
   }
+
+  eliminarResena(id: number): Observable<void> {
+    const url = `${this.urlResena}/eliminar-resena/${id}`;
+    return this.httpClient.delete<void>(url);
+  }
 }
