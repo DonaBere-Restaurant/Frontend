@@ -48,6 +48,11 @@ export class LoginComponent {
       this.showSnackBar('Por favor, complete los campos correctamente');
     }
   }
+
+  navigateToSendMail() {
+    this.router.navigate(['/auth/sendMail']);
+  }
+
   private showSnackBar(message:string) : void{
     this.snackbar.open(message,'Close',{
       duration : 2000,
