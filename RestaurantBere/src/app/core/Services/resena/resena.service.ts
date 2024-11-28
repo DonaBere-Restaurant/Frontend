@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {ResenaRequestModel} from "../../../shared/models/Resena/resena-request-model";
 import {ResenaResponseModel} from "../../../shared/models/Resena/resena-response-model";
 import {Observable} from "rxjs";
+import { environment } from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResenaService {
-  private urlResena = "http://localhost:8080/api/v1/resena";
+  private urlResena = `${environment.baseURL}/resena`;
 
   constructor(private httpClient: HttpClient) {
 

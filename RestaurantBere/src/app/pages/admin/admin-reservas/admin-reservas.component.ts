@@ -52,12 +52,10 @@ export class AdminReservasComponent {
   
   getEstadoReserva(estado: number): string {
     switch (estado) {
-      case 0:
-        return 'Reservado';
       case 2:
         return 'Cancelado';
       default:
-        return 'Desconocido';
+        return 'Reservado';
     }
   }
   getEstadoRembolso(estado:boolean,cancelado: number)
