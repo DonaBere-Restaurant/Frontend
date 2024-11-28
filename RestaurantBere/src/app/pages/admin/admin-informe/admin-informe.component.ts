@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AdminService } from '../../../core/Services/admin/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ReportService } from '../../../core/Services/report/report.service';
 
 @Component({
   selector: 'app-admin-informe',
@@ -12,19 +13,24 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AdminInformeComponent {
   constructor(
-    private adminService: AdminService,
+    private reportService: ReportService,
     private snackBar: MatSnackBar
   ) {}
   
   downloadWeeklyReport() {
-    this.adminService.downloadWeeklyReport().subscribe({
-      next: (blob) => this.downloadFile(blob, "reporte_semanal.pdf"),
-      error: (error) => this.handleError(error, "reporte semanal")
+    this.reportService.downloadWeeklyReport().subscribe({
+        next: (blob) => {
+            if (blob.type !== 'application/pdf') {
+                console.error('Respuesta no válida:', blob);
+            } else {
+                this.downloadFile(blob, 'reporte_semanal.pdf');
+            }
+        },
+        error: (error) => console.error('Error en la descarga:', error)
     });
-  }
-
+}
   downloadMonthlyReport() {
-    this.adminService.downloadMonthlyReport().subscribe({
+    this.reportService.downloadMonthlyReport().subscribe({
       next: (blob) => this.downloadFile(blob, "reporte_mensual.pdf"),
       error: (error) => this.handleError(error, "reporte mensual")
     });

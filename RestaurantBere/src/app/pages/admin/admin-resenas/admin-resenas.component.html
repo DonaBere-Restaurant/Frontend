@@ -26,10 +26,10 @@
   
     <!-- Detalles de la reseña seleccionada -->
 <div *ngIf="selectedResena" class="mt-4 border p-3 text-center justify-content-center d-flex flex-column">
-    <h4>Detalles de la Reseña (ID: {{ selectedResena?.id }})</h4>
-    <p><strong>Calificación otorgada:</strong> {{ selectedResena?.calificacion }} estrellas</p>
+    <h4>Detalles de la Reseña (ID: {{ selectedResena.id }})</h4>
+    <p><strong>Calificación otorgada:</strong> {{ selectedResena.calificacion }} estrellas</p>
     <p><strong>Descripción:</strong></p>
-    <p>{{ selectedResena?.comentario }}</p>
+    <p>{{ selectedResena.comentario }}</p>
   
     <!-- Botón para eliminar la reseña -->
      <div class="row d-flex justify-content-center">

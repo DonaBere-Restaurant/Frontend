@@ -112,4 +112,6 @@ export class AdminService {
     updatePassword(userId:number, passdata: PasswordRequest): Observable<string> {
         return this.http.put(`${this.baseUrl}/edit-password/${userId}`, passdata, { responseType: 'text' });
     }
+
+    
 }

@@ -16,7 +16,7 @@ import { Reserva } from "../../../shared/models/Reserva/reserva";
 
 export class ReportService {
 
-    private baseUrl5 = `${environment.baseURL}/api/v1/pdf`;
+    private baseUrl5 = `${environment.baseURL}/pdf`;
     private http = inject(HttpClient);
 
     constructor() { }
