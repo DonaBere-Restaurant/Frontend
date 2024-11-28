@@ -19,8 +19,7 @@ export class AdminService {
     private baseUrl = `${environment.baseURL}/user/profile`;
     private baseUrl2 = `${environment.baseURL}/reservasion`;
     private baseUrl3 = `${environment.baseURL}/admin/drink`;
-    private baseUrl4 = `${environment.baseURL}`;
-    private baseUrl5 = `${environment.baseURL}/pdf`;
+    private baseUrl4 = `${environment.baseURL}`; 
     private http = inject(HttpClient);
 
     constructor() { }
@@ -108,15 +107,7 @@ export class AdminService {
             formData.append('image', bebida.image, bebida.image.name);
         }
         return this.http.put(`${this.baseUrl3}/update/${id}`, formData, { responseType: 'text' });
-    }
-
-    downloadWeeklyReport(): Observable<Blob> {
-        return this.http.get(`${this.baseUrl5}/week`, { responseType: 'blob' });
-    }
-
-    downloadMonthlyReport(): Observable<Blob> {
-        return this.http.get(`${this.baseUrl5}/month`, { responseType: 'blob' });
-    }
+    } 
 
     updatePassword(userId:number, passdata: PasswordRequest): Observable<string> {
         return this.http.put(`${this.baseUrl}/edit-password/${userId}`, passdata, { responseType: 'text' });
