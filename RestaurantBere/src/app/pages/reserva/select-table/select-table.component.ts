@@ -31,12 +31,21 @@ export class SelectTableComponent {
   ){}
   
   ngOnInit(): void {
+
+    const idReservaguardado = localStorage.getItem('reserva_id')
+
     this.route.paramMap.subscribe(params => {
       this.reservaId = this.reservaDataService.getReservaId();
+      if (idReservaguardado) {
+        this.reservaId = parseInt(idReservaguardado, 10);
+        this.getReservaById(this.reservaId);
+      }
       
       if (this.reservaId) {
         this.getReservaById(this.reservaId);
-      } else {
+        localStorage.setItem('reserva_id', this.reservaId.toString());
+      } 
+      else {
         console.error('No se encontró el ID de la reserva');
       }
     });

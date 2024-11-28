@@ -62,6 +62,7 @@ export class SelectDateComponent {
         this.isSubmitting = false;
         this.errorMessage = '';
         this.reservaDataService.setReservaId(dato.id); 
+        localStorage.setItem(`reserva_id`, dato.id.toString());
         // Redirige a la página para seleccionar mesas, pasando el ID de la reserva
         this.router.navigate(['/inicio/reservacion/mesas']);
       },
@@ -136,6 +137,7 @@ export class SelectDateComponent {
       this.showSnackBar('Formulario inválido');
     }
   }
+
   pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
   }

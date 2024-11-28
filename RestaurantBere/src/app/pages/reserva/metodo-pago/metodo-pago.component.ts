@@ -32,16 +32,24 @@ export class MetodoPagoComponent {
   ) {}
 
   ngOnInit() {
+    const idreservaguardado = localStorage.getItem(`reserva_id_${this.reservaId}`);
+    console.log(idreservaguardado);
     this.obtenerReserva(); // Llama a obtenerReserva al inicializar
   }
 
   obtenerReserva() {
+    const idReservaguardado = localStorage.getItem('reserva_id')
     this.route.paramMap.subscribe(params => {
       this.reservaId = this.reservaDataService.getReservaId();
       
       if (this.reservaId) {
         this.getReservaById(this.reservaId);
-      } else {
+        localStorage.setItem('reserva_id', this.reservaId.toString());
+      } 
+      if(idReservaguardado){
+        this.reservaId = parseInt(idReservaguardado, 10);
+        this.getReservaById(this.reservaId);
+      }else {
         this.showSnackBar('No se encontró el ID de la reserva');
       }
     });

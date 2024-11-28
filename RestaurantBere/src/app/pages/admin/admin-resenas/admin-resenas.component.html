@@ -1,1 +1,65 @@
-<p>admin-resenas works!</p>
+<div class="container mt-4">
+    <!-- Cabecera de la tabla -->
+    <div class="row text-light bg-dark d-flex justify-content-center align-items-center p-3 text-center">
+      <div class="col-1"><p>Id de Reseña</p></div>
+      <div class="col-2"><p>Fecha</p></div>
+      <div class="col-1"><p>DNI</p></div>
+      <div class="col-1"><p>Nombre</p></div>
+      <div class="col-3"><p>Correo</p></div>
+      <div class="col-1"><p>Detalle</p></div>
+    </div>
+  
+    <!-- Mostrar las reseñas -->
+    <div *ngFor="let resena of reseanas" class="row d-flex justify-content-center align-items-center p-3 text-center">
+      <div class="col-1"><p>{{ resena.id }}</p></div>
+      <div class="col-2"><p>{{ resena.fecha }}</p></div>
+      <div class="col-1"><p>{{ resena.dni }}</p></div>
+      <div class="col-1"><p>{{ resena.nombre }}</p></div>
+      <div class="col-3"><p>{{ resena.correo }}</p></div>
+      <div class="col-1">
+        <button class="btn btn-info" (click)="showDetails(resena)">
+          Detalles
+        </button>
+      </div>
+      
+    </div>
+  
+    <!-- Detalles de la reseña seleccionada -->
+<div *ngIf="selectedResena" class="mt-4 border p-3 text-center justify-content-center d-flex flex-column">
+    <h4>Detalles de la Reseña (ID: {{ selectedResena?.id }})</h4>
+    <p><strong>Calificación otorgada:</strong> {{ selectedResena?.calificacion }} estrellas</p>
+    <p><strong>Descripción:</strong></p>
+    <p>{{ selectedResena?.comentario }}</p>
+  
+    <!-- Botón para eliminar la reseña -->
+     <div class="row d-flex justify-content-center">
+        <!-- Botón para eliminar reseña (abre el modal) -->
+        <button class="btn btn-danger col-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Eliminar reseña
+        </button>
+        <!-- Modal de confirmación -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmación de eliminación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar esta reseña?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteResena(selectedResena.id)" data-bs-dismiss="modal">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+     </div>
+    
+  </div>
+  
+  
