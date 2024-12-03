@@ -194,7 +194,7 @@ handlePaymentSuccess(token: string): Observable<string> {
 
     
     downloadPdf(): Observable<Blob> {
-      return this.httpClient.get(`${this.baseUrl}/reservation`, { responseType: 'blob' });
+      return this.httpClient.get(`${environment.baseURL}/pdf/reservation`, { responseType: 'blob' });
     }
 
 }
