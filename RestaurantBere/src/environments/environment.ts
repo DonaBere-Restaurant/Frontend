@@ -1,5 +1,4 @@
 export const environment = {
     production : false,
-    //baseURL : "http://localhost:8080/api/v1"
-    baseURL : "https://bere-api.onrender.com/api/v1"
+    baseURL : "http://13.59.40.43:8080/api/v1"
 };
