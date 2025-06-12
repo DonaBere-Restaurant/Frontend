@@ -1,4 +1,4 @@
 export const environment = {
     production : false,
-    baseURL : "http://main-lb-1088994905.us-east-2.elb.amazonaws.com/api/v1"
+    baseURL : "https://erm1tuode6.execute-api.us-east-2.amazonaws.com"
 };
