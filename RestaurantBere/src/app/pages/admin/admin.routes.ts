@@ -22,6 +22,7 @@ export const adminRoutes: Routes = [
             // { path:'platos/editar/:id', component: EditDishComponent}
             // { path:'bebidas/editar/:id', component: EditDrinkComponent}
             // { path:'resenas/editar/:id', component: EditReviewComponent}
+            // prueba
         ]
     }
 ];
