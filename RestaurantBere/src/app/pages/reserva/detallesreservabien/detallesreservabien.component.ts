@@ -15,7 +15,7 @@ export class DetallesreservabienComponent {
 
   downloadReservationPdf() {
     this.reservaService.downloadPdf().subscribe({
-      next: (blob) => this.downloadFile(blob, "reporte_mensual.pdf")
+      next: (blob) => this.downloadFile(blob, "reserva.pdf")
     });
   }
 
