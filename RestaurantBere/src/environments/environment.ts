@@ -1,5 +1,5 @@
 export const environment = {
     production : false,
-    baseURL : "https://ajla222zrb.execute-api.us-east-2.amazonaws.com/api/v1"
+    baseURL : "https://mkaduyaqy7.execute-api.us-east-2.amazonaws.com"
     
 };
